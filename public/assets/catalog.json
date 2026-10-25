@@ -1,0 +1,389 @@
+{
+  "collection": "Velocity Vehicle Library",
+  "version": 1,
+  "units": "metres",
+  "upAxis": "Y",
+  "forwardAxis": "+Z (after showroom normalization)",
+  "performanceNote": "Performance figures are fictional design targets unless a production specification is identified in the description. They are metadata only; no gameplay is implemented.",
+  "cars": [
+    {
+      "id": "car-concept",
+      "name": "VX-1 Concept",
+      "shortName": "VX-1",
+      "series": "Velocity Originals",
+      "category": "concept",
+      "class": "Concept Grand Tourer",
+      "year": "2024",
+      "model": "assets/cars/car-concept.glb",
+      "preview": "assets/previews/car-concept.webp",
+      "length": 4.6,
+      "triangles": 213347,
+      "fileSize": "11.8 MB",
+      "description": "A highly detailed concept grand tourer with a complete cockpit, articulated body panels and layered PBR paint.",
+      "performance": {
+        "topSpeed": 320,
+        "acceleration": 3.2,
+        "power": "680 hp",
+        "handling": 88
+      },
+      "paintMaterials": [
+        "Paint 1 Carmine",
+        "Paint 2 Carmine"
+      ],
+      "defaultPaint": "#b81232",
+      "credit": {
+        "title": "Car Concept",
+        "author": "Eric Chadwick / Darmstadt Graphics Group GmbH; original model by Unity Fan",
+        "license": "CC BY 4.0",
+        "source": "https://github.com/KhronosGroup/glTF-Sample-Assets/tree/main/Models/CarConcept",
+        "distribution": "https://github.com/KhronosGroup/glTF-Sample-Assets/blob/main/Models/CarConcept/glTF-Binary/CarConcept.glb",
+        "changes": "Original geometry, textures and materials preserved; Velocity attribution metadata added to the GLB. Showroom scale, grounding, camera framing and paint selection are applied at runtime.",
+        "notice": "The original Unity Fan model is CC0. Khronos and 3D Commerce logos retain their separate trademark terms; see the source legal notice."
+      }
+    },
+    {
+      "id": "hypercar",
+      "name": "Aether HX",
+      "shortName": "Aether",
+      "series": "Collect Concepts",
+      "category": "concept",
+      "class": "Electric Hypercar",
+      "year": "Concept 01",
+      "model": "assets/cars/hypercar.glb",
+      "preview": "assets/previews/hypercar.webp",
+      "length": 4.7,
+      "triangles": 196500,
+      "fileSize": "3.8 MB",
+      "description": "A low electric hypercar with a forward glass canopy, illuminated wheel rings and a floating rear wing.",
+      "performance": {
+        "topSpeed": 352,
+        "acceleration": 2.5,
+        "power": "1,020 hp",
+        "handling": 94
+      },
+      "paintMaterials": [
+        "Paint_SatinGraphite"
+      ],
+      "defaultPaint": "#252a31",
+      "credit": {
+        "title": "Hypercar — Collect Cars",
+        "author": "drcollect",
+        "license": "CC BY 4.0",
+        "source": "https://github.com/drcollect/collect-cars",
+        "distribution": "https://github.com/drcollect/collect-cars/blob/main/models/full/hypercar.glb",
+        "changes": "Original uncompressed geometry and materials preserved; Velocity attribution metadata added. Display name, showroom setup and optional paint finishes are applied by this project."
+      }
+    },
+    {
+      "id": "wedge",
+      "name": "Vector 84",
+      "shortName": "Vector",
+      "series": "Collect Concepts",
+      "category": "concept",
+      "class": "Retro Wedge Coupe",
+      "year": "Concept 02",
+      "model": "assets/cars/wedge.glb",
+      "preview": "assets/previews/wedge.webp",
+      "length": 4.4,
+      "triangles": 71240,
+      "fileSize": "1.8 MB",
+      "description": "An eighties-inspired wedge with crisp body creases, rear-window louvres, pop-up panels and a full-width nose light.",
+      "performance": {
+        "topSpeed": 294,
+        "acceleration": 4.1,
+        "power": "510 hp",
+        "handling": 86
+      },
+      "paintMaterials": [
+        "Wedge_Paint"
+      ],
+      "defaultPaint": "#4a4f57",
+      "credit": {
+        "title": "80s Wedge — Collect Cars",
+        "author": "drcollect",
+        "license": "CC BY 4.0",
+        "source": "https://github.com/drcollect/collect-cars",
+        "distribution": "https://github.com/drcollect/collect-cars/blob/main/models/full/wedge.glb",
+        "changes": "Original uncompressed geometry and materials preserved; Velocity attribution metadata added. Display name, showroom setup and optional paint finishes are applied by this project."
+      }
+    },
+    {
+      "id": "rally-raid",
+      "name": "Raptor XRT",
+      "shortName": "Raptor",
+      "series": "Collect Concepts",
+      "category": "track",
+      "class": "Rally-Raid Prototype",
+      "year": "Concept 03",
+      "model": "assets/cars/rally-raid.glb",
+      "preview": "assets/previews/rally-raid.webp",
+      "length": 4.6,
+      "triangles": 127812,
+      "fileSize": "4.5 MB",
+      "description": "A raised desert racer with six light pods, all-terrain tyres, visible suspension, skid plates and a roof scoop.",
+      "performance": {
+        "topSpeed": 228,
+        "acceleration": 4.6,
+        "power": "480 hp",
+        "handling": 90
+      },
+      "paintMaterials": [
+        "Paint_SatinGraphite"
+      ],
+      "defaultPaint": "#d2381c",
+      "credit": {
+        "title": "Rally-Raid — Collect Cars",
+        "author": "drcollect",
+        "license": "CC BY 4.0",
+        "source": "https://github.com/drcollect/collect-cars",
+        "distribution": "https://github.com/drcollect/collect-cars/blob/main/models/full/rally.glb",
+        "changes": "Original uncompressed geometry and materials preserved; Velocity attribution metadata added. Display name, showroom setup and optional paint finishes are applied by this project."
+      }
+    },
+    {
+      "id": "endurance",
+      "name": "Ender LM-9",
+      "shortName": "Ender",
+      "series": "Collect Concepts",
+      "category": "track",
+      "class": "Endurance Prototype",
+      "year": "Concept 04",
+      "model": "assets/cars/endurance.glb",
+      "preview": "assets/previews/endurance.webp",
+      "length": 4.9,
+      "triangles": 247752,
+      "fileSize": "5.0 MB",
+      "description": "A 24-hour prototype with a tall shark fin, bubble canopy, split light blade and deeply channelled aero surfaces.",
+      "performance": {
+        "topSpeed": 338,
+        "acceleration": 2.7,
+        "power": "900 hp",
+        "handling": 97
+      },
+      "paintMaterials": [
+        "Paint_SatinGraphite"
+      ],
+      "defaultPaint": "#e9e5da",
+      "credit": {
+        "title": "Endurance — Collect Cars",
+        "author": "drcollect",
+        "license": "CC BY 4.0",
+        "source": "https://github.com/drcollect/collect-cars",
+        "distribution": "https://github.com/drcollect/collect-cars/blob/main/models/full/endurance.glb",
+        "changes": "Original uncompressed geometry and materials preserved; Velocity attribution metadata added. Display name, showroom setup and optional paint finishes are applied by this project."
+      }
+    },
+    {
+      "id": "streamliner",
+      "name": "Silverline S1",
+      "shortName": "Silverline",
+      "series": "Collect Concepts",
+      "category": "concept",
+      "class": "Experimental Streamliner",
+      "year": "Concept 05",
+      "model": "assets/cars/streamliner.glb",
+      "preview": "assets/previews/streamliner.webp",
+      "length": 5.2,
+      "triangles": 389520,
+      "fileSize": "9.0 MB",
+      "description": "A liquid-metal teardrop with outboard front wheels and one continuous light line wrapped around its body.",
+      "performance": {
+        "topSpeed": 402,
+        "acceleration": 2.2,
+        "power": "1,280 hp",
+        "handling": 91
+      },
+      "paintMaterials": [
+        "Streamliner_LiquidGraphite.001"
+      ],
+      "defaultPaint": "#646b70",
+      "credit": {
+        "title": "Streamliner — Collect Cars",
+        "author": "drcollect",
+        "license": "CC BY 4.0",
+        "source": "https://github.com/drcollect/collect-cars",
+        "distribution": "https://github.com/drcollect/collect-cars/blob/main/models/full/streamliner.glb",
+        "changes": "Original uncompressed geometry and materials preserved; Velocity attribution metadata added. Display name, showroom setup and optional paint finishes are applied by this project."
+      }
+    },
+    {
+      "id": "sport-coupe",
+      "name": "Corsa RS",
+      "shortName": "Corsa",
+      "series": "Generic Performance",
+      "category": "road",
+      "class": "Sport Coupe",
+      "year": "Production Study",
+      "model": "assets/cars/sport-coupe.glb",
+      "preview": "assets/previews/sport-coupe.webp",
+      "length": 4.52,
+      "triangles": 113622,
+      "fileSize": "14.9 MB",
+      "description": "An unbranded rear-drive coupe with a detailed cabin, textured lights, brake assemblies and a balanced grand-touring silhouette.",
+      "performance": {
+        "topSpeed": 286,
+        "acceleration": 4.3,
+        "power": "450 hp",
+        "handling": 87
+      },
+      "paintMaterials": [
+        "car-body"
+      ],
+      "defaultPaint": "#a81324",
+      "credit": {
+        "title": "Generic Sport Coupé Car",
+        "author": "Márcio Meireles (mmcworks)",
+        "license": "CC BY 4.0",
+        "source": "https://sketchfab.com/3d-models/generic-sport-coupe-car-820a13c4831c41959ce75e6c2014e882",
+        "distribution": "https://github.com/timo-hoen-ias/sls-racing/tree/main/assets-src/cars/coupe",
+        "changes": "Original geometry and materials preserved; Velocity attribution metadata added. Display name, showroom normalization and optional solid paint are applied at runtime."
+      }
+    },
+    {
+      "id": "grand-sedan",
+      "name": "Sovereign S",
+      "shortName": "Sovereign",
+      "series": "Generic Performance",
+      "category": "road",
+      "class": "Executive Sports Sedan",
+      "year": "Production Study",
+      "model": "assets/cars/grand-sedan.glb",
+      "preview": "assets/previews/grand-sedan.webp",
+      "length": 4.78,
+      "triangles": 113191,
+      "fileSize": "16.7 MB",
+      "description": "A detailed unbranded sports sedan with a full interior, four-door proportions, textured optics and separate wheel components.",
+      "performance": {
+        "topSpeed": 260,
+        "acceleration": 5.1,
+        "power": "380 hp",
+        "handling": 79
+      },
+      "paintMaterials": [
+        "Car_Paint_-_All_Colors"
+      ],
+      "defaultPaint": "#1d4568",
+      "credit": {
+        "title": "Generic Sedan Car",
+        "author": "Márcio Meireles (mmcworks)",
+        "license": "CC BY 4.0",
+        "source": "https://sketchfab.com/3d-models/generic-sedan-car-58c33766470d46e7b2aed542650494e5",
+        "distribution": "https://github.com/timo-hoen-ias/sls-racing/tree/main/assets-src/cars/sedan",
+        "changes": "Original geometry and materials preserved; Velocity attribution metadata added. Display name, showroom normalization and optional solid paint are applied at runtime."
+      }
+    },
+    {
+      "id": "v12-goblin",
+      "name": "Goblin V12",
+      "shortName": "Goblin",
+      "series": "Generic Performance",
+      "category": "track",
+      "class": "Fictional Supercar",
+      "year": "Design Study",
+      "model": "assets/cars/v12-goblin.glb",
+      "preview": "assets/previews/v12-goblin.webp",
+      "length": 4.55,
+      "triangles": 86623,
+      "fileSize": "5.4 MB",
+      "description": "A fictional mid-engine supercar with dramatic haunches, a dark glass canopy and separate suspension and brake nodes.",
+      "performance": {
+        "topSpeed": 346,
+        "acceleration": 2.9,
+        "power": "780 hp",
+        "handling": 93
+      },
+      "paintMaterials": [
+        "car_body"
+      ],
+      "paintExcludeNodes": [
+        "car_wheel",
+        "car_brake"
+      ],
+      "hideNodes": [
+        "car_shadow",
+        "clearcoat"
+      ],
+      "forward": "-Z",
+      "defaultPaint": "#c51620",
+      "credit": {
+        "title": "Fictional supercar - V12 Goblin",
+        "author": "Olli Teittinen (ollitei)",
+        "license": "CC BY 4.0",
+        "source": "https://sketchfab.com/3d-models/fictional-supercar-v12-goblin-0a20e49ad5774d778567cb5c3f345786",
+        "distribution": "https://github.com/timo-hoen-ias/sls-racing/tree/main/assets-src/cars/goblin",
+        "changes": "Converted from legacy specular/glossiness to standard metallic/roughness PBR and embedded Velocity attribution metadata. The supplied shadow plane is hidden; showroom orientation, scale and paint are applied at runtime."
+      }
+    },
+    {
+      "id": "mercedes-sl63",
+      "name": "Mercedes-AMG SL 63",
+      "shortName": "SL 63",
+      "series": "Production Icons",
+      "category": "road",
+      "class": "Luxury Performance Roadster",
+      "year": "R232 · 2022",
+      "model": "assets/cars/mercedes-sl63.glb",
+      "preview": "assets/previews/mercedes-sl63.webp",
+      "length": 4.71,
+      "triangles": 359979,
+      "fileSize": "4.4 MB",
+      "description": "A highly detailed R232 roadster with a complete cockpit and underbody. Production reference: 4.0-litre biturbo V8 and all-wheel drive.",
+      "performance": {
+        "topSpeed": 315,
+        "acceleration": 3.6,
+        "power": "585 PS",
+        "handling": 89
+      },
+      "paintMaterials": [
+        "SL63_paint"
+      ],
+      "defaultPaint": "#1552c4",
+      "credit": {
+        "title": "Mersedes-Benz SL63 AMG [Free]",
+        "author": "Black Snow",
+        "license": "CC BY 4.0",
+        "source": "https://sketchfab.com/3d-models/mersedes-benz-sl63-amg-free-f7a625e6f5de425e89e84ae2e92cad65",
+        "distribution": "https://github.com/OkeahDavid/midnight-showroom",
+        "changes": "Meshopt/WebP-optimized distribution by OkeahDavid; geometry and materials preserved and Velocity attribution metadata added. Showroom normalization and paint are applied at runtime. Mercedes-Benz and AMG marks belong to their respective owner; no endorsement is implied."
+      },
+      "orientation": "auto"
+    },
+    {
+      "id": "bmw-m4-csl",
+      "name": "BMW M4 CSL",
+      "shortName": "M4 CSL",
+      "series": "Production Icons",
+      "category": "track",
+      "class": "Limited Production Track Coupe",
+      "year": "G82 · 2022",
+      "model": "assets/cars/bmw-m4-csl.glb",
+      "preview": "assets/previews/bmw-m4-csl.webp",
+      "length": 4.8,
+      "triangles": 286137,
+      "fileSize": "2.5 MB",
+      "description": "A detailed G82 track coupe with cockpit, engine and chassis geometry. Production reference: twin-turbo inline-six and rear-wheel drive.",
+      "performance": {
+        "topSpeed": 307,
+        "acceleration": 3.7,
+        "power": "550 hp",
+        "handling": 95
+      },
+      "paintMaterials": [
+        "M4xNME_Paint"
+      ],
+      "hideNodes": [
+        "M4xNME_unused"
+      ],
+      "defaultPaint": "#7e8284",
+      "credit": {
+        "title": "BMW m4 CSL 2023",
+        "author": "Black Snow",
+        "license": "CC BY 4.0",
+        "source": "https://sketchfab.com/3d-models/bmw-m4-csl-2023-26d05968e63b4fc28205cbb9abb0ea41",
+        "distribution": "https://github.com/OkeahDavid/midnight-showroom",
+        "changes": "Meshopt/WebP-optimized distribution by OkeahDavid; geometry and materials preserved and Velocity attribution metadata added. Showroom normalization and paint are applied at runtime. BMW and M marks belong to their respective owner; no endorsement is implied."
+      },
+      "orientation": "auto"
+    }
+  ]
+}
