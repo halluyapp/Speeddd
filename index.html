@@ -1,0 +1,617 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+  <title>VELOCITY — VX-1 Concept Hypercar</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+    
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    
+    html, body {
+      width: 100%; height: 100%;
+      overflow: hidden;
+      background: #070709;
+      font-family: 'Inter', system-ui, -apple-system, sans-serif;
+      color: #e8e8ec;
+    }
+    
+    #canvas-container {
+      position: absolute;
+      inset: 0;
+      z-index: 0;
+    }
+    
+    canvas { display: block; width: 100%; height: 100%; outline: none; }
+    
+    .header {
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      z-index: 20;
+      padding: 22px 32px;
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      pointer-events: none;
+      background: linear-gradient(to bottom, rgba(7,7,9,0.82) 0%, transparent 100%);
+    }
+    
+    .brand { pointer-events: auto; }
+    
+    .brand h1 {
+      font-size: 1.4rem;
+      font-weight: 700;
+      letter-spacing: 0.32em;
+      color: #ffffff;
+      margin-bottom: 3px;
+    }
+    
+    .brand .subtitle {
+      font-size: 0.68rem;
+      font-weight: 400;
+      letter-spacing: 0.14em;
+      color: #8a8a94;
+      text-transform: uppercase;
+    }
+    
+    .model-tag {
+      text-align: right;
+      pointer-events: auto;
+    }
+    
+    .model-tag .name {
+      font-size: 0.9rem;
+      font-weight: 600;
+      color: #fff;
+      letter-spacing: 0.03em;
+    }
+    
+    .model-tag .spec {
+      font-size: 0.62rem;
+      color: #666;
+      margin-top: 4px;
+      letter-spacing: 0.02em;
+    }
+    
+    .panel {
+      position: absolute;
+      bottom: 28px;
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 20;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 14px;
+      pointer-events: none;
+    }
+    
+    .paint-row {
+      display: flex;
+      gap: 11px;
+      pointer-events: auto;
+      background: rgba(16,16,20,0.88);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      padding: 11px 16px;
+      border-radius: 50px;
+      border: 1px solid rgba(255,255,255,0.07);
+      box-shadow: 0 10px 40px rgba(0,0,0,0.55);
+    }
+    
+    .paint-swatch {
+      width: 34px; height: 34px;
+      border-radius: 50%;
+      border: 2.5px solid transparent;
+      cursor: pointer;
+      transition: transform 0.18s ease, border-color 0.18s, box-shadow 0.18s;
+    }
+    
+    .paint-swatch:hover { transform: scale(1.14); }
+    .paint-swatch.active {
+      border-color: #e11d48;
+      box-shadow: 0 0 0 3px rgba(225,29,72,0.28);
+    }
+    
+    .paint-swatch[data-color="racing-red"]     { background: radial-gradient(circle at 32% 28%, #ff5c5c, #9f1239); }
+    .paint-swatch[data-color="pearl-white"]    { background: radial-gradient(circle at 32% 28%, #ffffff, #d4d4d8); }
+    .paint-swatch[data-color="electric-blue"]  { background: radial-gradient(circle at 32% 28%, #38bdf8, #0369a1); }
+    .paint-swatch[data-color="graphite-black"] { background: radial-gradient(circle at 32% 28%, #52525b, #18181b); }
+    .paint-swatch[data-color="champagne-gold"] { background: radial-gradient(circle at 32% 28%, #f5d78e, #92400e); }
+    
+    .controls-row {
+      display: flex;
+      gap: 9px;
+      pointer-events: auto;
+    }
+    
+    .ctrl-btn {
+      background: rgba(16,16,20,0.92);
+      border: 1px solid rgba(255,255,255,0.09);
+      color: #d4d4d8;
+      font-family: inherit;
+      font-size: 0.7rem;
+      font-weight: 500;
+      letter-spacing: 0.07em;
+      text-transform: uppercase;
+      padding: 11px 18px;
+      border-radius: 9px;
+      cursor: pointer;
+      transition: all 0.18s ease;
+      backdrop-filter: blur(12px);
+    }
+    
+    .ctrl-btn:hover {
+      background: rgba(28,28,34,0.97);
+      border-color: rgba(225,29,72,0.45);
+      color: #fff;
+    }
+    
+    .ctrl-btn.active {
+      background: rgba(225,29,72,0.18);
+      border-color: #e11d48;
+      color: #fda4af;
+    }
+    
+    .footer-note {
+      position: absolute;
+      bottom: 14px;
+      right: 24px;
+      font-size: 0.58rem;
+      color: #444;
+      letter-spacing: 0.05em;
+      z-index: 20;
+      pointer-events: none;
+    }
+    
+    #status {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: #070709;
+      z-index: 100;
+      flex-direction: column;
+      gap: 18px;
+      transition: opacity 0.55s ease;
+    }
+    
+    #status.hidden {
+      opacity: 0;
+      pointer-events: none;
+    }
+    
+    .loader {
+      width: 42px; height: 42px;
+      border: 2.5px solid rgba(225,29,72,0.18);
+      border-top-color: #e11d48;
+      border-radius: 50%;
+      animation: spin 0.75s linear infinite;
+    }
+    
+    @keyframes spin { to { transform: rotate(360deg); } }
+    
+    #status p {
+      font-size: 0.78rem;
+      color: #777;
+      letter-spacing: 0.14em;
+      font-weight: 500;
+    }
+    
+    #error {
+      display: none;
+      max-width: 440px;
+      text-align: center;
+      padding: 28px;
+      background: rgba(28,8,8,0.95);
+      border: 1px solid #7f1d1d;
+      border-radius: 14px;
+    }
+    
+    #error h2 { color: #f87171; margin-bottom: 10px; font-size: 1.05rem; }
+    #error p { color: #fca5a5; font-size: 0.84rem; line-height: 1.55; }
+    
+    .progress-bar {
+      width: 180px;
+      height: 3px;
+      background: rgba(255,255,255,0.08);
+      border-radius: 2px;
+      overflow: hidden;
+      margin-top: 4px;
+    }
+    
+    .progress-fill {
+      height: 100%;
+      width: 0%;
+      background: #e11d48;
+      transition: width 0.2s ease;
+    }
+    
+    @media (max-width: 640px) {
+      .header { padding: 14px 16px; }
+      .brand h1 { font-size: 1.05rem; letter-spacing: 0.22em; }
+      .model-tag .name { font-size: 0.75rem; }
+      .panel { bottom: 18px; gap: 11px; }
+      .paint-row { padding: 9px 12px; gap: 9px; }
+      .paint-swatch { width: 29px; height: 29px; }
+      .ctrl-btn { padding: 9px 13px; font-size: 0.64rem; }
+      .footer-note { display: none; }
+    }
+  </style>
+</head>
+<body>
+  <div id="status">
+    <div class="loader"></div>
+    <p id="status-text">LOADING VELOCITY</p>
+    <div class="progress-bar"><div class="progress-fill" id="progress"></div></div>
+    <div id="error">
+      <h2>WebGL Unavailable</h2>
+      <p>This experience requires a modern browser with WebGL support. Please try Chrome, Firefox, Edge or Safari on a device with hardware acceleration enabled.</p>
+    </div>
+  </div>
+
+  <div id="canvas-container"></div>
+
+  <header class="header">
+    <div class="brand">
+      <h1>VELOCITY</h1>
+      <div class="subtitle">Concept Design Studio</div>
+    </div>
+    <div class="model-tag">
+      <div class="name">VX-1 Hypercar Concept</div>
+      <div class="spec">Fictional concept · High-detail GLB model</div>
+    </div>
+  </header>
+
+  <div class="panel">
+    <div class="paint-row" id="paint-selector">
+      <div class="paint-swatch active" data-color="racing-red" title="Racing Red"></div>
+      <div class="paint-swatch" data-color="pearl-white" title="Pearl White"></div>
+      <div class="paint-swatch" data-color="electric-blue" title="Electric Blue"></div>
+      <div class="paint-swatch" data-color="graphite-black" title="Graphite Black"></div>
+      <div class="paint-swatch" data-color="champagne-gold" title="Champagne Gold"></div>
+    </div>
+    <div class="controls-row">
+      <button class="ctrl-btn active" id="btn-auto">Auto Rotate</button>
+      <button class="ctrl-btn" id="btn-reset">Reset View</button>
+    </div>
+  </div>
+
+  <div class="footer-note">Drag to orbit · Scroll to zoom · Pinch on mobile</div>
+
+  <script type="importmap">
+  {
+    "imports": {
+      "three": "https://unpkg.com/three@0.186.1/build/three.module.js",
+      "three/addons/": "https://unpkg.com/three@0.186.1/examples/jsm/"
+    }
+  }
+  </script>
+
+  <script type="module">
+    import * as THREE from 'three';
+    import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
+    import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';
+    import { DRACOLoader } from 'three/addons/loaders/DRACOLoader.js';
+    import { RoomEnvironment } from 'three/addons/environments/RoomEnvironment.js';
+
+    let renderer, scene, camera, controls, carRoot;
+    let autoRotate = true;
+    let bodyMaterials = [];
+
+    const PAINTS = {
+      'racing-red':     { color: new THREE.Color(0xc41e3a), metalness: 0.72, roughness: 0.18 },
+      'pearl-white':    { color: new THREE.Color(0xf8f8fa), metalness: 0.45, roughness: 0.14 },
+      'electric-blue':  { color: new THREE.Color(0x0ea5e9), metalness: 0.65, roughness: 0.16 },
+      'graphite-black': { color: new THREE.Color(0x1a1a1c), metalness: 0.88, roughness: 0.22 },
+      'champagne-gold': { color: new THREE.Color(0xc9a227), metalness: 0.78, roughness: 0.2 }
+    };
+
+    // High-quality concept car from Khronos glTF Sample Assets
+    // Original public-domain model by Unity Fan, optimized by Eric Chadwick
+    // License: CC-BY-4.0
+    const MODEL_URL = 'https://raw.githubusercontent.com/KhronosGroup/glTF-Sample-Assets/main/Models/CarConcept/glTF-Binary/CarConcept.glb';
+
+    function init() {
+      const container = document.getElementById('canvas-container');
+      
+      try {
+        renderer = new THREE.WebGLRenderer({ 
+          antialias: true, 
+          powerPreference: 'high-performance',
+          alpha: false
+        });
+      } catch (e) {
+        showError();
+        return;
+      }
+
+      if (!renderer.getContext()) {
+        showError();
+        return;
+      }
+
+      renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+      renderer.setSize(window.innerWidth, window.innerHeight);
+      renderer.toneMapping = THREE.ACESFilmicToneMapping;
+      renderer.toneMappingExposure = 1.15;
+      renderer.shadowMap.enabled = true;
+      renderer.shadowMap.type = THREE.PCFSoftShadowMap;
+      renderer.outputColorSpace = THREE.SRGBColorSpace;
+      container.appendChild(renderer.domElement);
+
+      scene = new THREE.Scene();
+      scene.background = new THREE.Color(0x070709);
+      scene.fog = new THREE.FogExp2(0x070709, 0.012);
+
+      camera = new THREE.PerspectiveCamera(40, window.innerWidth / window.innerHeight, 0.05, 80);
+      camera.position.set(4.8, 1.9, 5.6);
+
+      controls = new OrbitControls(camera, renderer.domElement);
+      controls.enableDamping = true;
+      controls.dampingFactor = 0.055;
+      controls.minDistance = 2.8;
+      controls.maxDistance = 12;
+      controls.maxPolarAngle = Math.PI * 0.495;
+      controls.target.set(0, 0.65, 0);
+      controls.autoRotate = true;
+      controls.autoRotateSpeed = 0.85;
+      controls.enablePan = true;
+
+      const pmrem = new THREE.PMREMGenerator(renderer);
+      const roomEnv = new RoomEnvironment();
+      const envMap = pmrem.fromScene(roomEnv, 0.04).texture;
+      scene.environment = envMap;
+      roomEnv.dispose();
+      pmrem.dispose();
+
+      scene.add(new THREE.AmbientLight(0x3a3a48, 0.4));
+
+      const key = new THREE.DirectionalLight(0xfff8f0, 2.6);
+      key.position.set(5, 9, 4);
+      key.castShadow = true;
+      key.shadow.mapSize.set(2048, 2048);
+      key.shadow.camera.near = 0.5;
+      key.shadow.camera.far = 25;
+      key.shadow.camera.left = -6;
+      key.shadow.camera.right = 6;
+      key.shadow.camera.top = 6;
+      key.shadow.camera.bottom = -6;
+      key.shadow.bias = -0.00025;
+      scene.add(key);
+
+      const fill = new THREE.DirectionalLight(0xa8c0e0, 1.0);
+      fill.position.set(-6, 5, -3);
+      scene.add(fill);
+
+      const rim = new THREE.DirectionalLight(0xffffff, 1.3);
+      rim.position.set(-1.5, 4, -7);
+      scene.add(rim);
+
+      const soft = new THREE.PointLight(0xffffff, 0.7, 18);
+      soft.position.set(0, 6, 1);
+      scene.add(soft);
+
+      const floorGeo = new THREE.CircleGeometry(16, 72);
+      const floorMat = new THREE.MeshStandardMaterial({
+        color: 0x101012,
+        metalness: 0.65,
+        roughness: 0.22,
+        envMapIntensity: 0.7
+      });
+      const floor = new THREE.Mesh(floorGeo, floorMat);
+      floor.rotation.x = -Math.PI / 2;
+      floor.receiveShadow = true;
+      scene.add(floor);
+
+      const refl = new THREE.Mesh(
+        new THREE.CircleGeometry(10, 48),
+        new THREE.MeshStandardMaterial({
+          color: 0x0a0a0c,
+          metalness: 0.95,
+          roughness: 0.12,
+          transparent: true,
+          opacity: 0.4
+        })
+      );
+      refl.rotation.x = -Math.PI / 2;
+      refl.position.y = 0.003;
+      scene.add(refl);
+
+      loadModel();
+      setupUI();
+      window.addEventListener('resize', onResize);
+      animate();
+    }
+
+    function showError() {
+      const loader = document.querySelector('.loader');
+      const text = document.getElementById('status-text');
+      const bar = document.querySelector('.progress-bar');
+      if (loader) loader.style.display = 'none';
+      if (text) text.style.display = 'none';
+      if (bar) bar.style.display = 'none';
+      document.getElementById('error').style.display = 'block';
+    }
+
+    function loadModel() {
+      const progressEl = document.getElementById('progress');
+      const statusText = document.getElementById('status-text');
+
+      const loader = new GLTFLoader();
+      const draco = new DRACOLoader();
+      draco.setDecoderPath('https://www.gstatic.com/draco/versioned/decoders/1.5.7/');
+      loader.setDRACOLoader(draco);
+
+      loader.load(
+        MODEL_URL,
+        (gltf) => {
+          carRoot = gltf.scene;
+          
+          const box = new THREE.Box3().setFromObject(carRoot);
+          const size = box.getSize(new THREE.Vector3());
+          const center = box.getCenter(new THREE.Vector3());
+          
+          const targetLength = 4.6;
+          const scale = targetLength / Math.max(size.x, size.z);
+          carRoot.scale.setScalar(scale);
+          
+          box.setFromObject(carRoot);
+          box.getCenter(center);
+          carRoot.position.sub(center);
+          carRoot.position.y = -box.min.y;
+          
+          carRoot.traverse((child) => {
+            if (child.isMesh) {
+              child.castShadow = true;
+              child.receiveShadow = true;
+              
+              const mat = child.material;
+              if (mat) {
+                const name = (mat.name || child.name || '').toLowerCase();
+                if (mat.isMeshPhysicalMaterial || mat.isMeshStandardMaterial) {
+                  if (name.includes('paint') || name.includes('body') || name.includes('car') ||
+                      name.includes('exterior') || (mat.metalness > 0.35 && mat.roughness < 0.55)) {
+                    bodyMaterials.push(mat);
+                  }
+                }
+              }
+            }
+          });
+
+          if (bodyMaterials.length === 0) {
+            carRoot.traverse((child) => {
+              if (child.isMesh && child.material && 
+                  (child.material.isMeshPhysicalMaterial || child.material.isMeshStandardMaterial)) {
+                bodyMaterials.push(child.material);
+              }
+            });
+            bodyMaterials = [...new Set(bodyMaterials)].slice(0, 5);
+          }
+
+          applyPaint('racing-red');
+          scene.add(carRoot);
+
+          document.getElementById('status').classList.add('hidden');
+          statusText.textContent = 'READY';
+        },
+        (xhr) => {
+          if (xhr.total > 0) {
+            const pct = Math.min(100, Math.round((xhr.loaded / xhr.total) * 100));
+            progressEl.style.width = pct + '%';
+            statusText.textContent = `LOADING MODEL  ${pct}%`;
+          }
+        },
+        (err) => {
+          console.error('Model load error:', err);
+          statusText.textContent = 'FAILED TO LOAD MODEL – using fallback';
+          progressEl.style.background = '#7f1d1d';
+          createFallbackCar();
+          document.getElementById('status').classList.add('hidden');
+        }
+      );
+    }
+
+    function applyPaint(key) {
+      const cfg = PAINTS[key];
+      if (!cfg) return;
+      
+      bodyMaterials.forEach(mat => {
+        if (mat.color) mat.color.copy(cfg.color);
+        if (mat.metalness !== undefined) mat.metalness = cfg.metalness;
+        if (mat.roughness !== undefined) mat.roughness = cfg.roughness;
+        if (mat.clearcoat !== undefined) {
+          mat.clearcoat = 1.0;
+          mat.clearcoatRoughness = 0.08;
+        }
+        mat.needsUpdate = true;
+      });
+    }
+
+    function createFallbackCar() {
+      carRoot = new THREE.Group();
+      const paintMat = new THREE.MeshPhysicalMaterial({
+        color: 0xc41e3a, metalness: 0.7, roughness: 0.2,
+        clearcoat: 1.0, clearcoatRoughness: 0.08
+      });
+      bodyMaterials = [paintMat];
+
+      const body = new THREE.Mesh(
+        new THREE.CapsuleGeometry(0.7, 2.8, 12, 24),
+        paintMat
+      );
+      body.rotation.z = Math.PI / 2;
+      body.scale.set(1, 0.55, 1.15);
+      body.position.y = 0.55;
+      body.castShadow = true;
+      carRoot.add(body);
+
+      const cabin = new THREE.Mesh(
+        new THREE.SphereGeometry(0.7, 24, 16, 0, Math.PI * 2, 0, Math.PI * 0.55),
+        new THREE.MeshPhysicalMaterial({
+          color: 0x111122, metalness: 0.1, roughness: 0.05,
+          transmission: 0.6, transparent: true, opacity: 0.8
+        })
+      );
+      cabin.scale.set(0.9, 0.7, 1.3);
+      cabin.position.set(0, 0.95, -0.1);
+      carRoot.add(cabin);
+
+      const rubber = new THREE.MeshStandardMaterial({ color: 0x111111, roughness: 0.9 });
+      const rim = new THREE.MeshStandardMaterial({ color: 0xccccd0, metalness: 0.9, roughness: 0.15 });
+      [[1.0, 1.2], [-1.0, 1.2], [1.05, -1.3], [-1.05, -1.3]].forEach(([x, z]) => {
+        const w = new THREE.Group();
+        const tire = new THREE.Mesh(new THREE.TorusGeometry(0.32, 0.1, 12, 24), rubber);
+        tire.rotation.y = Math.PI / 2;
+        w.add(tire);
+        const r = new THREE.Mesh(new THREE.CylinderGeometry(0.22, 0.22, 0.18, 16), rim);
+        r.rotation.z = Math.PI / 2;
+        w.add(r);
+        w.position.set(x, 0.35, z);
+        carRoot.add(w);
+      });
+
+      scene.add(carRoot);
+    }
+
+    function setupUI() {
+      const swatches = document.querySelectorAll('.paint-swatch');
+      swatches.forEach(s => {
+        s.addEventListener('click', () => {
+          swatches.forEach(x => x.classList.remove('active'));
+          s.classList.add('active');
+          applyPaint(s.dataset.color);
+        });
+      });
+
+      document.getElementById('btn-auto').addEventListener('click', function () {
+        autoRotate = !autoRotate;
+        controls.autoRotate = autoRotate;
+        this.classList.toggle('active', autoRotate);
+      });
+
+      document.getElementById('btn-reset').addEventListener('click', () => {
+        camera.position.set(4.8, 1.9, 5.6);
+        controls.target.set(0, 0.65, 0);
+        controls.update();
+      });
+    }
+
+    function onResize() {
+      camera.aspect = window.innerWidth / window.innerHeight;
+      camera.updateProjectionMatrix();
+      renderer.setSize(window.innerWidth, window.innerHeight);
+    }
+
+    function animate() {
+      requestAnimationFrame(animate);
+      controls.update();
+      renderer.render(scene, camera);
+    }
+
+    init();
+  </script>
+</body>
+</html>
