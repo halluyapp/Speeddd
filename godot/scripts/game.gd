@@ -56,7 +56,6 @@ func _setup_environment() -> void:
 	environment.ambient_light_source = Environment.AMBIENT_SOURCE_COLOR
 	environment.ambient_light_color = Color("b9d2d4")
 	environment.ambient_light_energy = 0.72
-	environment.reflected_light_source = Environment.REFLECTED_SOURCE_DISABLED
 	world_environment.environment = environment
 	add_child(world_environment)
 	var key_light := DirectionalLight3D.new()
