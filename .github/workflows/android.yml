@@ -48,10 +48,18 @@ jobs:
           godot --headless --version
       - name: Generate standard Android debug signing key
         run: keytool -genkeypair -noprompt -keystore "$HOME/.android/debug.keystore" -storepass android -alias androiddebugkey -keypass android -dname "CN=Android Debug,O=Android,C=US" -keyalg RSA -keysize 2048 -validity 10000
-      - name: Import resources and run native smoke tests
+      - name: Import Godot resources
+        run: godot --headless --path godot --editor --import --quit
+      - name: Run native smoke tests
         run: |
-          godot --headless --path godot --editor --import --quit
-          timeout 150s godot --headless --path godot --script res://tests/smoke_test.gd
+          set +e
+          timeout 45s godot --headless --path godot --script res://tests/smoke_test.gd > /tmp/velocity-native-test.log 2>&1
+          status=$?
+          cat /tmp/velocity-native-test.log
+          if [ "$status" -ne 0 ]; then
+            tail -60 /tmp/velocity-native-test.log | while IFS= read -r line; do printf '::error::%s\n' "$line"; done
+            exit "$status"
+          fi
       - name: Export installable Android APK
         run: godot --headless --path godot --export-debug Android build/velocity-debug.apk
       - uses: actions/upload-artifact@v4
