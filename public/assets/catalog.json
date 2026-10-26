@@ -1,6 +1,6 @@
 {
   "collection": "Velocity Asset Library",
-  "version": 6,
+  "version": 7,
   "units": "metres",
   "upAxis": "Y",
   "forwardAxis": "+Z (baked into runtime vehicle assets)",
@@ -660,6 +660,13 @@
       "manifest": "assets/tracks/azurline-circuit.json",
       "preview": "assets/previews/azurline-circuit.webp",
       "page": "track.html"
+    },
+    {
+      "id": "kestrel-ridge",
+      "name": "Kestrel Ridge",
+      "manifest": "assets/tracks/kestrel-ridge.json",
+      "preview": "assets/previews/kestrel-ridge.webp",
+      "page": "track.html?track=kestrel-ridge"
     }
   ],
   "presentation": [

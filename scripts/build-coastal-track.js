@@ -798,6 +798,7 @@ function createRaceMetadata() {
     preview: 'assets/previews/azurline-circuit.webp',
     master: 'assets-src/tracks/azurline-circuit.glb',
     collision: 'assets/tracks/collisions/azurline-circuit-collision.glb',
+    licenseFile: 'assets/tracks/azurline-circuit-LICENSE.txt',
     gameplayNote: 'Layout, spawn and checkpoint metadata only. No driving, lap validation, AI or race logic is implemented.',
   };
 }
@@ -876,17 +877,21 @@ await fs.writeFile(path.join(OUTPUT_DIR, `${TRACK_ID}.json`), `${JSON.stringify(
 await createPoster(metadata);
 
 const attribution = `${TRACK_NAME}\n${metadata.credit.author}\n${metadata.credit.license}\nhttps://creativecommons.org/publicdomain/zero/1.0/\n${metadata.credit.source}\n${metadata.credit.changes}\n`;
+await fs.writeFile(path.join(ROOT, 'public', metadata.licenseFile), attribution);
 await fs.writeFile(path.join(OUTPUT_DIR, 'LICENSE.txt'), attribution);
 
 const catalogPath = path.join(ROOT, 'public/assets/catalog.json');
 const catalog = JSON.parse(await fs.readFile(catalogPath, 'utf8'));
-catalog.tracks = [{
+const catalogEntry = {
   id: TRACK_ID,
   name: TRACK_NAME,
   manifest: `assets/tracks/${TRACK_ID}.json`,
   preview: metadata.preview,
   page: 'track.html',
-}];
+};
+const existingTrack = (catalog.tracks || []).findIndex((entry) => entry.id === TRACK_ID);
+if (existingTrack >= 0) catalog.tracks[existingTrack] = catalogEntry;
+else catalog.tracks = [catalogEntry, ...(catalog.tracks || [])];
 catalog.version = Math.max(Number(catalog.version) || 1, 2);
 catalog.forwardAxis = '+Z (baked into runtime vehicle assets)';
 await fs.writeFile(catalogPath, `${JSON.stringify(catalog, null, 2)}\n`);

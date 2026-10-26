@@ -2490,6 +2490,7 @@
   "preview": "assets/previews/azurline-circuit.webp",
   "master": "assets-src/tracks/azurline-circuit.glb",
   "collision": "assets/tracks/collisions/azurline-circuit-collision.glb",
+  "licenseFile": "assets/tracks/azurline-circuit-LICENSE.txt",
   "gameplayNote": "Layout, spawn and checkpoint metadata only. No driving, lap validation, AI or race logic is implemented.",
   "lods": {
     "0": "assets/tracks/lods/azurline-circuit-lod0.glb",

@@ -4,18 +4,18 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="theme-color" content="#0a1115" />
-    <meta name="description" content="Azurline Circuit — an original reusable coastal racing environment with four LODs, collision and race metadata." />
+    <meta name="description" content="Velocity Environments — original Azurline Circuit and Kestrel Ridge reusable racing environments with LODs, collision and race metadata." />
     <title>Azurline Circuit — Velocity Environments</title>
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
   </head>
-  <body>
+  <body data-track-id="azurline-circuit">
     <div id="track-app">
       <header class="track-topbar">
         <a class="track-brand" href="./" aria-label="Back to Velocity vehicle library">
           <svg viewBox="0 0 40 28" aria-hidden="true"><path d="M2 4h9l7 20h-8L2 4Zm13 0h8l6 14 5-14h5L26 24h-7L13 4Z" fill="currentColor" /></svg>
           <span>VELOCITY<small>Environment division</small></span>
         </a>
-        <div class="track-breadcrumb"><span>Library</span><i>/</i><strong>Environment 02</strong></div>
+        <div class="track-breadcrumb"><span>Library</span><i>/</i><strong>Environment library</strong></div>
         <nav class="track-nav" aria-label="Environment resources">
           <span class="track-local"><i></i> Original · CC0</span>
           <a href="./">Vehicles</a>
@@ -30,12 +30,17 @@
       <main class="track-workspace">
         <aside class="track-info-panel">
           <div class="track-heading">
-            <p class="track-eyebrow">Atlantic coast / 01</p>
-            <h1>Azurline <span>Circuit</span></h1>
-            <p class="track-description">Fast coastal sweepers. A technical inner loop. Sixty-four metres of elevation above the Atlantic.</p>
+            <p class="track-eyebrow" id="track-region">Atlantic coast / 01</p>
+            <h1 id="track-name">Azurline <span id="track-name-secondary">Circuit</span></h1>
+            <p class="track-description" id="track-description">Fast coastal sweepers. A technical inner loop. Sixty-four metres of elevation above the Atlantic.</p>
           </div>
 
-          <div class="track-tags"><span>Closed circuit</span><span>Road / hill climb</span></div>
+          <div class="environment-list" id="environment-list" role="group" aria-label="Select environment">
+            <button class="active" type="button" data-track-id="azurline-circuit" aria-pressed="true"><span>01</span><strong>Azurline</strong><small>Circuit</small></button>
+            <button type="button" data-track-id="kestrel-ridge" aria-pressed="false"><span>02</span><strong>Kestrel</strong><small>Ridge</small></button>
+          </div>
+
+          <div class="track-tags" id="track-tags"><span>Closed circuit</span><span>Road / hill climb</span></div>
 
           <div class="track-stat-grid">
             <div><span>Lap distance</span><strong id="track-length">2,799 m</strong></div>
@@ -55,14 +60,22 @@
             <div id="sector-list"></div>
           </section>
 
-          <p class="track-scope-note">Environment and race-layout metadata only. Driving, lap timing and AI are not part of this pack.</p>
+          <p class="track-scope-note">Environment and race-layout metadata only. Driving, drift scoring, lap timing and AI are not part of these packs.</p>
         </aside>
 
-        <section class="track-stage" id="track-stage" aria-label="Interactive 3D coastal circuit preview">
+        <section class="track-stage" id="track-stage" aria-label="Interactive 3D environment preview">
           <div id="track-canvas" aria-hidden="true"></div>
           <div class="track-poster" id="track-poster" aria-hidden="true">
-            <img id="track-poster-image" src="/assets/previews/azurline-circuit.webp" width="960" height="600" alt="" fetchpriority="high" decoding="async" />
+            <img id="track-poster-image" data-default-src="/assets/previews/azurline-circuit.webp" width="960" height="600" alt="" fetchpriority="high" decoding="async" />
           </div>
+          <script>
+            {
+              const poster = document.getElementById('track-poster-image');
+              const ridge = new URLSearchParams(window.location.search).get('track') === 'kestrel-ridge';
+              poster.src = ridge ? '/assets/previews/kestrel-ridge.webp' : poster.dataset.defaultSrc;
+              if (ridge) document.body.dataset.trackId = 'kestrel-ridge';
+            }
+          </script>
           <div class="track-stage-shade" aria-hidden="true"></div>
 
           <div class="track-stage-topline">
@@ -70,7 +83,7 @@
             <span class="track-stage-lod" id="stage-lod-label">LOD0 / 134K</span>
           </div>
 
-          <div class="track-stage-title" aria-hidden="true"><span>Velocity originals</span><strong>AZURLINE</strong></div>
+          <div class="track-stage-title" aria-hidden="true"><span>Velocity originals</span><strong id="track-stage-name">AZURLINE</strong></div>
 
           <div class="track-loader" id="track-loader" role="status" aria-live="polite">
             <span class="track-loader-ring"></span>
@@ -87,7 +100,7 @@
             <button class="active" type="button" data-view="overview" aria-pressed="true">Overview</button>
             <button type="button" data-view="start" aria-pressed="false">Start grid</button>
             <button type="button" data-view="hairpin" aria-pressed="false">Hairpin</button>
-            <button type="button" data-view="coast" aria-pressed="false">Coast</button>
+            <button type="button" id="track-scenic-view" data-view="coast" aria-pressed="false">Coast</button>
           </div>
 
           <div class="track-stage-actions">
@@ -115,11 +128,12 @@
             <a class="track-primary-download" id="download-track" href="/assets/tracks/lods/azurline-circuit-lod0.glb" download="azurline-circuit-lod0.glb">Download LOD0 GLB <span>↓</span></a>
             <a id="download-collision" href="/assets/tracks/collisions/azurline-circuit-collision.glb" download="azurline-circuit-collision.glb">Collision mesh <span>GLB</span></a>
             <a id="download-race-data" href="/assets/tracks/azurline-circuit.json" download="azurline-circuit.json">Race-layout data <span>JSON</span></a>
+            <a id="download-track-license" href="/assets/tracks/azurline-circuit-LICENSE.txt" download="azurline-circuit-LICENSE.txt">CC0 license record <span>TXT</span></a>
           </div>
 
           <dl class="track-package-facts">
             <div><dt>Checkpoints</dt><dd id="checkpoint-count">12 / ordered</dd></div>
-            <div><dt>Grid slots</dt><dd>16 / staggered</dd></div>
+            <div><dt>Grid slots</dt><dd id="grid-slot-fact">16 / staggered</dd></div>
             <div><dt>Collision</dt><dd id="collision-triangles">10,740 tris</dd></div>
             <div><dt>Conventions</dt><dd>Metres · Y-up</dd></div>
             <div><dt>Compression</dt><dd>Meshopt</dd></div>
@@ -127,7 +141,7 @@
 
           <div class="track-master-record">
             <span>Preserved master</span>
-            <code>assets-src/tracks/azurline-circuit.glb</code>
+            <code id="track-master-path">assets-src/tracks/azurline-circuit.glb</code>
           </div>
 
           <div class="track-license-card"><strong>CC0 1.0</strong><p>Original procedural geometry, layout, materials and metadata. No third-party environment assets.</p></div>

@@ -1,6 +1,6 @@
 # Velocity — Asset Library
 
-A local, reusable asset foundation containing **11 detailed vehicles**, the original **Azurline Circuit** coastal environment, the original **Race Control** presentation kit, original procedural **VFX and synthesized audio**, the original **Combat Kit** of vehicular weapon/projectile models, and the original **Social UI kit**. Vehicles include untouched masters, four runtime LODs, convex collision meshes, and wheel-rig metadata. The track includes four purpose-built LODs, drive-surface/terrain/barrier collision, and race-layout metadata. Race Control adds modular hardware, addressable light/display nodes, vector flags, and broadcast presentation fixtures. Media Lab adds eight real flipbook/sprite packages and eleven original sounds. Combat Lab adds five models with mounting, articulation and muzzle-socket records. Social Lab adds eight vector emblems, a 24-symbol sprite, four checked palettes, and ten fictional players across three static fixtures. The pages are **asset inspectors only**—there are no driving, racing, AI, physics, live-timing, multiplayer, firing, damage, fire-control, combat gameplay, or live networking systems.
+A local, reusable asset foundation containing **11 detailed vehicles**, two original environments—**Azurline Circuit** and **Kestrel Ridge**—the original **Race Control** presentation kit, original procedural **VFX and synthesized audio**, the original **Combat Kit** of vehicular weapon/projectile models, and the original **Social UI kit**. Vehicles include untouched masters, four runtime LODs, convex collision meshes, and wheel-rig metadata. Each environment includes four purpose-built LODs, drive-surface/terrain/barrier collision, and race-layout metadata. Race Control adds modular hardware, addressable light/display nodes, vector flags, and broadcast presentation fixtures. Media Lab adds eight real flipbook/sprite packages and eleven original sounds. Combat Lab adds five models with mounting, articulation and muzzle-socket records. Social Lab adds eight vector emblems, a 24-symbol sprite, four checked palettes, and ten fictional players across three static fixtures. The pages are **asset inspectors only**—there are no driving, racing, AI, physics, live-timing, multiplayer, firing, damage, fire-control, combat gameplay, or live networking systems.
 
 ## Run the inspectors
 
@@ -12,7 +12,7 @@ npm run dev
 Open the local URL printed by Vite. A local HTTP server is required; do not open the HTML files through `file://`.
 
 - `index.html` — vehicle collection and paint showroom
-- `track.html` — Azurline Circuit environment inspector
+- `track.html` — Azurline Circuit + Kestrel Ridge environment inspector
 - `race.html` — Race Control hardware and broadcast-presentation inspector
 - `effects.html` — VFX flipbook, blend/camera and isolated audio inspector
 - `combat.html` — weapon/projectile geometry, mounting, socket and articulation inspector
@@ -24,7 +24,7 @@ npm run preview          # serve the production build
 npm test                 # all vehicle, environment, presentation, media, combat and social checks
 npm run validate:assets  # all geometry, metadata, media, combat and social checks
 npm run validate:cars    # vehicle checks only
-npm run validate:track   # coastal-track checks only
+npm run validate:track   # both environment geometry, layout and license checks
 npm run validate:race    # race-presentation checks only
 npm run validate:effects # visual/audio format, signal and metadata checks
 npm run validate:combat  # combat glTF, rig, socket and package checks
@@ -53,22 +53,33 @@ The pipeline uses glTF Transform, Meshoptimizer, Sharp, and Three.js. It reads e
 
 Vehicle LODs use Meshopt geometry compression and WebP textures. Named wheel nodes, paint materials, attribution, and applicable node hierarchy are retained. The unused source skin in the sport coupé is pruned; there are no active skinned meshes to remove. The vehicle masters themselves are never written by the build pipeline.
 
-## Rebuild Azurline Circuit
+## Rebuild the environment packages
 
 ```bash
-npm run build:track
+npm run build:track   # Azurline Circuit only
+npm run build:ridge   # Kestrel Ridge only
+npm run build:tracks  # both environments
 npm run validate:track
 ```
 
-`scripts/build-coastal-track.js` deterministically generates the original master and all derivatives. No third-party environment geometry is used; the environment is **CC0 1.0**. Outputs include:
+`scripts/build-coastal-track.js` and `scripts/build-kestrel-ridge.js` deterministically generate their original masters and all derivatives. No third-party environment geometry is used; both environments are **CC0 1.0**. Each generator preserves sibling catalogue entries and writes a separate license record. Azurline outputs include:
 
 - `assets-src/tracks/azurline-circuit.glb` — full-detail procedural master
 - `public/assets/tracks/lods/azurline-circuit-lod0.glb` through `-lod3.glb`
 - `public/assets/tracks/collisions/azurline-circuit-collision.glb`
 - `public/assets/tracks/azurline-circuit.json` — reusable layout, grid, checkpoint, sector, camera, and package manifest
 - `public/assets/previews/azurline-circuit.webp` — instant illustrated circuit-map poster
+- `public/assets/tracks/azurline-circuit-LICENSE.txt` — CC0 provenance record
 
-The four track LODs are purpose-built from the same centerline rather than aggressively simplifying the road. They preserve the closed driving layout while reducing terrain, ocean, vegetation, and decorative detail.
+Kestrel outputs include:
+
+- `assets-src/tracks/kestrel-ridge.glb` — preserved full-detail alpine master
+- `public/assets/tracks/lods/kestrel-ridge-lod0.glb` through `-lod3.glb`
+- `public/assets/tracks/collisions/kestrel-ridge-collision.glb`
+- `public/assets/tracks/kestrel-ridge.json` — layout, 18 checkpoints, technical sections, gallery and package records
+- `public/assets/previews/kestrel-ridge.webp` and `public/assets/tracks/kestrel-ridge-LICENSE.txt`
+
+Each environment's four LODs are purpose-built from the same centerline rather than aggressively simplifying the road. They preserve the closed driving layout while reducing terrain, scenery, vegetation, and decorative detail.
 
 ## Rebuild Race Control presentation assets
 
@@ -177,6 +188,23 @@ Triangle counts below are for runtime LOD0 after cleanup. Each vehicle asset-det
 
 The environment includes the elevated road loop, edge markings, red/white curbs, guardrails and tire barriers, start gantry and grid markings, pit garages, grandstand, track lights, brake boards, coastal terrain, ocean and shoreline, rocks, palms, and scrub. The inspector provides overview, start-grid, hairpin, and coast cameras; a live circuit map; working LOD switches; and direct GLB/JSON downloads.
 
+## Kestrel Ridge package
+
+| Metric | Value |
+|---|---:|
+| Closed lap | 3,193.6 m |
+| Road / shoulder width | 12 m / 2 m |
+| Elevation change | 101.9 m |
+| Grid / checkpoints / sectors | 16 / 18 / 3 |
+| LOD0–LOD3 triangles | 153,482 / 95,704 / 48,342 / 27,402 |
+| LOD0–LOD3 sizes | 1.1 / 0.7 / 0.4 / 0.3 MB |
+| Basic collision | 11,224 triangles |
+| License | CC0 1.0 |
+
+The alpine environment includes banked technical esses, a granite hairpin, amber/ivory curbs and dashed markings, guardrails, tire barriers, an open-sided avalanche gallery with 5.11 m clearance, a timber pit lodge, viewing terrace, irregular ridged peaks, residual snow, spruce/fir clusters, granite rocks, and alpine scrub. Three named technical-section records describe the Ridge Esses, Granite Hairpin, and Gallery Run; they do not implement drift detection or scoring.
+
+Open `track.html?track=kestrel-ridge` for its direct poster-first inspector view. The shared Track Lab switches both environments with isolated per-track LOD caches, dynamic maps/stats/cameras/downloads, and a dedicated gallery camera. No driving, drift scoring, lap validation, AI, or race rules are included.
+
 ## Race Control package
 
 | Hardware | LOD0–LOD3 triangles | Collision triangles | Reusable control |
@@ -249,7 +277,7 @@ assets-src/
   combat/                        Original weapon/projectile full-detail GLB masters
   social/                        Original readable emblem and icon SVG masters
 index.html                       Vehicle showroom
-track.html                       Coastal environment inspector
+track.html                       Two-environment inspector
 race.html                        Race hardware + broadcast-presentation inspector
 effects.html                     VFX flipbook + isolated audio inspector
 combat.html                      Combat geometry + isolated articulation inspector
@@ -269,7 +297,9 @@ public/
       collisions/                Vehicle convex collision GLBs
       rigs/                      Wheel/dimension/package JSON records
     tracks/
-      azurline-circuit.json      Layout, grid, checkpoints, sectors and package data
+      azurline-circuit.json      Coastal layout, grid, checkpoints and package data
+      kestrel-ridge.json         Alpine layout, technical sections and gallery data
+      *-LICENSE.txt              Separate CC0 records for each environment
       lods/                      Track LOD0–LOD3 GLBs
       collisions/                Road, terrain and barrier collision GLB
     race/
@@ -300,12 +330,13 @@ public/
 scripts/
   build-car-assets.js            Vehicle master → runtime pipeline
   build-coastal-track.js         Original coastal master + runtime generator
+  build-kestrel-ridge.js         Original alpine master + runtime generator
   build-race-presentation.js     Original race hardware + graphics generator
   build-vfx-audio.js             Original flipbook/sprite + PCM audio generator
   build-combat-assets.js         Original combat models, rigs and runtime generator
   build-social-assets.js         Original emblems, sprite, palettes and fixture generator
   validate-assets.js             Vehicle geometry, LOD, collision and rig validation
-  validate-track-assets.js       Track glTF, layout and package validation
+  validate-track-assets.js       Both environments' glTF, layout and license validation
   validate-race-assets.js        Race glTF, controls, graphics and fixture validation
   validate-vfx-audio.js          Independent media format/signal/metadata validation
   validate-combat-assets.js      Combat glTF, hierarchy, socket and package validation
@@ -313,7 +344,7 @@ scripts/
   embed_attribution.py           Update vehicle-master credit metadata
 tests/
   catalog.test.js                Vehicle collection/package checks
-  track.test.js                  Coastal environment/package checks
+  track.test.js                  Both environment/package and selector checks
   race.test.js                   Race presentation/package checks
   effects.test.js                VFX/audio package and inspector checks
   combat.test.js                 Combat model/package and inspector checks
@@ -327,7 +358,7 @@ LICENSES.md                      Full attribution and modification record
 - **LOD selection is explicit.** Manifests map levels `0`–`3` to local GLB paths and record exact triangle counts and byte sizes. A future game can choose them by camera distance or platform budget.
 - **Vehicle collision is a starting point.** Single convex hulls support basic arcade experiments, not final vehicle physics. Suspension, chassis shape, tire behavior, and handling still need validation in the driving prototype.
 - **Wheel metadata is reusable.** Rig JSON provides `FL`, `FR`, `RL`, and `RR` records, source node names, positions, radii, widths, and steering/axle labels. It is not an animation or suspension controller.
-- **Track race data is reusable.** The manifest provides a closed centerline, start transform, 16 staggered grid slots, 12 ordered checkpoint/respawn transforms, three sectors, road bounds, and camera hints. It does not implement lap validation or race rules.
+- **Track race data is reusable.** Each environment manifest provides a closed centerline, start transform, 16 staggered grid slots, ordered checkpoint/respawn transforms, three sectors, road bounds, and camera hints. Azurline has 12 checkpoints; Kestrel has 18 plus technical-section and gallery records. These files do not implement lap validation, drift scoring, or race rules.
 - **Track collision is separated by role.** The collision GLB contains `collision-road`, `collision-terrain`, `collision-barriers`, and start-structure geometry. Final physics layering and trigger volumes belong to the driving prototype.
 - **Race-control nodes are addressable.** Start-light GLBs retain ten lens nodes with zero-based column/row metadata. Marshal panels retain separate base and LED `flag-display` roles. Clone their materials per runtime instance before applying state, as the inspector does.
 - **Presentation fixtures are replaceable data.** The race manifest's event, standings, telemetry, and six states demonstrate schema and layout only. Replace them with validated runtime data in a future game; do not treat them as race-rule implementations.
@@ -358,4 +389,4 @@ The attribution script changes only each vehicle-master GLB's JSON metadata chun
 
 ## Production names and marks
 
-The Mercedes-Benz, AMG, BMW, and M names/marks belong to their respective owners. Their model licenses permit reuse with attribution, but model copyright licensing does not grant manufacturer endorsement or separate trademark rights. Azurline Circuit, Velocity Race Control, Velocity Media Lab VFX/audio, Velocity Combat Kit, and Velocity Social UI are original fictional CC0 assets. This is an independent asset collection.
+The Mercedes-Benz, AMG, BMW, and M names/marks belong to their respective owners. Their model licenses permit reuse with attribution, but model copyright licensing does not grant manufacturer endorsement or separate trademark rights. Azurline Circuit, Kestrel Ridge, Velocity Race Control, Velocity Media Lab VFX/audio, Velocity Combat Kit, and Velocity Social UI are original fictional CC0 assets. This is an independent asset collection.
