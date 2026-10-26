@@ -20,6 +20,7 @@ export default defineConfig({
         effects: resolve(process.cwd(), 'effects.html'),
         combat: resolve(process.cwd(), 'combat.html'),
         social: resolve(process.cwd(), 'social.html'),
+        drivers: resolve(process.cwd(), 'drivers.html'),
       },
     },
   },

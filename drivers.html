@@ -1,0 +1,100 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#090e11" />
+    <meta name="description" content="Velocity Driver Kit — three original fictional helmeted drivers with rigid articulated rigs, four embedded clips each, cinematic fixtures, LODs and capsule proxies." />
+    <title>Driver Kit — Velocity Character Lab</title>
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+  </head>
+  <body data-asset-ready="false" data-asset="v84" data-lod="0" data-view="fixture" data-shot="grid-ready" data-clip="Idle" data-playing="false" data-joints="hidden" data-wireframe="false">
+    <div id="driver-app">
+      <header class="driver-topbar">
+        <a class="driver-brand" href="./" aria-label="Back to Velocity vehicle library">
+          <svg viewBox="0 0 40 28" aria-hidden="true"><path d="M2 4h9l7 20h-8L2 4Zm13 0h8l6 14 5-14h5L26 24h-7L13 4Z" fill="currentColor" /></svg>
+          <span>VELOCITY<small>Character division</small></span>
+        </a>
+        <div class="driver-breadcrumb"><span>Library</span><i>/</i><strong>Character 08</strong></div>
+        <nav class="driver-nav" aria-label="Driver package resources">
+          <span class="driver-local"><i></i> Fictional · CC0</span>
+          <a href="./">Vehicles</a><a href="./track.html">Environments</a><a href="./race.html">Race</a><a href="./effects.html">FX</a><a href="./combat.html">Arsenal</a><a href="./social.html">Social</a>
+          <a href="/assets/drivers/drivers.json" download="drivers.json">Manifest</a>
+        </nav>
+      </header>
+
+      <main class="driver-workspace">
+        <aside class="driver-library-panel">
+          <div class="driver-heading"><p class="driver-eyebrow">Original characters / 01</p><h1>Driver <span>Lab</span></h1><p>Three fictional helmeted drivers. Play the actual embedded joint clips, inspect cinematic cameras and download compact local runtimes.</p></div>
+          <div class="driver-tags"><span>3 drivers</span><span>17 joints</span><span>12 clips</span><span>CC0</span></div>
+          <section class="driver-library" aria-labelledby="driver-library-title">
+            <div class="driver-section-title"><span id="driver-library-title">Driver inventory</span><small>GLB / Meshopt</small></div>
+            <div id="driver-asset-list" class="driver-asset-list" role="group" aria-label="Select fictional driver"></div>
+          </section>
+          <section class="driver-selected-card" aria-live="polite">
+            <div><span id="selected-driver-discipline">CIRCUIT / LEAD</span><strong id="selected-driver-name">V84 Vector</strong></div>
+            <p id="selected-driver-description">Graphite circuit suit, chartreuse harness markers and an ivory full-face helmet.</p>
+            <dl><div><dt>Height</dt><dd id="selected-driver-height">1.943 m</dd></div><div><dt>Rig</dt><dd>17 rigid joints</dd></div><div><dt>Embedded clips</dt><dd>4 / driver</dd></div><div><dt>Capsule</dt><dd id="selected-driver-capsule">112 triangles</dd></div></dl>
+            <code id="selected-driver-master">assets-src/drivers/v84.glb</code>
+          </section>
+          <p class="driver-scope-note">Character presentation only. No locomotion, AI, physics, seat constraints, racing logic, cinematic gameplay or movie rendering.</p>
+        </aside>
+
+        <section class="driver-stage" id="driver-stage" aria-label="Interactive 3D driver animation inspector">
+          <div id="driver-canvas" aria-hidden="true"></div>
+          <div class="driver-poster" id="driver-poster" aria-hidden="true"><img src="/assets/previews/driver-kit.webp" width="1200" height="800" alt="" fetchpriority="high" decoding="async" /></div>
+          <div class="driver-stage-shade" aria-hidden="true"></div>
+          <div class="driver-stage-topline"><span><i></i> Actual embedded clips</span><b id="stage-driver-lod">V84 / LOD0</b></div>
+          <div class="driver-stage-title" aria-hidden="true"><span>Velocity fictional characters</span><strong>CHARACTER / 08</strong></div>
+          <div class="driver-loader" id="driver-loader" role="status" aria-live="polite"><span></span><div><strong id="driver-loader-title">Preparing Driver Lab</strong><small id="driver-loader-detail">Illustrated preview · rig loading…</small><i><b id="driver-loader-progress"></b></i></div></div>
+          <div class="driver-error" id="driver-error" hidden><strong>Driver could not be displayed</strong><p id="driver-error-message">Please retry the local asset.</p><button id="retry-driver" type="button">Retry</button></div>
+          <div class="driver-stage-actions">
+            <button id="toggle-driver-joints" type="button" aria-pressed="false">Joints</button>
+            <button id="toggle-driver-wireframe" type="button" aria-pressed="false">Wireframe</button>
+            <button id="toggle-driver-orbit" type="button" aria-pressed="false">Auto orbit</button>
+            <button id="reset-driver-view" type="button">Reset</button>
+          </div>
+          <div class="driver-stage-badge"><span id="stage-driver-name">V84 Vector</span><small id="stage-driver-class">CIRCUIT / LEAD · +Z FORWARD</small></div>
+
+          <div class="driver-rig-controls driver-playback" id="driver-playback">
+            <div class="playback-heading"><div><span id="driver-shot-label">GRID READY</span><strong id="driver-clip-name">Idle</strong></div><small id="driver-clip-state">LOOP · 4.0 S</small></div>
+            <div class="driver-transport">
+              <button id="toggle-driver-play" type="button" aria-label="Pause animation">Pause</button>
+              <button id="restart-driver-clip" type="button">Restart</button>
+              <input id="driver-timeline" type="range" min="0" max="4" step="0.01" value="0" aria-label="Animation playhead in seconds" />
+              <span id="driver-time">0.00 / 4.00</span>
+              <select id="driver-speed" aria-label="Animation playback speed"><option value="0.5">0.5×</option><option value="1" selected>1×</option><option value="1.5">1.5×</option><option value="2">2×</option></select>
+            </div>
+          </div>
+          <div class="driver-camera-dock" role="group" aria-label="Driver camera preset"><button class="active" type="button" data-view="fixture" aria-pressed="true">Fixture</button><button type="button" data-view="iso" aria-pressed="false">3/4</button><button type="button" data-view="front" aria-pressed="false">Front</button><button type="button" data-view="profile" aria-pressed="false">Profile</button><button type="button" data-view="top" aria-pressed="false">Top</button></div>
+        </section>
+
+        <aside class="driver-package-panel">
+          <div class="driver-package-heading"><div><p class="driver-eyebrow">Reusable package</p><h2>Rig + clips</h2></div><span>LOCAL / CC0</span></div>
+          <section class="driver-shot-section" aria-labelledby="driver-shot-title">
+            <div class="driver-section-title"><span id="driver-shot-title">Cinematic fixtures</span><small>Camera + clip</small></div>
+            <div id="driver-shot-list" class="driver-shot-list" role="group" aria-label="Select cinematic clip fixture"></div>
+          </section>
+          <div class="package-current"><span id="package-driver-name">V84 Vector / LOD0</span><strong id="package-driver-triangles">8,340</strong><small>triangles · <b id="package-driver-size">71 KB</b></small></div>
+          <div class="driver-section-title"><span>Runtime detail</span><small>Clips preserved</small></div>
+          <div id="driver-lod-list" class="driver-lod-list" role="group" aria-label="Select driver level of detail"></div>
+          <dl class="package-facts"><div><dt>LOD0 triangles</dt><dd id="package-driver-master-tris">8,340</dd></div><div><dt>Collision capsule</dt><dd id="package-driver-collision">112 tris</dd></div><div><dt>Animation targets</dt><dd>18 channels / clip</dd></div><div><dt>Compression</dt><dd>Meshopt</dd></div><div><dt>Conventions</dt><dd>Metres · Y-up · +Z</dd></div></dl>
+          <div class="package-downloads">
+            <a class="package-primary" id="download-driver-model" href="/assets/drivers/lods/v84-lod0.glb" download="v84-lod0.glb">Download LOD0 GLB <span>↓</span></a>
+            <a id="download-driver-collision" href="/assets/drivers/collisions/v84-capsule.glb" download="v84-capsule.glb">Collision capsule <span>GLB</span></a>
+            <a href="/assets/drivers/drivers.json" download="drivers.json">Rig + fixture manifest <span>JSON</span></a>
+            <a href="/assets/drivers/LICENSE.txt" download="driver-LICENSE.txt">CC0 license record <span>TXT</span></a>
+          </div>
+          <section class="driver-rig-section" aria-labelledby="driver-rig-title">
+            <div class="driver-section-title"><span id="driver-rig-title">Named rigid hierarchy</span><small>DriverRoot + 17</small></div>
+            <div id="driver-rig-list" class="driver-rig-list"></div>
+          </section>
+          <div class="package-master"><span>Preserved animation master</span><code id="package-driver-master">assets-src/drivers/v84.glb</code></div>
+          <div class="package-license"><strong>CC0 1.0</strong><p>Original procedural characters and animation. No third-party people, likenesses, character models or game assets.</p></div>
+        </aside>
+      </main>
+      <footer class="driver-footer"><span><i></i> Asset foundation / presentation rigs only</span><span id="active-driver-file">assets/drivers/lods/v84-lod0.glb</span></footer>
+    </div>
+    <script type="module" src="/src/drivers.js"></script>
+  </body>
+</html>

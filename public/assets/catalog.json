@@ -1,6 +1,6 @@
 {
   "collection": "Velocity Asset Library",
-  "version": 7,
+  "version": 8,
   "units": "metres",
   "upAxis": "Y",
   "forwardAxis": "+Z (baked into runtime vehicle assets)",
@@ -703,6 +703,15 @@
       "manifest": "assets/social/social.json",
       "preview": "assets/previews/social-lobby.webp",
       "page": "social.html"
+    }
+  ],
+  "drivers": [
+    {
+      "id": "velocity-driver-kit",
+      "name": "Velocity Driver Kit — Character 01",
+      "manifest": "assets/drivers/drivers.json",
+      "preview": "assets/previews/driver-kit.webp",
+      "page": "drivers.html"
     }
   ]
 }

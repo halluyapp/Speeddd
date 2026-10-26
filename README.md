@@ -1,6 +1,6 @@
 # Velocity — Asset Library
 
-A local, reusable asset foundation containing **11 detailed vehicles**, two original environments—**Azurline Circuit** and **Kestrel Ridge**—the original **Race Control** presentation kit, original procedural **VFX and synthesized audio**, the original **Combat Kit** of vehicular weapon/projectile models, and the original **Social UI kit**. Vehicles include untouched masters, four runtime LODs, convex collision meshes, and wheel-rig metadata. Each environment includes four purpose-built LODs, drive-surface/terrain/barrier collision, and race-layout metadata. Race Control adds modular hardware, addressable light/display nodes, vector flags, and broadcast presentation fixtures. Media Lab adds eight real flipbook/sprite packages and eleven original sounds. Combat Lab adds five models with mounting, articulation and muzzle-socket records. Social Lab adds eight vector emblems, a 24-symbol sprite, four checked palettes, and ten fictional players across three static fixtures. The pages are **asset inspectors only**—there are no driving, racing, AI, physics, live-timing, multiplayer, firing, damage, fire-control, combat gameplay, or live networking systems.
+A local, reusable asset foundation containing **11 detailed vehicles**, two original environments—**Azurline Circuit** and **Kestrel Ridge**—the original **Race Control** presentation kit, original procedural **VFX and synthesized audio**, the original **Combat Kit** of vehicular weapon/projectile models, the original **Social UI kit**, and the original **Driver Kit** of animated fictional characters. Vehicles include untouched masters, four runtime LODs, convex collision meshes, and wheel-rig metadata. Each environment includes four purpose-built LODs, drive-surface/terrain/barrier collision, and race-layout metadata. Race Control adds modular hardware, addressable light/display nodes, vector flags, and broadcast presentation fixtures. Media Lab adds eight real flipbook/sprite packages and eleven original sounds. Combat Lab adds five models with mounting, articulation and muzzle-socket records. Social Lab adds eight vector emblems, a 24-symbol sprite, four checked palettes, and ten fictional players across three static fixtures. Driver Lab adds three rigid-rigged helmeted drivers, twelve embedded clips, four cinematic camera fixtures, and capsule proxies. The pages are **asset inspectors only**—there are no driving, racing, AI, physics, live-timing, multiplayer, firing, damage, fire-control, combat gameplay, live networking, locomotion, seat-constraint, or cinematic gameplay systems.
 
 ## Run the inspectors
 
@@ -17,18 +17,20 @@ Open the local URL printed by Vite. A local HTTP server is required; do not open
 - `effects.html` — VFX flipbook, blend/camera and isolated audio inspector
 - `combat.html` — weapon/projectile geometry, mounting, socket and articulation inspector
 - `social.html` — emblems, palettes, icon sprite and fictional social-presentation inspector
+- `drivers.html` — animated rigid-rig, cinematic fixture, LOD and capsule inspector
 
 ```bash
 npm run build            # production multi-page site in dist/
 npm run preview          # serve the production build
-npm test                 # all vehicle, environment, presentation, media, combat and social checks
-npm run validate:assets  # all geometry, metadata, media, combat and social checks
+npm test                 # all vehicle, environment, presentation, media, combat, social and driver checks
+npm run validate:assets  # all geometry, metadata, media, combat, social and driver checks
 npm run validate:cars    # vehicle checks only
 npm run validate:track   # both environment geometry, layout and license checks
 npm run validate:race    # race-presentation checks only
 npm run validate:effects # visual/audio format, signal and metadata checks
 npm run validate:combat  # combat glTF, rig, socket and package checks
 npm run validate:social  # vector safety, contrast, sprite and fixture checks
+npm run validate:drivers # driver glTF, rig, clip, cinematic and package checks
 ```
 
 All runtime libraries, fonts, previews, decoders, graphics, and models are served locally. No inspector makes CDN or third-party runtime requests.
@@ -153,6 +155,25 @@ npm run validate:social
 
 The independent validator computes both foreground/background contrast pairs for every palette; all eight pairs exceed 4.5:1. `party`, `lobby`, and `ready` are replaceable JSON fixtures linked to `azurline-circuit` and its existing local preview. Rebuilding changes only generated social derivatives and the social catalogue entry.
 
+## Rebuild the Driver Kit
+
+```bash
+npm run build:drivers
+npm run validate:drivers
+```
+
+`scripts/build-driver-assets.js` deterministically generates three original fictional helmeted drivers, their named rigid-joint hierarchies, twelve embedded animation clips, four cinematic camera fixtures, thumbnails, poster, and package metadata. No third-party characters, real-world likenesses, motion captures, trademarks, network assets, or game assets are used. All generated character assets are **CC0 1.0**. Outputs include:
+
+- `assets-src/drivers/<driver-id>.glb` — three preserved full-detail animation masters
+- `public/assets/drivers/lods/<driver-id>-lod0.glb` through `-lod3.glb` — 12 purpose-built Meshopt runtime LODs, each retaining all four clips
+- `public/assets/drivers/collisions/<driver-id>-capsule.glb` — three 112-triangle capsule proxies
+- `public/assets/drivers/thumbnails/` — driver inventory thumbnails
+- `public/assets/drivers/drivers.json` — bounds, rig joints, clips, capsules, LODs, and cinematic fixtures
+- `public/assets/drivers/LICENSE.txt` — CC0 provenance record
+- `public/assets/previews/driver-kit.webp` — instant illustrated Driver Lab poster
+
+The independent validator runs Khronos validation on every master, runtime LOD, and capsule; checks actual exported node-instance triangle counts; verifies all 17 joints and 18 channels per clip; measures animation duration from GLB timing accessors; and validates fixture references, local downloads, and presentation-only scope. Rebuilding changes only generated driver derivatives and the driver catalogue entry.
+
 ## Vehicle collection
 
 Triangle counts below are for runtime LOD0 after cleanup. Each vehicle asset-details dialog exposes all four LOD downloads and their exact counts.
@@ -265,6 +286,27 @@ The ten demo players are fictional; their tags, host/member roles, platforms, pi
 
 The `social.html` inspector supports fixture selection, player inspection, palette-only accent previews, all 24 icons, and downloads for emblems, sprite, manifest, and CC0 record. Selecting a player or palette does not mutate the fixtures. There is no networking, WebSocket/WebRTC transport, server, authentication, matchmaking, invitation action, chat input/transport, voice, presence service, lobby rule, or multiplayer gameplay.
 
+## Driver Kit package
+
+| Fictional driver | Height | LOD0–LOD3 triangles | Capsule |
+|---|---:|---|---:|
+| V84 Vector — Circuit / lead | 1.943 m | 8,340 / 3,804 / 1,554 / 1,018 | 112 triangles |
+| N09 Nova — Endurance / night | 2.010 m | 8,340 / 3,804 / 1,554 / 1,018 | 112 triangles |
+| A17 Apex — Ridge / attack | 1.894 m | 8,340 / 3,804 / 1,554 / 1,018 | 112 triangles |
+
+Every master and runtime LOD contains `DriverRoot`, 17 named rigid joints, and four clips: **Idle** (4 s loop), **Seated** (2 s loop), **Celebrate** (2.4 s one-shot), and **Signal** (2 s one-shot). Each clip has 18 channels: quaternion tracks for all 17 joints plus a Pelvis translation track. Geometry is attached to rigid nodes; there is no skinned deformation or motion-capture source.
+
+| Cinematic fixture | Clip | Environment reference | Presentation |
+|---|---|---|---|
+| Grid Ready | Idle | Azurline Circuit | Full-body grid portrait |
+| Cockpit Check | Seated | Kestrel Ridge | Side-profile seated pose |
+| Podium Celebration | Celebrate | Azurline Circuit | Raised-arm one-shot |
+| Marshal Signal | Signal | Kestrel Ridge | Front three-quarter signal |
+
+The environment IDs are reusable composition references only; Driver Lab renders an isolated local stage and does not load or modify either track. Fixture cameras are data, not cinematic gameplay or movie rendering. Seated Pelvis offsets are clip poses, not vehicle-seat constraints.
+
+The `drivers.html` inspector plays the actual embedded GLTF clips with play/pause, restart, scrubbing, speed control, four fixture cameras, four additional inspection views, joint markers, wireframe, automatic orbit, all LODs, and direct GLB/capsule/manifest/license downloads. Query parameters such as `drivers.html?driver=n09&shot=podium-celebration&lod=2&view=fixture` provide direct reproducible views. No locomotion, AI, physics, seat constraints, racing logic, cinematic gameplay, or movie rendering is implemented.
+
 ## Repository layout
 
 ```text
@@ -276,12 +318,14 @@ assets-src/
   audio/                         Original 48 kHz / 24-bit stereo WAV masters
   combat/                        Original weapon/projectile full-detail GLB masters
   social/                        Original readable emblem and icon SVG masters
+  drivers/                       Original full-detail rigid-rig animation masters
 index.html                       Vehicle showroom
 track.html                       Two-environment inspector
 race.html                        Race hardware + broadcast-presentation inspector
 effects.html                     VFX flipbook + isolated audio inspector
 combat.html                      Combat geometry + isolated articulation inspector
 social.html                      Social vector + fictional fixture inspector
+drivers.html                     Animated driver + cinematic fixture inspector
 src/
   main.js / style.css            Vehicle viewer and responsive showroom
   track.js / track.css           Environment viewer, map, LOD and camera UI
@@ -289,9 +333,10 @@ src/
   effects.js / effects.css       Media playback, UV, camera and gesture-gated audio UI
   combat.js / combat.css         Combat model, socket, rig, LOD and camera UI
   social.js / social.css         Social fixture, player, palette and vector UI
+  drivers.js / drivers.css       Driver clips, scrubber, cameras, rig and package UI
 public/
   assets/
-    catalog.json                 Vehicle + track + presentation + media + combat + social index
+    catalog.json                 Vehicle + track + presentation + media + combat + social + driver index
     cars/
       lods/                      Vehicle LOD0–LOD3 GLBs
       collisions/                Vehicle convex collision GLBs
@@ -325,6 +370,12 @@ public/
       emblems/                   Eight compact runtime emblem SVGs
       icons.svg                  Local 24-symbol interface sprite
       LICENSE.txt                CC0 dedication and source-separation notice
+    drivers/
+      drivers.json               Rigs, clips, capsules, LODs and cinematic fixtures
+      lods/                      Animated driver LOD0–LOD3 GLBs
+      collisions/                Three simple capsule proxy GLBs
+      thumbnails/                Driver inventory thumbnails
+      LICENSE.txt                CC0 dedication and original-character record
     previews/                    Vehicle renders + illustrated package posters
     draco/                       Local Draco decoder for compatible assets
 scripts/
@@ -335,12 +386,14 @@ scripts/
   build-vfx-audio.js             Original flipbook/sprite + PCM audio generator
   build-combat-assets.js         Original combat models, rigs and runtime generator
   build-social-assets.js         Original emblems, sprite, palettes and fixture generator
+  build-driver-assets.js         Original drivers, rigid rigs, clips and fixture generator
   validate-assets.js             Vehicle geometry, LOD, collision and rig validation
   validate-track-assets.js       Both environments' glTF, layout and license validation
   validate-race-assets.js        Race glTF, controls, graphics and fixture validation
   validate-vfx-audio.js          Independent media format/signal/metadata validation
   validate-combat-assets.js      Combat glTF, hierarchy, socket and package validation
   validate-social-assets.js      Independent vector, contrast, sprite and fixture validation
+  validate-driver-assets.js      Khronos, rig, clip, LOD, cinematic and package validation
   embed_attribution.py           Update vehicle-master credit metadata
 tests/
   catalog.test.js                Vehicle collection/package checks
@@ -349,6 +402,7 @@ tests/
   effects.test.js                VFX/audio package and inspector checks
   combat.test.js                 Combat model/package and inspector checks
   social.test.js                 Social vector/package and inspector checks
+  drivers.test.js                Driver animation/package and inspector checks
 LICENSES.md                      Full attribution and modification record
 ```
 
@@ -373,6 +427,10 @@ LICENSES.md                      Full attribution and modification record
 - **Emblem masters remain editable.** Runtime SVGs include their default accent; edit the readable master or its `color` value when creating another treatment. Preserve the 128 × 128 viewBox and do not add remote or executable content.
 - **Palette preview is not team assignment.** Social Lab changes only the inspector's accent custom property. A future UI should apply the manifest's primary/on-primary and secondary/on-secondary pairs together rather than deriving low-contrast text colors.
 - **Social fixtures are replaceable data, not transport.** Player, room, ping, presence, voice and ready fields demonstrate layout only. A future approved networking layer must supply validated runtime state; these files must not be treated as lobby rules or presence services.
+- **Driver clips are embedded in every LOD.** Load `gltf.animations` by the manifest names and play them with an animation mixer; do not infer motion from the poster. Each clip targets the preserved named nodes directly, with no skin retargeting step.
+- **Driver rigs are rigid, not skinned.** `DriverRoot` contains 17 articulated joints and rigid mesh children. Preserve the hierarchy when cloning or editing. The +Z-forward, Y-up, metre and ground-zero conventions match the other character-placement assets.
+- **Cinematic fixtures are reusable data.** Camera position/target/FOV, clip name, duration, loop state, and environment reference are recorded in `drivers.json`. They are composition hints, not camera splines, gameplay cinematics, seat constraints, or movie-renderer outputs.
+- **Driver capsules are simple proxies.** The 112-triangle GLBs are coarse presentation/collision starting shapes only. Character physics, locomotion, vehicle seating, IK, and constraint behavior remain separate future systems.
 - **Paint remains a viewer operation.** Vehicle paint selections are not baked into downloads.
 - **Masters remain separate.** Use `assets-src/` for source work and `public/assets/` for runtime deployment. Do not edit generated runtime files directly.
 - **Meshopt support is required for runtime visual LODs.** The included Three.js loaders support it; other tools may need a Meshopt-compatible importer. Collision GLBs are intentionally simple uncompressed geometry.
@@ -389,4 +447,4 @@ The attribution script changes only each vehicle-master GLB's JSON metadata chun
 
 ## Production names and marks
 
-The Mercedes-Benz, AMG, BMW, and M names/marks belong to their respective owners. Their model licenses permit reuse with attribution, but model copyright licensing does not grant manufacturer endorsement or separate trademark rights. Azurline Circuit, Kestrel Ridge, Velocity Race Control, Velocity Media Lab VFX/audio, Velocity Combat Kit, and Velocity Social UI are original fictional CC0 assets. This is an independent asset collection.
+The Mercedes-Benz, AMG, BMW, and M names/marks belong to their respective owners. Their model licenses permit reuse with attribution, but model copyright licensing does not grant manufacturer endorsement or separate trademark rights. Azurline Circuit, Kestrel Ridge, Velocity Race Control, Velocity Media Lab VFX/audio, Velocity Combat Kit, Velocity Social UI, and Velocity Driver Kit are original fictional CC0 assets. This is an independent asset collection.
