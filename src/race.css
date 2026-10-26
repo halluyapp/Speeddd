@@ -288,7 +288,7 @@ body[data-race-state='green'] .broadcast-bar > em { background: #36f58a; }
   .race-brand svg { width: 29px; }.race-brand > span { font-size: 12px; }
   .race-breadcrumb { display: none; }
   .race-nav { gap: 12px; font-size: 8px; }
-  .race-nav a:first-of-type { display: none; }
+  .race-nav a:not(:last-child) { display: none; }
   .race-workspace { display: flex; flex-direction: column; gap: 0; }
   .race-stage { order: 1; height: 68vh; min-height: 590px; }
   .race-control-panel { order: 2; overflow: visible; padding: 26px 22px; }

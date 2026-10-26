@@ -1816,6 +1816,10 @@ kbd {
 }
 
 @media (max-width: 420px) {
+  .header-actions .text-button {
+    padding: 0 4px;
+  }
+
   .view-button[data-view='rear'] {
     display: none;
   }

@@ -1,6 +1,6 @@
 # Velocity — Asset Library
 
-A local, reusable asset foundation containing **11 detailed vehicles**, the original **Azurline Circuit** coastal environment, the original **Race Control** presentation kit, original procedural **VFX and synthesized audio**, and the original **Combat Kit** of vehicular weapon/projectile models. Vehicles include untouched masters, four runtime LODs, convex collision meshes, and wheel-rig metadata. The track includes four purpose-built LODs, drive-surface/terrain/barrier collision, and race-layout metadata. Race Control adds modular hardware, addressable light/display nodes, vector flags, and broadcast presentation fixtures. Media Lab adds eight real flipbook/sprite packages and eleven original sounds. Combat Lab adds five models with mounting, articulation and muzzle-socket records. The pages are **asset inspectors only**—there are no driving, racing, AI, physics, live-timing, multiplayer, firing, damage, fire-control, or combat gameplay systems.
+A local, reusable asset foundation containing **11 detailed vehicles**, the original **Azurline Circuit** coastal environment, the original **Race Control** presentation kit, original procedural **VFX and synthesized audio**, the original **Combat Kit** of vehicular weapon/projectile models, and the original **Social UI kit**. Vehicles include untouched masters, four runtime LODs, convex collision meshes, and wheel-rig metadata. The track includes four purpose-built LODs, drive-surface/terrain/barrier collision, and race-layout metadata. Race Control adds modular hardware, addressable light/display nodes, vector flags, and broadcast presentation fixtures. Media Lab adds eight real flipbook/sprite packages and eleven original sounds. Combat Lab adds five models with mounting, articulation and muzzle-socket records. Social Lab adds eight vector emblems, a 24-symbol sprite, four checked palettes, and ten fictional players across three static fixtures. The pages are **asset inspectors only**—there are no driving, racing, AI, physics, live-timing, multiplayer, firing, damage, fire-control, combat gameplay, or live networking systems.
 
 ## Run the inspectors
 
@@ -16,17 +16,19 @@ Open the local URL printed by Vite. A local HTTP server is required; do not open
 - `race.html` — Race Control hardware and broadcast-presentation inspector
 - `effects.html` — VFX flipbook, blend/camera and isolated audio inspector
 - `combat.html` — weapon/projectile geometry, mounting, socket and articulation inspector
+- `social.html` — emblems, palettes, icon sprite and fictional social-presentation inspector
 
 ```bash
 npm run build            # production multi-page site in dist/
 npm run preview          # serve the production build
-npm test                 # all vehicle, environment, presentation, media and combat checks
-npm run validate:assets  # all geometry, metadata, media and combat checks
+npm test                 # all vehicle, environment, presentation, media, combat and social checks
+npm run validate:assets  # all geometry, metadata, media, combat and social checks
 npm run validate:cars    # vehicle checks only
 npm run validate:track   # coastal-track checks only
 npm run validate:race    # race-presentation checks only
 npm run validate:effects # visual/audio format, signal and metadata checks
 npm run validate:combat  # combat glTF, rig, socket and package checks
+npm run validate:social  # vector safety, contrast, sprite and fixture checks
 ```
 
 All runtime libraries, fonts, previews, decoders, graphics, and models are served locally. No inspector makes CDN or third-party runtime requests.
@@ -121,6 +123,25 @@ npm run validate:combat
 
 The four turrets retain named `MountSocket`, `YawPivot` and `PitchPivot` nodes plus local-space muzzle sockets. The rotary cannon also retains `SpinPivot`; the micro-missile retains a centered projectile root and guidance socket. Rebuilding changes only generated combat derivatives and the combat catalogue entry.
 
+## Rebuild the Social UI kit
+
+```bash
+npm run build:social
+npm run validate:social
+```
+
+`scripts/build-social-assets.js` deterministically generates eight original abstract emblems, 24 interface symbols, four palettes, ten explicitly fictional players, and three static presentation fixtures. No third-party icons, remote avatars, real player records, network services, or game assets are used. The generated vectors, poster, records, and package metadata are **CC0 1.0**. Outputs include:
+
+- `assets-src/social/emblems/<emblem-id>.svg` — eight readable vector masters with titles, descriptions and CC0 metadata
+- `public/assets/social/emblems/<emblem-id>.svg` — compact 128 × 128 runtime emblems
+- `assets-src/social/icons.svg` — readable 24-symbol sprite master
+- `public/assets/social/icons.svg` — compact reusable 24 × 24 runtime sprite with local symbol IDs
+- `public/assets/social/social.json` — palettes, UI tokens, players, fixtures, and package paths
+- `public/assets/social/LICENSE.txt` — CC0 dedication and asset-source record
+- `public/assets/previews/social-lobby.webp` — instant illustrated Social Lab poster
+
+The independent validator computes both foreground/background contrast pairs for every palette; all eight pairs exceed 4.5:1. `party`, `lobby`, and `ready` are replaceable JSON fixtures linked to `azurline-circuit` and its existing local preview. Rebuilding changes only generated social derivatives and the social catalogue entry.
+
 ## Vehicle collection
 
 Triangle counts below are for runtime LOD0 after cleanup. Each vehicle asset-details dialog exposes all four LOD downloads and their exact counts.
@@ -201,6 +222,21 @@ All assets use metres, Y-up and +Z-forward. Turret origins are roof-mount ground
 
 The `combat.html` inspector loads actual Meshopt GLBs and includes all four LODs, four cameras, automatic orbit, socket markers, wireframe, articulation sliders, model/collision downloads and complete manifest access. Sliders demonstrate transforms only. No firing, ammunition, targeting, ballistics, damage, health, AI, animation clips or combat rules are included. Collision GLBs are simple visual-proxy starting points, not a physics implementation.
 
+## Social UI package
+
+The eight emblems are **Vector, Nova, Tide, Echo, Apex, Flux, Orbit, and Hex**. Each is a standalone local SVG with a compact runtime and readable source master. The icon sprite contains `players`, `party`, `invite`, `chat`, `mic`, `mic-off`, `ready`, `not-ready`, `host`, `ping`, `desktop`, `controller`, `deck`, `globe`, `lock`, `check`, `close`, `copy`, `settings`, `leave`, `download`, `shield`, `link`, and `calendar`.
+
+| Palette | Primary / on-primary | Ratio | Secondary / on-secondary | Ratio |
+|---|---|---:|---|---:|
+| Velocity Lime | `#d7ff3f` / `#111608` | 15.99:1 | `#293616` / `#eff8df` | 11.73:1 |
+| Atlantic Cyan | `#66e7ed` / `#081416` | 12.67:1 | `#15363c` / `#e5fbfc` | 12.02:1 |
+| Marshal Orange | `#ffb13b` / `#1a1004` | 10.36:1 | `#3c2610` / `#fff1dc` | 12.78:1 |
+| Night Violet | `#c5a3ff` / `#160d24` | 9.00:1 | `#2e2144` / `#f2eaff` | 12.69:1 |
+
+The ten demo players are fictional; their tags, host/member roles, platforms, ping, presence, voice, and ready values are presentation records, not live telemetry. The fixtures demonstrate a four-person party with two empty visual slots, an eight-player two-team lobby, and an eight-player all-ready presentation. `DEMO-V84` is deliberately not a joinable room code.
+
+The `social.html` inspector supports fixture selection, player inspection, palette-only accent previews, all 24 icons, and downloads for emblems, sprite, manifest, and CC0 record. Selecting a player or palette does not mutate the fixtures. There is no networking, WebSocket/WebRTC transport, server, authentication, matchmaking, invitation action, chat input/transport, voice, presence service, lobby rule, or multiplayer gameplay.
+
 ## Repository layout
 
 ```text
@@ -211,20 +247,23 @@ assets-src/
   vfx/                           Original full-resolution PNG visual masters
   audio/                         Original 48 kHz / 24-bit stereo WAV masters
   combat/                        Original weapon/projectile full-detail GLB masters
+  social/                        Original readable emblem and icon SVG masters
 index.html                       Vehicle showroom
 track.html                       Coastal environment inspector
 race.html                        Race hardware + broadcast-presentation inspector
 effects.html                     VFX flipbook + isolated audio inspector
 combat.html                      Combat geometry + isolated articulation inspector
+social.html                      Social vector + fictional fixture inspector
 src/
   main.js / style.css            Vehicle viewer and responsive showroom
   track.js / track.css           Environment viewer, map, LOD and camera UI
   race.js / race.css             Race hardware, state, HUD, timing and package UI
   effects.js / effects.css       Media playback, UV, camera and gesture-gated audio UI
   combat.js / combat.css         Combat model, socket, rig, LOD and camera UI
+  social.js / social.css         Social fixture, player, palette and vector UI
 public/
   assets/
-    catalog.json                 Vehicle + track + presentation + media + combat index
+    catalog.json                 Vehicle + track + presentation + media + combat + social index
     cars/
       lods/                      Vehicle LOD0–LOD3 GLBs
       collisions/                Vehicle convex collision GLBs
@@ -251,6 +290,11 @@ public/
       lods/                      Combat-model LOD0–LOD3 GLBs
       collisions/                Simple weapon/projectile collision proxies
       thumbnails/                Model inventory thumbnails
+    social/
+      social.json                Emblems, sprite, palettes, tokens and static fixtures
+      emblems/                   Eight compact runtime emblem SVGs
+      icons.svg                  Local 24-symbol interface sprite
+      LICENSE.txt                CC0 dedication and source-separation notice
     previews/                    Vehicle renders + illustrated package posters
     draco/                       Local Draco decoder for compatible assets
 scripts/
@@ -259,11 +303,13 @@ scripts/
   build-race-presentation.js     Original race hardware + graphics generator
   build-vfx-audio.js             Original flipbook/sprite + PCM audio generator
   build-combat-assets.js         Original combat models, rigs and runtime generator
+  build-social-assets.js         Original emblems, sprite, palettes and fixture generator
   validate-assets.js             Vehicle geometry, LOD, collision and rig validation
   validate-track-assets.js       Track glTF, layout and package validation
   validate-race-assets.js        Race glTF, controls, graphics and fixture validation
   validate-vfx-audio.js          Independent media format/signal/metadata validation
   validate-combat-assets.js      Combat glTF, hierarchy, socket and package validation
+  validate-social-assets.js      Independent vector, contrast, sprite and fixture validation
   embed_attribution.py           Update vehicle-master credit metadata
 tests/
   catalog.test.js                Vehicle collection/package checks
@@ -271,6 +317,7 @@ tests/
   race.test.js                   Race presentation/package checks
   effects.test.js                VFX/audio package and inspector checks
   combat.test.js                 Combat model/package and inspector checks
+  social.test.js                 Social vector/package and inspector checks
 LICENSES.md                      Full attribution and modification record
 ```
 
@@ -291,6 +338,10 @@ LICENSES.md                      Full attribution and modification record
 - **Combat mounts and pivots are reusable.** Attach turrets at `MountSocket`, rotate `YawPivot` around Y, and apply positive pitch as negative X rotation to `PitchPivot`. Keep muzzle effects in their recorded parent space; rotary sockets follow `SpinPivot`.
 - **Combat metadata contains no weapon balancing.** Models, bounds and socket positions are visual/package data only. Fire rates, ammunition, targeting, recoil, projectile simulation, damage and health must be designed and validated separately if gameplay is approved later.
 - **Combat collision is intentionally simple.** The proxy GLBs provide coarse mount/receiver/barrel or projectile shapes for future physics work; they do not implement hit detection, damage or constraints.
+- **Social icons inherit `currentColor`.** Reference a symbol with `<svg viewBox="0 0 24 24"><use href="/assets/social/icons.svg#players"></use></svg>` and set the desired CSS color. Keep the sprite local and use only IDs listed in the manifest.
+- **Emblem masters remain editable.** Runtime SVGs include their default accent; edit the readable master or its `color` value when creating another treatment. Preserve the 128 × 128 viewBox and do not add remote or executable content.
+- **Palette preview is not team assignment.** Social Lab changes only the inspector's accent custom property. A future UI should apply the manifest's primary/on-primary and secondary/on-secondary pairs together rather than deriving low-contrast text colors.
+- **Social fixtures are replaceable data, not transport.** Player, room, ping, presence, voice and ready fields demonstrate layout only. A future approved networking layer must supply validated runtime state; these files must not be treated as lobby rules or presence services.
 - **Paint remains a viewer operation.** Vehicle paint selections are not baked into downloads.
 - **Masters remain separate.** Use `assets-src/` for source work and `public/assets/` for runtime deployment. Do not edit generated runtime files directly.
 - **Meshopt support is required for runtime visual LODs.** The included Three.js loaders support it; other tools may need a Meshopt-compatible importer. Collision GLBs are intentionally simple uncompressed geometry.
@@ -307,4 +358,4 @@ The attribution script changes only each vehicle-master GLB's JSON metadata chun
 
 ## Production names and marks
 
-The Mercedes-Benz, AMG, BMW, and M names/marks belong to their respective owners. Their model licenses permit reuse with attribution, but model copyright licensing does not grant manufacturer endorsement or separate trademark rights. Azurline Circuit, Velocity Race Control, Velocity Media Lab VFX/audio, and Velocity Combat Kit are original fictional CC0 assets. This is an independent asset collection.
+The Mercedes-Benz, AMG, BMW, and M names/marks belong to their respective owners. Their model licenses permit reuse with attribution, but model copyright licensing does not grant manufacturer endorsement or separate trademark rights. Azurline Circuit, Velocity Race Control, Velocity Media Lab VFX/audio, Velocity Combat Kit, and Velocity Social UI are original fictional CC0 assets. This is an independent asset collection.

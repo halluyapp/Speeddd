@@ -179,6 +179,7 @@ button:focus-visible, a:focus-visible { outline: 2px solid var(--accent); outlin
   .track-brand svg { width: 29px; }
   .track-brand > span { font-size: 12px; }
   .track-nav { gap: 14px; font-size: 9px; }
+  .track-nav a:not(:last-child) { display: none; }
   .track-workspace { display: flex; flex-direction: column; gap: 0; }
   .track-stage { order: 1; height: 66vh; min-height: 500px; }
   .track-info-panel { order: 2; overflow: visible; padding: 26px 22px; }

@@ -1,6 +1,6 @@
 {
   "collection": "Velocity Asset Library",
-  "version": 5,
+  "version": 6,
   "units": "metres",
   "upAxis": "Y",
   "forwardAxis": "+Z (baked into runtime vehicle assets)",
@@ -687,6 +687,15 @@
       "manifest": "assets/combat/combat.json",
       "preview": "assets/previews/combat-kit.webp",
       "page": "combat.html"
+    }
+  ],
+  "social": [
+    {
+      "id": "velocity-social-lobby",
+      "name": "Velocity Social Lobby — Social 01",
+      "manifest": "assets/social/social.json",
+      "preview": "assets/previews/social-lobby.webp",
+      "page": "social.html"
     }
   ]
 }

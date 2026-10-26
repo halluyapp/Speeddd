@@ -170,7 +170,7 @@ button:focus-visible, a:focus-visible, input:focus-visible, select:focus-visible
   html, body { height: auto; min-height: 100%; } body { overflow: auto; }
   #effects-app { display: block; height: auto; min-height: 100vh; }
   .effects-topbar { grid-template-columns: 1fr auto; height: 60px; padding: 0 14px; }.effects-brand svg { width: 29px; }.effects-brand > span { font-size: 12px; }.effects-breadcrumb { display: none; }
-  .effects-nav { gap: 12px; font-size: 8px; }.effects-nav a:first-of-type, .effects-nav a:nth-of-type(2) { display: none; }
+  .effects-nav { gap: 12px; font-size: 8px; }.effects-nav a:not(:last-child) { display: none; }
   .effects-workspace { display: flex; flex-direction: column; gap: 0; }
   .effects-stage { order: 1; height: 68vh; min-height: 590px; }.effects-library-panel { order: 2; overflow: visible; padding: 26px 22px; }.audio-library-panel { order: 3; overflow: visible; padding: 24px 22px; border-top: 1px solid var(--line); }
   .effects-heading h1 { font-size: 43px; }.effects-heading > p:last-child { max-width: 470px; font-size: 11px; }
