@@ -1,0 +1,88 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#090e11" />
+    <meta name="description" content="Velocity Media Lab — original reusable VFX flipbooks, sprites and synthesized racing audio with interactive local previews." />
+    <title>VFX + Audio — Velocity Media Lab</title>
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+  </head>
+  <body data-asset-ready="false" data-effect-playing="false" data-audio-playing="false">
+    <div id="effects-app">
+      <header class="effects-topbar">
+        <a class="effects-brand" href="./" aria-label="Back to Velocity vehicle library">
+          <svg viewBox="0 0 40 28" aria-hidden="true"><path d="M2 4h9l7 20h-8L2 4Zm13 0h8l6 14 5-14h5L26 24h-7L13 4Z" fill="currentColor" /></svg>
+          <span>VELOCITY<small>Media division</small></span>
+        </a>
+        <div class="effects-breadcrumb"><span>Library</span><i>/</i><strong>Media 04</strong></div>
+        <nav class="effects-nav" aria-label="Media resources">
+          <span class="effects-local"><i></i> Original · CC0</span>
+          <a href="./">Vehicles</a><a href="./track.html">Azurline</a><a href="./race.html">Race</a>
+          <a href="/assets/media/vfx-audio.json" download="vfx-audio.json">Manifest</a>
+        </nav>
+      </header>
+
+      <main class="effects-workspace">
+        <aside class="effects-library-panel">
+          <div class="effects-heading"><p class="effects-eyebrow">VFX + audio / 01</p><h1>Media <span>Lab</span></h1><p>Original flipbooks, sprites and synthesized sound. Preview the actual local runtime assets, frame by frame.</p></div>
+          <div class="effects-tags"><span>8 visual packages</span><span>11 sounds</span><span>CC0</span></div>
+          <section class="effect-library" aria-labelledby="effect-library-title">
+            <div class="effects-section-title"><span id="effect-library-title">Visual effects</span><small>WebP / RGBA</small></div>
+            <div id="effect-list" class="effect-list" role="group" aria-label="Select visual effect"></div>
+          </section>
+          <section class="effect-package-card">
+            <div><span id="effect-package-type">LOOPING FLIPBOOK</span><strong id="effect-package-name">Boost flame</strong></div>
+            <dl><div><dt>Atlas</dt><dd id="effect-atlas">1024 × 1024</dd></div><div><dt>Frames</dt><dd id="effect-frames">16 / 4 × 4</dd></div><div><dt>Playback</dt><dd id="effect-fps">24 fps · 0.67 s</dd></div><div><dt>Blend</dt><dd id="effect-blend">Additive</dd></div></dl>
+            <a id="effect-download" href="/assets/vfx/flipbooks/boost-flame.webp" download="boost-flame.webp">Download runtime WebP <span>↓</span></a>
+            <code id="effect-master-path">assets-src/vfx/boost-flame.png</code>
+          </section>
+          <p class="effects-scope-note">Isolated media previews only. No particle simulation, driving, damage, weapon or combat systems.</p>
+        </aside>
+
+        <section class="effects-stage" id="effects-stage" aria-label="Interactive local VFX flipbook preview">
+          <div id="effects-canvas" aria-hidden="true"></div>
+          <div class="effects-poster" id="effects-poster" aria-hidden="true"><img src="/assets/previews/vfx-audio.webp" width="1200" height="800" alt="" fetchpriority="high" decoding="async" /></div>
+          <div class="effects-stage-shade" aria-hidden="true"></div>
+          <div class="effects-stage-topline"><span><i></i> Actual runtime texture</span><b id="stage-effect-label">BOOST / 16 FRAMES</b></div>
+          <div class="effects-stage-title" aria-hidden="true"><span>Velocity originals</span><strong>MEDIA / 04</strong></div>
+          <div class="effects-loader" id="effects-loader" role="status" aria-live="polite"><span></span><div><strong id="effects-loader-title">Preparing Media Lab</strong><small id="effects-loader-detail">Illustrated preview · WebP loading…</small><i><b id="effects-loader-progress"></b></i></div></div>
+          <div class="effects-error" id="effects-error" hidden><strong>Effect could not be displayed</strong><p id="effects-error-message">Please retry the local texture.</p><button id="retry-effect" type="button">Retry</button></div>
+
+          <div class="effect-stage-badge"><span id="stage-effect-name">Boost flame</span><small id="stage-effect-category">RACING / ADDITIVE</small></div>
+          <div class="effects-stage-actions"><button id="toggle-effects-orbit" type="button" aria-pressed="false">Auto orbit</button><button id="reset-effects-view" type="button">Reset</button></div>
+
+          <div class="effect-transport">
+            <div class="effect-transport-buttons">
+              <button id="effect-play" type="button" aria-pressed="true">Pause</button>
+              <button id="effect-replay" type="button">Replay</button>
+              <button id="effect-loop" type="button" aria-pressed="true">Loop on</button>
+              <label>Speed<select id="effect-speed"><option value="0.5">0.5×</option><option value="1" selected>1×</option><option value="1.5">1.5×</option><option value="2">2×</option></select></label>
+            </div>
+            <div class="effect-scrub"><input id="effect-scrubber" type="range" min="0" max="15" value="0" step="1" aria-label="Inspect flipbook frame" /><span id="effect-frame">F 01 / 16</span></div>
+            <div class="effect-progress"><i id="effect-progress-bar"></i></div>
+          </div>
+          <div class="effects-camera-dock" role="group" aria-label="VFX camera"><button class="active" type="button" data-view="iso" aria-pressed="true">3/4</button><button type="button" data-view="front" aria-pressed="false">Front</button><button type="button" data-view="top" aria-pressed="false">Top</button></div>
+        </section>
+
+        <aside class="audio-library-panel">
+          <div class="audio-heading"><div><p class="effects-eyebrow">Synthesized library</p><h2>Sound assets</h2></div><span>11 / LOCAL</span></div>
+          <div class="audio-tools"><label>Category<select id="audio-filter"><option value="all">All sounds</option><option value="Powertrain">Powertrain</option><option value="Tires">Tires</option><option value="Ambience">Ambience</option><option value="Impacts">Impacts</option><option value="Race UI">Race UI</option><option value="UI">UI</option></select></label><label>Volume<input id="audio-volume" type="range" min="0" max="100" value="60" aria-label="Audio preview volume" /><span id="audio-volume-value">60</span></label></div>
+          <div id="audio-list" class="audio-list" role="group" aria-label="Select sound asset"></div>
+          <section class="audio-selected" aria-live="polite">
+            <div class="audio-selected-heading"><div><span id="audio-category">POWERTRAIN / LOOP</span><strong id="audio-name">Engine idle</strong></div><b id="audio-duration">2.00 s</b></div>
+            <img id="audio-waveform" src="/assets/audio/waveforms/engine-idle-loop.svg" width="480" height="64" alt="Engine idle waveform" />
+            <p id="audio-description">Layered combustion pulses and mechanical harmonics for low-RPM blending.</p>
+            <div class="audio-playback-row"><button id="audio-play" type="button">Play sound</button><span id="audio-time">0.00 / 2.00</span></div>
+            <div class="audio-meta"><span id="audio-format">32 KHZ / 16 BIT / STEREO</span><span id="audio-loop">SEAMLESS LOOP</span></div>
+            <a id="audio-download" href="/assets/audio/runtime/engine-idle-loop.wav" download="engine-idle-loop.wav">Download runtime WAV <span>↓</span></a>
+            <code id="audio-master-path">assets-src/audio/engine-idle-loop.wav</code>
+          </section>
+          <p class="audio-note"><i></i> No autoplay. Audio is decoded only after a play gesture; selecting a row is silent.</p>
+        </aside>
+      </main>
+      <footer class="effects-footer"><span><i></i> Asset foundation / media only</span><span id="active-effect-file">assets/vfx/flipbooks/boost-flame.webp</span></footer>
+    </div>
+    <script type="module" src="/src/effects.js"></script>
+  </body>
+</html>

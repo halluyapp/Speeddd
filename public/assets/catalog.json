@@ -1,6 +1,6 @@
 {
   "collection": "Velocity Asset Library",
-  "version": 3,
+  "version": 4,
   "units": "metres",
   "upAxis": "Y",
   "forwardAxis": "+Z (baked into runtime vehicle assets)",
@@ -669,6 +669,15 @@
       "manifest": "assets/race/race-presentation.json",
       "preview": "assets/previews/race-presentation.webp",
       "page": "race.html"
+    }
+  ],
+  "media": [
+    {
+      "id": "velocity-vfx-audio",
+      "name": "Velocity VFX & Audio — Media 01",
+      "manifest": "assets/media/vfx-audio.json",
+      "preview": "assets/previews/vfx-audio.webp",
+      "page": "effects.html"
     }
   ]
 }
