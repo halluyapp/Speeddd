@@ -32,26 +32,53 @@ func _run() -> void:
 		await physics_frame
 	Input.action_release("throttle")
 	_check(game.player.speed_kph > 10.0, "player vehicle accelerates through the shared controller")
+	_check(game.racers[1].speed_kph > 5.0, "AI opponent accelerates on the real racing line")
+	_check(game.player.crossed_start, "player crosses the ordered start checkpoint")
 	_check(game.player.race_time > 1.0, "race timing advances")
+	game.player.weapon_cooldown = 0.0
+	game.player._try_fire()
+	_check(game.player.heat > 0.0, "equipped weapon fires and accumulates heat")
 	var opponent: CharacterBody3D = game.racers[1]
 	var initial_health: float = opponent.health
 	opponent.apply_damage(10.0, game.player)
 	_check(opponent.health == initial_health - 10.0, "damage applies through the common combat rule")
 	opponent._begin_destroyed(game.player)
 	_check(opponent.respawn_time > 0.0, "destruction starts respawn recovery")
-	print("RESPAWN DEBUG before: same_course=", opponent.course == game.course, " main=", game.course.checkpoints.size(), " vehicle=", opponent.course.checkpoints.size())
 	opponent.respawn_time = 0.01
 	await physics_frame
 	await physics_frame
-	print("RESPAWN DEBUG after: main=", game.course.checkpoints.size(), " vehicle=", opponent.course.checkpoints.size())
 	_check(opponent.health == 100.0 and opponent.visible, "respawn restores the vehicle at course data")
 	game.pause_race()
 	_check(paused and game.state == "paused", "pause suspends gameplay")
 	game.resume_race()
 	_check(not paused and game.state == "racing", "resume restores racing")
+	game._on_vehicle_finished(game.player)
+	_check(game.state == "results", "player finish opens race results")
 	game.show_garage()
 	await process_frame
 	_check(game.state == "menu", "garage return disposes the race")
+	for car_index in range(content["cars"].size()):
+		game._on_selection_changed("car", car_index)
+		await process_frame
+		_check(is_instance_valid(game.menu_car), "garage loads " + content["cars"][car_index]["name"])
+	for weapon_index in range(content["weapons"].size()):
+		game._on_selection_changed("weapon", weapon_index)
+		await process_frame
+		_check(is_instance_valid(game.menu_car) and game.menu_car.get_child_count() > 0, "garage mounts " + content["weapons"][weapon_index]["name"])
+	game._on_selection_changed("track", 1)
+	game._on_selection_changed("weapon", 2)
+	game.start_race()
+	await process_frame
+	_check(game.course.checkpoints.size() == 18, "Kestrel Ridge installs all eighteen checkpoints")
+	game._begin_racing()
+	for _index in range(30):
+		await physics_frame
+	var children_before_missile: int = game.world_root.get_child_count()
+	game._on_missile(game.player, game.racers[1])
+	_check(game.world_root.get_child_count() == children_before_missile + 1, "missile pod creates a real homing projectile")
+	game.show_garage()
+	await process_frame
+	_check(game.state == "menu", "second track and missile resources dispose cleanly")
 	game.queue_free()
 	await process_frame
 	if failures.is_empty():

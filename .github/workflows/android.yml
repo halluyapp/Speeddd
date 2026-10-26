@@ -55,6 +55,7 @@ jobs:
           set +e
           timeout 45s godot --headless --path godot --script res://tests/smoke_test.gd > /tmp/velocity-native-test.log 2>&1
           status=$?
+          if grep -qE 'SCRIPT ERROR:|^ERROR:' /tmp/velocity-native-test.log; then status=1; fi
           cat /tmp/velocity-native-test.log
           if [ "$status" -ne 0 ]; then
             tail -120 /tmp/velocity-native-test.log | while IFS= read -r line; do printf '::error::%s\n' "$line"; done
