@@ -57,7 +57,7 @@ jobs:
           status=$?
           cat /tmp/velocity-native-test.log
           if [ "$status" -ne 0 ]; then
-            tail -60 /tmp/velocity-native-test.log | while IFS= read -r line; do printf '::error::%s\n' "$line"; done
+            tail -120 /tmp/velocity-native-test.log | while IFS= read -r line; do printf '::error::%s\n' "$line"; done
             exit "$status"
           fi
       - name: Export installable Android APK

@@ -39,9 +39,11 @@ func _run() -> void:
 	_check(opponent.health == initial_health - 10.0, "damage applies through the common combat rule")
 	opponent._begin_destroyed(game.player)
 	_check(opponent.respawn_time > 0.0, "destruction starts respawn recovery")
+	print("RESPAWN DEBUG before: same_course=", opponent.course == game.course, " main=", game.course.checkpoints.size(), " vehicle=", opponent.course.checkpoints.size())
 	opponent.respawn_time = 0.01
 	await physics_frame
 	await physics_frame
+	print("RESPAWN DEBUG after: main=", game.course.checkpoints.size(), " vehicle=", opponent.course.checkpoints.size())
 	_check(opponent.health == 100.0 and opponent.visible, "respawn restores the vehicle at course data")
 	game.pause_race()
 	_check(paused and game.state == "paused", "pause suspends gameplay")
