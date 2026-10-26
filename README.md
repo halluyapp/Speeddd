@@ -1,6 +1,6 @@
 # Velocity — Asset Library
 
-A local, reusable asset foundation containing **11 detailed vehicles**, the original **Azurline Circuit** coastal environment, the original **Race Control** presentation kit, and original procedural **VFX and synthesized audio**. Vehicles include untouched masters, four runtime LODs, convex collision meshes, and wheel-rig metadata. The track includes four purpose-built LODs, drive-surface/terrain/barrier collision, and race-layout metadata. Race Control adds modular hardware, addressable light/display nodes, vector flags, and broadcast presentation fixtures. Media Lab adds eight real flipbook/sprite packages and eleven original sounds. The pages are **asset inspectors only**—there are no driving, racing, AI, physics, live-timing, multiplayer, damage, weapon, or combat systems.
+A local, reusable asset foundation containing **11 detailed vehicles**, the original **Azurline Circuit** coastal environment, the original **Race Control** presentation kit, original procedural **VFX and synthesized audio**, and the original **Combat Kit** of vehicular weapon/projectile models. Vehicles include untouched masters, four runtime LODs, convex collision meshes, and wheel-rig metadata. The track includes four purpose-built LODs, drive-surface/terrain/barrier collision, and race-layout metadata. Race Control adds modular hardware, addressable light/display nodes, vector flags, and broadcast presentation fixtures. Media Lab adds eight real flipbook/sprite packages and eleven original sounds. Combat Lab adds five models with mounting, articulation and muzzle-socket records. The pages are **asset inspectors only**—there are no driving, racing, AI, physics, live-timing, multiplayer, firing, damage, fire-control, or combat gameplay systems.
 
 ## Run the inspectors
 
@@ -15,16 +15,18 @@ Open the local URL printed by Vite. A local HTTP server is required; do not open
 - `track.html` — Azurline Circuit environment inspector
 - `race.html` — Race Control hardware and broadcast-presentation inspector
 - `effects.html` — VFX flipbook, blend/camera and isolated audio inspector
+- `combat.html` — weapon/projectile geometry, mounting, socket and articulation inspector
 
 ```bash
 npm run build            # production multi-page site in dist/
 npm run preview          # serve the production build
-npm test                 # vehicle, track, presentation and media package checks
-npm run validate:assets  # all geometry, metadata and media checks
+npm test                 # all vehicle, environment, presentation, media and combat checks
+npm run validate:assets  # all geometry, metadata, media and combat checks
 npm run validate:cars    # vehicle checks only
 npm run validate:track   # coastal-track checks only
 npm run validate:race    # race-presentation checks only
 npm run validate:effects # visual/audio format, signal and metadata checks
+npm run validate:combat  # combat glTF, rig, socket and package checks
 ```
 
 All runtime libraries, fonts, previews, decoders, graphics, and models are served locally. No inspector makes CDN or third-party runtime requests.
@@ -101,6 +103,24 @@ npm run validate:effects
 
 PCM WAV was selected instead of compressed audio for universal browser decoding and gapless loop boundaries. Rebuilding overwrites only generated media derivatives and the media catalogue entry; vehicle, track, and race entries remain intact.
 
+## Rebuild the Combat Kit
+
+```bash
+npm run build:combat
+npm run validate:combat
+```
+
+`scripts/build-combat-assets.js` deterministically generates five original models from procedural geometry. No third-party models, real-world weapon blueprints, network assets or game IP are used. All geometry, thumbnails, poster and metadata are **CC0 1.0**. Outputs include:
+
+- `assets-src/combat/<asset-id>.glb` — five preserved full-detail masters
+- `public/assets/combat/lods/<asset-id>-lod0.glb` through `-lod3.glb` — 20 purpose-built Meshopt runtime LODs
+- `public/assets/combat/collisions/<asset-id>-collision.glb` — five simple collision proxies
+- `public/assets/combat/thumbnails/` — model inventory thumbnails
+- `public/assets/combat/combat.json` — bounds, mounting, articulation, muzzle and package records
+- `public/assets/previews/combat-kit.webp` — instant illustrated Combat Lab poster
+
+The four turrets retain named `MountSocket`, `YawPivot` and `PitchPivot` nodes plus local-space muzzle sockets. The rotary cannon also retains `SpinPivot`; the micro-missile retains a centered projectile root and guidance socket. Rebuilding changes only generated combat derivatives and the combat catalogue entry.
+
 ## Vehicle collection
 
 Triangle counts below are for runtime LOD0 after cleanup. Each vehicle asset-details dialog exposes all four LOD downloads and their exact counts.
@@ -167,6 +187,20 @@ Flipbooks are row-major from the **top-left** of the atlas. For a frame at colum
 
 The `effects.html` inspector displays the actual runtime textures, not substitute animations. It includes frame scrubbing, play/pause/replay, loop and speed controls, three cameras, automatic orbit, blend labels, thumbnails, category filters, volume, waveforms, and downloads. Sound is decoded only after an explicit play gesture; selecting an asset is silent. The validator independently decodes PNG alpha/layout and PCM headers/samples, checks signal-aware loop seams and waveform endpoints, and rejects remote URLs or gameplay scripts.
 
+## Combat Kit package
+
+| Model | LOD0–LOD3 triangles | Collision | Reusable sockets |
+|---|---|---:|---|
+| R-6 Rotary Cannon | 13,180 / 5,944 / 2,496 / 1,704 | 36 | Yaw, pitch, spin, 6 muzzles |
+| D-2 Twin Repeater | 18,208 / 6,592 / 2,448 / 1,408 | 36 | Yaw, pitch, 2 muzzles |
+| H-6 Missile Pod | 11,500 / 5,348 / 2,388 / 1,636 | 36 | Yaw, pitch, 6 cells |
+| A-1 Pulse Projector | 11,740 / 4,628 / 1,788 / 1,084 | 36 | Yaw, pitch, 1 output |
+| M-6 Micro Missile | 2,256 / 1,080 / 608 / 384 | 56 | Centered root, guidance socket |
+
+All assets use metres, Y-up and +Z-forward. Turret origins are roof-mount ground zero; the projectile origin is its geometric bounds center. Yaw applies around parent Y. Positive manifest pitch raises the muzzle and therefore applies as **negative X rotation** in Three.js. Muzzle positions and directions are local to `PitchPivot`, except rotary muzzles, which are local to `SpinPivot`; use the parent world matrix when attaching future visual effects.
+
+The `combat.html` inspector loads actual Meshopt GLBs and includes all four LODs, four cameras, automatic orbit, socket markers, wireframe, articulation sliders, model/collision downloads and complete manifest access. Sliders demonstrate transforms only. No firing, ammunition, targeting, ballistics, damage, health, AI, animation clips or combat rules are included. Collision GLBs are simple visual-proxy starting points, not a physics implementation.
+
 ## Repository layout
 
 ```text
@@ -176,18 +210,21 @@ assets-src/
   race/                          Original procedural race-hardware masters
   vfx/                           Original full-resolution PNG visual masters
   audio/                         Original 48 kHz / 24-bit stereo WAV masters
+  combat/                        Original weapon/projectile full-detail GLB masters
 index.html                       Vehicle showroom
 track.html                       Coastal environment inspector
 race.html                        Race hardware + broadcast-presentation inspector
 effects.html                     VFX flipbook + isolated audio inspector
+combat.html                      Combat geometry + isolated articulation inspector
 src/
   main.js / style.css            Vehicle viewer and responsive showroom
   track.js / track.css           Environment viewer, map, LOD and camera UI
   race.js / race.css             Race hardware, state, HUD, timing and package UI
   effects.js / effects.css       Media playback, UV, camera and gesture-gated audio UI
+  combat.js / combat.css         Combat model, socket, rig, LOD and camera UI
 public/
   assets/
-    catalog.json                 Vehicle + track + presentation + media package index
+    catalog.json                 Vehicle + track + presentation + media + combat index
     cars/
       lods/                      Vehicle LOD0–LOD3 GLBs
       collisions/                Vehicle convex collision GLBs
@@ -209,6 +246,11 @@ public/
       waveforms/                 Standalone stereo waveform SVGs
     media/
       vfx-audio.json             Reusable visual/audio manifest and licenses
+    combat/
+      combat.json                Model bounds, mounts, pivots, muzzles and packages
+      lods/                      Combat-model LOD0–LOD3 GLBs
+      collisions/                Simple weapon/projectile collision proxies
+      thumbnails/                Model inventory thumbnails
     previews/                    Vehicle renders + illustrated package posters
     draco/                       Local Draco decoder for compatible assets
 scripts/
@@ -216,16 +258,19 @@ scripts/
   build-coastal-track.js         Original coastal master + runtime generator
   build-race-presentation.js     Original race hardware + graphics generator
   build-vfx-audio.js             Original flipbook/sprite + PCM audio generator
+  build-combat-assets.js         Original combat models, rigs and runtime generator
   validate-assets.js             Vehicle geometry, LOD, collision and rig validation
   validate-track-assets.js       Track glTF, layout and package validation
   validate-race-assets.js        Race glTF, controls, graphics and fixture validation
   validate-vfx-audio.js          Independent media format/signal/metadata validation
+  validate-combat-assets.js      Combat glTF, hierarchy, socket and package validation
   embed_attribution.py           Update vehicle-master credit metadata
 tests/
   catalog.test.js                Vehicle collection/package checks
   track.test.js                  Coastal environment/package checks
   race.test.js                   Race presentation/package checks
   effects.test.js                VFX/audio package and inspector checks
+  combat.test.js                 Combat model/package and inspector checks
 LICENSES.md                      Full attribution and modification record
 ```
 
@@ -243,6 +288,9 @@ LICENSES.md                      Full attribution and modification record
 - **Flipbook metadata is authoritative.** Atlases are row-major from the top-left. Apply the manifest's repeat/offset convention, timing, alpha mode, and blend mode rather than treating a whole atlas as one sprite. Runtime WebP files are RGBA; PNG masters remain lossless.
 - **Audio runtimes are lightweight PCM.** All browser files are 32 kHz / 16-bit stereo WAVs; all preserved masters are 48 kHz / 24-bit stereo WAVs. Respect exact loop ranges and create/resume audio only after a user gesture. No sound starts automatically.
 - **Media inspection is not a simulation.** The inspector renders isolated textures and plays individual sounds. Particle emitters, gameplay triggers, mixing, damage, weapons, and race logic remain outside this asset pack.
+- **Combat mounts and pivots are reusable.** Attach turrets at `MountSocket`, rotate `YawPivot` around Y, and apply positive pitch as negative X rotation to `PitchPivot`. Keep muzzle effects in their recorded parent space; rotary sockets follow `SpinPivot`.
+- **Combat metadata contains no weapon balancing.** Models, bounds and socket positions are visual/package data only. Fire rates, ammunition, targeting, recoil, projectile simulation, damage and health must be designed and validated separately if gameplay is approved later.
+- **Combat collision is intentionally simple.** The proxy GLBs provide coarse mount/receiver/barrel or projectile shapes for future physics work; they do not implement hit detection, damage or constraints.
 - **Paint remains a viewer operation.** Vehicle paint selections are not baked into downloads.
 - **Masters remain separate.** Use `assets-src/` for source work and `public/assets/` for runtime deployment. Do not edit generated runtime files directly.
 - **Meshopt support is required for runtime visual LODs.** The included Three.js loaders support it; other tools may need a Meshopt-compatible importer. Collision GLBs are intentionally simple uncompressed geometry.
@@ -259,4 +307,4 @@ The attribution script changes only each vehicle-master GLB's JSON metadata chun
 
 ## Production names and marks
 
-The Mercedes-Benz, AMG, BMW, and M names/marks belong to their respective owners. Their model licenses permit reuse with attribution, but model copyright licensing does not grant manufacturer endorsement or separate trademark rights. Azurline Circuit, Velocity Race Control, and the Velocity Media Lab VFX/audio are original fictional CC0 assets. This is an independent asset collection.
+The Mercedes-Benz, AMG, BMW, and M names/marks belong to their respective owners. Their model licenses permit reuse with attribution, but model copyright licensing does not grant manufacturer endorsement or separate trademark rights. Azurline Circuit, Velocity Race Control, Velocity Media Lab VFX/audio, and Velocity Combat Kit are original fictional CC0 assets. This is an independent asset collection.

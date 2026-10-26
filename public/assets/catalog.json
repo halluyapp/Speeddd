@@ -1,6 +1,6 @@
 {
   "collection": "Velocity Asset Library",
-  "version": 4,
+  "version": 5,
   "units": "metres",
   "upAxis": "Y",
   "forwardAxis": "+Z (baked into runtime vehicle assets)",
@@ -678,6 +678,15 @@
       "manifest": "assets/media/vfx-audio.json",
       "preview": "assets/previews/vfx-audio.webp",
       "page": "effects.html"
+    }
+  ],
+  "combat": [
+    {
+      "id": "velocity-combat-kit",
+      "name": "Velocity Combat Kit — Arsenal 01",
+      "manifest": "assets/combat/combat.json",
+      "preview": "assets/previews/combat-kit.webp",
+      "page": "combat.html"
     }
   ]
 }

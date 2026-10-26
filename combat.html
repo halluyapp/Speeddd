@@ -1,0 +1,95 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#090e11" />
+    <meta name="description" content="Velocity Combat Kit — original reusable vehicular weapon and projectile models with LODs, collision, mounting metadata and isolated rig inspection." />
+    <title>Combat Kit — Velocity Arsenal</title>
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+  </head>
+  <body data-asset-ready="false" data-asset="rotary-cannon" data-lod="0" data-view="iso" data-markers="hidden" data-wireframe="false">
+    <div id="combat-app">
+      <header class="combat-topbar">
+        <a class="combat-brand" href="./" aria-label="Back to Velocity vehicle library">
+          <svg viewBox="0 0 40 28" aria-hidden="true"><path d="M2 4h9l7 20h-8L2 4Zm13 0h8l6 14 5-14h5L26 24h-7L13 4Z" fill="currentColor" /></svg>
+          <span>VELOCITY<small>Arsenal division</small></span>
+        </a>
+        <div class="combat-breadcrumb"><span>Library</span><i>/</i><strong>Arsenal 05</strong></div>
+        <nav class="combat-nav" aria-label="Combat package resources">
+          <span class="combat-local"><i></i> Original · CC0</span>
+          <a href="./">Vehicles</a><a href="./track.html">Azurline</a><a href="./race.html">Race</a><a href="./effects.html">FX</a>
+          <a href="/assets/combat/combat.json" download="combat.json">Manifest</a>
+        </nav>
+      </header>
+
+      <main class="combat-workspace">
+        <aside class="combat-library-panel">
+          <div class="combat-heading"><p class="combat-eyebrow">Vehicular arsenal / 01</p><h1>Combat <span>Lab</span></h1><p>Original modular weapon and projectile models. Inspect real local geometry, mounting points and articulation—without fire control.</p></div>
+          <div class="combat-tags"><span>5 models</span><span>20 runtime LODs</span><span>CC0</span></div>
+          <section class="combat-library" aria-labelledby="combat-library-title">
+            <div class="combat-section-title"><span id="combat-library-title">Model inventory</span><small>GLB / Meshopt</small></div>
+            <div id="combat-asset-list" class="combat-asset-list" role="group" aria-label="Select combat model"></div>
+          </section>
+          <section class="combat-selected-card" aria-live="polite">
+            <div><span id="selected-combat-category">KINETIC / TURRET</span><strong id="selected-combat-name">R-6 Rotary Cannon</strong></div>
+            <p id="selected-combat-description">Six independently modeled barrels, rotating cluster, clamp rings, feed housing and armored receiver.</p>
+            <dl><div><dt>Dimensions</dt><dd id="selected-combat-dimensions">—</dd></div><div><dt>Mount</dt><dd id="selected-combat-mount">Roof ring</dd></div><div><dt>Muzzle sockets</dt><dd id="selected-combat-muzzles">6</dd></div><div><dt>Origin</dt><dd id="selected-combat-origin">Mount zero</dd></div></dl>
+            <code id="selected-combat-master">assets-src/combat/rotary-cannon.glb</code>
+          </section>
+          <p class="combat-scope-note">Visual assets and isolated rig previews only. No firing, ammunition, targeting, ballistics, damage, health, AI or combat gameplay.</p>
+        </aside>
+
+        <section class="combat-stage" id="combat-stage" aria-label="Interactive 3D combat model inspector">
+          <div id="combat-canvas" aria-hidden="true"></div>
+          <div class="combat-poster" id="combat-poster" aria-hidden="true"><img src="/assets/previews/combat-kit.webp" width="1200" height="800" alt="" fetchpriority="high" decoding="async" /></div>
+          <div class="combat-stage-shade" aria-hidden="true"></div>
+          <div class="combat-stage-topline"><span><i></i> Actual runtime geometry</span><b id="stage-combat-lod">ROTARY / LOD0</b></div>
+          <div class="combat-stage-title" aria-hidden="true"><span>Velocity originals</span><strong>ARSENAL / 05</strong></div>
+          <div class="combat-loader" id="combat-loader" role="status" aria-live="polite"><span></span><div><strong id="combat-loader-title">Preparing Combat Lab</strong><small id="combat-loader-detail">Illustrated preview · 3D loading…</small><i><b id="combat-loader-progress"></b></i></div></div>
+          <div class="combat-error" id="combat-error" hidden><strong>Model could not be displayed</strong><p id="combat-error-message">Please retry the local asset.</p><button id="retry-combat" type="button">Retry</button></div>
+          <div class="combat-stage-actions">
+            <button id="toggle-combat-markers" type="button" aria-pressed="false">Sockets</button>
+            <button id="toggle-combat-wireframe" type="button" aria-pressed="false">Wireframe</button>
+            <button id="toggle-combat-orbit" type="button" aria-pressed="false">Auto orbit</button>
+            <button id="reset-combat-view" type="button">Reset</button>
+          </div>
+          <div class="combat-stage-badge"><span id="stage-combat-name">R-6 Rotary Cannon</span><small id="stage-combat-class">SIX-BARREL ROTARY / +Z FORWARD</small></div>
+
+          <div class="combat-rig-controls" id="combat-rig-controls">
+            <div class="rig-heading"><span>Presentation rig</span><small>Isolated transform preview · no aiming</small></div>
+            <div id="turret-rig-controls" class="turret-rig-controls">
+              <label><span>Yaw <b id="combat-yaw-value">0°</b></span><input id="combat-yaw" type="range" min="-160" max="160" value="0" step="1" aria-label="Preview yaw articulation" /></label>
+              <label><span>Pitch <b id="combat-pitch-value">0°</b></span><input id="combat-pitch" type="range" min="-15" max="55" value="0" step="1" aria-label="Preview pitch articulation" /></label>
+              <button id="reset-combat-rig" type="button">Center</button>
+            </div>
+            <div id="projectile-rig-note" class="projectile-rig-note" hidden><span>Centered static projectile</span><small>+Z nose · guidance socket preserved</small></div>
+          </div>
+          <div class="combat-camera-dock" role="group" aria-label="Model camera"><button class="active" type="button" data-view="iso" aria-pressed="true">3/4</button><button type="button" data-view="side" aria-pressed="false">Profile</button><button type="button" data-view="front" aria-pressed="false">Front</button><button type="button" data-view="top" aria-pressed="false">Top</button></div>
+        </section>
+
+        <aside class="combat-package-panel">
+          <div class="combat-package-heading"><div><p class="combat-eyebrow">Reusable package</p><h2>Model + rig</h2></div><span>LOCAL / CC0</span></div>
+          <div class="package-current"><span id="package-combat-name">R-6 Rotary Cannon / LOD0</span><strong id="package-combat-triangles">13,180</strong><small>triangles · <b id="package-combat-size">91 KB</b></small></div>
+          <div class="combat-section-title"><span>Runtime detail</span><small>Purpose-built</small></div>
+          <div id="combat-lod-list" class="combat-lod-list" role="group" aria-label="Select model level of detail"></div>
+          <dl class="package-facts"><div><dt>LOD0 triangles</dt><dd id="package-combat-master-tris">13,180</dd></div><div><dt>Collision</dt><dd id="package-combat-collision">—</dd></div><div><dt>Compression</dt><dd>Meshopt</dd></div><div><dt>Conventions</dt><dd>Metres · Y-up · +Z</dd></div></dl>
+          <div class="package-downloads">
+            <a class="package-primary" id="download-combat-model" href="/assets/combat/lods/rotary-cannon-lod0.glb" download="rotary-cannon-lod0.glb">Download LOD0 GLB <span>↓</span></a>
+            <a id="download-combat-collision" href="/assets/combat/collisions/rotary-cannon-collision.glb" download="rotary-cannon-collision.glb">Collision mesh <span>GLB</span></a>
+            <a href="/assets/combat/combat.json" download="combat.json">Complete rig manifest <span>JSON</span></a>
+            <a href="/assets/combat/LICENSE.txt" download="combat-LICENSE.txt">CC0 license record <span>TXT</span></a>
+          </div>
+          <section class="socket-manifest" aria-labelledby="socket-manifest-title">
+            <div class="combat-section-title"><span id="socket-manifest-title">Socket manifest</span><small id="socket-count">6 outputs</small></div>
+            <div id="combat-socket-list" class="combat-socket-list"></div>
+          </section>
+          <div class="package-master"><span>Preserved master</span><code id="package-combat-master">assets-src/combat/rotary-cannon.glb</code></div>
+          <div class="package-license"><strong>CC0 1.0</strong><p>Original procedural geometry. No third-party models, real-world weapon blueprints or game assets.</p></div>
+        </aside>
+      </main>
+      <footer class="combat-footer"><span><i></i> Asset foundation / visual models only</span><span id="active-combat-file">assets/combat/lods/rotary-cannon-lod0.glb</span></footer>
+    </div>
+    <script type="module" src="/src/combat.js"></script>
+  </body>
+</html>
