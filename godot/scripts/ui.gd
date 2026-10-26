@@ -242,7 +242,7 @@ func _touch_button(action: String, text: String, position: Vector2, size: Vector
 	button.scale = size / 64.0
 	button.texture_normal = _touch_texture(Color(0.04, 0.09, 0.1, 0.62))
 	button.texture_pressed = _touch_texture(Color(0.84, 1.0, 0.25, 0.75))
-	button.visibility_mode = TouchScreenButton.VISIBILITY_MODE_ALWAYS
+	button.visibility_mode = TouchScreenButton.VISIBILITY_ALWAYS
 	touch.add_child(button)
 	var label := Label.new()
 	label.text = text

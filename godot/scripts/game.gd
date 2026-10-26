@@ -254,11 +254,10 @@ func _on_tracer(start: Vector3, finish: Vector3, color: Color) -> void:
 	var material := StandardMaterial3D.new()
 	material.shading_mode = BaseMaterial3D.SHADING_MODE_UNSHADED
 	material.albedo_color = color
-	mesh.surface_begin(Mesh.PRIMITIVE_LINES)
+	mesh.surface_begin(Mesh.PRIMITIVE_LINES, material)
 	mesh.surface_add_vertex(start)
 	mesh.surface_add_vertex(finish)
 	mesh.surface_end()
-	mesh.surface_set_material(0, material)
 	var instance := MeshInstance3D.new()
 	instance.mesh = mesh
 	world_root.add_child(instance)
