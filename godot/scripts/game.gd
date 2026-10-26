@@ -89,6 +89,7 @@ func _setup_input() -> void:
 
 func _new_world() -> void:
 	if is_instance_valid(world_root):
+		_stop_audio(world_root)
 		remove_child(world_root)
 		world_root.queue_free()
 	world_root = Node3D.new()
@@ -323,6 +324,12 @@ func _sound_stream(id: String) -> AudioStream:
 		if sound["id"] == id:
 			return load("res://" + sound["runtime"])
 	return null
+
+func _stop_audio(node: Node) -> void:
+	if node is AudioStreamPlayer or node is AudioStreamPlayer3D:
+		node.stop()
+	for child in node.get_children():
+		_stop_audio(child)
 
 func _load_json(path: String) -> Dictionary:
 	return JSON.parse_string(FileAccess.get_file_as_string(path))

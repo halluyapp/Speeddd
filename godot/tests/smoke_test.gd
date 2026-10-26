@@ -79,8 +79,10 @@ func _run() -> void:
 	game.show_garage()
 	await process_frame
 	_check(game.state == "menu", "second track and missile resources dispose cleanly")
+	game._stop_audio(game)
 	game.queue_free()
 	await process_frame
+	await create_timer(0.2).timeout
 	if failures.is_empty():
 		print("PASS Godot native smoke suite")
 		quit(0)
