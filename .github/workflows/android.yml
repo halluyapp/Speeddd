@@ -58,7 +58,11 @@ jobs:
           if grep -qE 'SCRIPT ERROR:|^ERROR:' /tmp/velocity-native-test.log; then status=1; fi
           cat /tmp/velocity-native-test.log
           if [ "$status" -ne 0 ]; then
-            tail -120 /tmp/velocity-native-test.log | while IFS= read -r line; do printf '::error::%s\n' "$line"; done
+            report=$(printf 'Native smoke exit code %s\n' "$status"; tail -100 /tmp/velocity-native-test.log | sed -r 's/\x1B\[[0-9;]*[mK]//g')
+            report=${report//'%'/'%25'}
+            report=${report//$'\r'/'%0D'}
+            report=${report//$'\n'/'%0A'}
+            printf '::error::%s\n' "$report"
             exit "$status"
           fi
       - name: Export installable Android APK
