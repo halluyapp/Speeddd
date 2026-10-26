@@ -1,6 +1,6 @@
 {
   "collection": "Velocity Asset Library",
-  "version": 8,
+  "version": 9,
   "units": "metres",
   "upAxis": "Y",
   "forwardAxis": "+Z (baked into runtime vehicle assets)",
@@ -712,6 +712,15 @@
       "manifest": "assets/drivers/drivers.json",
       "preview": "assets/previews/driver-kit.webp",
       "page": "drivers.html"
+    }
+  ],
+  "progression": [
+    {
+      "id": "velocity-progression-kit",
+      "name": "Velocity Progression Kit — Progression 01",
+      "manifest": "assets/progression/progression.json",
+      "preview": "assets/previews/progression-kit.webp",
+      "page": "progression.html"
     }
   ]
 }

@@ -340,6 +340,8 @@ body[data-race-state='green'] .broadcast-bar > em { background: #36f58a; }
 }
 
 @media (max-width: 370px) {
+  .race-brand { gap: 7px; }
+  .race-brand small { font-size: 6px; letter-spacing: .12em; }
   .race-nav { gap: 9px; }
   .race-stage { min-height: 560px; }
   .race-stage-actions button { font-size: 6px; }

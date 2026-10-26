@@ -1820,6 +1820,10 @@ kbd {
     padding: 0 4px;
   }
 
+  .header-actions .text-button[href$='.html'] {
+    display: none;
+  }
+
   .view-button[data-view='rear'] {
     display: none;
   }

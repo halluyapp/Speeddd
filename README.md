@@ -1,6 +1,6 @@
 # Velocity — Asset Library
 
-A local, reusable asset foundation containing **11 detailed vehicles**, two original environments—**Azurline Circuit** and **Kestrel Ridge**—the original **Race Control** presentation kit, original procedural **VFX and synthesized audio**, the original **Combat Kit** of vehicular weapon/projectile models, the original **Social UI kit**, and the original **Driver Kit** of animated fictional characters. Vehicles include untouched masters, four runtime LODs, convex collision meshes, and wheel-rig metadata. Each environment includes four purpose-built LODs, drive-surface/terrain/barrier collision, and race-layout metadata. Race Control adds modular hardware, addressable light/display nodes, vector flags, and broadcast presentation fixtures. Media Lab adds eight real flipbook/sprite packages and eleven original sounds. Combat Lab adds five models with mounting, articulation and muzzle-socket records. Social Lab adds eight vector emblems, a 24-symbol sprite, four checked palettes, and ten fictional players across three static fixtures. Driver Lab adds three rigid-rigged helmeted drivers, twelve embedded clips, four cinematic camera fixtures, and capsule proxies. The pages are **asset inspectors only**—there are no driving, racing, AI, physics, live-timing, multiplayer, firing, damage, fire-control, combat gameplay, live networking, locomotion, seat-constraint, or cinematic gameplay systems.
+A local, reusable asset foundation containing **11 detailed vehicles**, two original environments—**Azurline Circuit** and **Kestrel Ridge**—the original **Race Control** presentation kit, original procedural **VFX and synthesized audio**, the original **Combat Kit** of vehicular weapon/projectile models, the original **Social UI kit**, the original **Driver Kit** of animated fictional characters, and the original **Progression Kit** of rank and reward presentation assets. Vehicles include untouched masters, four runtime LODs, convex collision meshes, and wheel-rig metadata. Each environment includes four purpose-built LODs, drive-surface/terrain/barrier collision, and race-layout metadata. Race Control adds modular hardware, addressable light/display nodes, vector flags, and broadcast presentation fixtures. Media Lab adds eight real flipbook/sprite packages and eleven original sounds. Combat Lab adds five models with mounting, articulation and muzzle-socket records. Social Lab adds eight vector emblems, a 24-symbol sprite, four checked palettes, and ten fictional players across three static fixtures. Driver Lab adds three rigid-rigged helmeted drivers, twelve embedded clips, four cinematic camera fixtures, and capsule proxies. Progression Lab adds ten rank insignias, twenty icons, four rarity frames, six reward records, and three static fixtures. The pages are **asset inspectors only**—there are no driving, racing, AI, physics, live-timing, multiplayer, firing, damage, fire-control, combat gameplay, live networking, locomotion, seat-constraint, cinematic gameplay, XP calculation, unlock, purchase, save, or progression-service systems.
 
 ## Run the inspectors
 
@@ -18,12 +18,13 @@ Open the local URL printed by Vite. A local HTTP server is required; do not open
 - `combat.html` — weapon/projectile geometry, mounting, socket and articulation inspector
 - `social.html` — emblems, palettes, icon sprite and fictional social-presentation inspector
 - `drivers.html` — animated rigid-rig, cinematic fixture, LOD and capsule inspector
+- `progression.html` — rank, reward, profile and static season-presentation inspector
 
 ```bash
 npm run build            # production multi-page site in dist/
 npm run preview          # serve the production build
-npm test                 # all vehicle, environment, presentation, media, combat, social and driver checks
-npm run validate:assets  # all geometry, metadata, media, combat, social and driver checks
+npm test                 # all vehicle, environment, presentation, media, combat, social, driver and progression checks
+npm run validate:assets  # all geometry, metadata, media, combat, social, driver and progression checks
 npm run validate:cars    # vehicle checks only
 npm run validate:track   # both environment geometry, layout and license checks
 npm run validate:race    # race-presentation checks only
@@ -31,6 +32,7 @@ npm run validate:effects # visual/audio format, signal and metadata checks
 npm run validate:combat  # combat glTF, rig, socket and package checks
 npm run validate:social  # vector safety, contrast, sprite and fixture checks
 npm run validate:drivers # driver glTF, rig, clip, cinematic and package checks
+npm run validate:progression # vector, contrast, reward, fixture and license checks
 ```
 
 All runtime libraries, fonts, previews, decoders, graphics, and models are served locally. No inspector makes CDN or third-party runtime requests.
@@ -174,6 +176,24 @@ npm run validate:drivers
 
 The independent validator runs Khronos validation on every master, runtime LOD, and capsule; checks actual exported node-instance triangle counts; verifies all 17 joints and 18 channels per clip; measures animation duration from GLB timing accessors; and validates fixture references, local downloads, and presentation-only scope. Rebuilding changes only generated driver derivatives and the driver catalogue entry.
 
+## Rebuild the Progression Kit
+
+```bash
+npm run build:progression
+npm run validate:progression
+```
+
+`scripts/build-progression-assets.js` deterministically generates ten original rank insignias, twenty progression/reward symbols, four rarity frames, six reward records, four challenge fixtures, three presentation states, and an illustrated poster. All generated vectors and original fixture data are **CC0 1.0**. Outputs include:
+
+- `assets-src/progression/ranks/<rank-id>.svg` and `public/assets/progression/ranks/<rank-id>.svg` — ten readable masters and compact runtimes
+- `assets-src/progression/icons.svg` and `public/assets/progression/icons.svg` — a reusable 20-symbol sprite
+- `assets-src/progression/frames/<frame-id>.svg` and `public/assets/progression/frames/<frame-id>.svg` — four scalable 320 × 420 rarity frames
+- `public/assets/progression/progression.json` — design tokens, ranks, rewards, challenges, static fixtures, and linked-media notices
+- `public/assets/progression/LICENSE.txt` — CC0 dedication plus standalone linked-media attribution
+- `public/assets/previews/progression-kit.webp` — instant illustrated Progression Lab poster
+
+The independent validator checks SVG safety, symbol IDs, rank order, frame/foreground contrast, fixture references, static challenge values, linked catalogue records, and presentation-only controls. Existing previews are referenced rather than duplicated. **Vector 84 / 80s Wedge by drcollect remains CC BY 4.0**; N09 Nova and Kestrel Ridge remain CC0. No linked media is relicensed with the generated vectors.
+
 ## Vehicle collection
 
 Triangle counts below are for runtime LOD0 after cleanup. Each vehicle asset-details dialog exposes all four LOD downloads and their exact counts.
@@ -307,6 +327,25 @@ The environment IDs are reusable composition references only; Driver Lab renders
 
 The `drivers.html` inspector plays the actual embedded GLTF clips with play/pause, restart, scrubbing, speed control, four fixture cameras, four additional inspection views, joint markers, wireframe, automatic orbit, all LODs, and direct GLB/capsule/manifest/license downloads. Query parameters such as `drivers.html?driver=n09&shot=podium-celebration&lod=2&view=fixture` provide direct reproducible views. No locomotion, AI, physics, seat constraints, racing logic, cinematic gameplay, or movie rendering is implemented.
 
+## Progression Kit package
+
+The rank ladder is **Rookie, Club, Sport, Pro, Elite, Apex, Master, Champion, Legend, Velocity**, with levels 1–10 recorded in the manifest. Each insignia has a readable CC0 SVG master and compact 128 × 128 runtime. The sprite contains `xp`, `credits`, `trophy`, `medal`, `star`, `crown`, `flag`, `timer`, `target`, `flame`, `bolt`, `car`, `driver`, `track`, `wrench`, `decal`, `gift`, `lock`, `check`, and `calendar`.
+
+| Reward record | Rarity | Linked local media | Media license |
+|---|---|---|---|
+| Vector 84 | Elite | Existing `wedge` vehicle preview | CC BY 4.0 · drcollect |
+| N09 Nova | Sport | Existing Driver Kit thumbnail | CC0 1.0 |
+| Kestrel Ridge | Legend | Existing environment poster | CC0 1.0 |
+| Credit Cache | Standard | Original `credits` symbol | CC0 1.0 |
+| XP Token | Sport | Original `xp` symbol | CC0 1.0 |
+| Velocity Chevron | Elite | Original `decal` symbol | CC0 1.0 |
+
+The four scalable rarity frames are **Standard, Sport, Elite, and Legend**. Their foreground/on-color pairs and all rank accents are independently checked for at least 4.5:1 contrast. The four challenge records contain explicit static current/total/percentage values; the inspector does not calculate progress.
+
+The three fixtures are **Profile**, **Season**, and **Rewards**. Profile combines a fictional Demo Driver 84, static XP/credit labels, and three challenges. Season presents five inspectable rank/reward stages with complete/current/locked labels. Rewards displays all six cards with their actual frame SVGs and local media. Selecting a fixture, stage, rank, or reward changes only the inspector. Query parameters such as `progression.html?fixture=season&rank=master&reward=vector-84` provide direct reproducible views.
+
+No XP calculation, leveling, unlock logic, purchases, balances, transactions, reward grants, save data, achievements, season rules, servers, or progression gameplay is implemented.
+
 ## Repository layout
 
 ```text
@@ -319,6 +358,7 @@ assets-src/
   combat/                        Original weapon/projectile full-detail GLB masters
   social/                        Original readable emblem and icon SVG masters
   drivers/                       Original full-detail rigid-rig animation masters
+  progression/                   Original rank, icon and rarity-frame SVG masters
 index.html                       Vehicle showroom
 track.html                       Two-environment inspector
 race.html                        Race hardware + broadcast-presentation inspector
@@ -326,6 +366,7 @@ effects.html                     VFX flipbook + isolated audio inspector
 combat.html                      Combat geometry + isolated articulation inspector
 social.html                      Social vector + fictional fixture inspector
 drivers.html                     Animated driver + cinematic fixture inspector
+progression.html                 Rank + reward + static season inspector
 src/
   main.js / style.css            Vehicle viewer and responsive showroom
   track.js / track.css           Environment viewer, map, LOD and camera UI
@@ -334,9 +375,10 @@ src/
   combat.js / combat.css         Combat model, socket, rig, LOD and camera UI
   social.js / social.css         Social fixture, player, palette and vector UI
   drivers.js / drivers.css       Driver clips, scrubber, cameras, rig and package UI
+  progression.js / progression.css Progression fixtures, ranks, rewards and vector UI
 public/
   assets/
-    catalog.json                 Vehicle + track + presentation + media + combat + social + driver index
+    catalog.json                 Vehicle + track + presentation + media + combat + social + driver + progression index
     cars/
       lods/                      Vehicle LOD0–LOD3 GLBs
       collisions/                Vehicle convex collision GLBs
@@ -376,6 +418,12 @@ public/
       collisions/                Three simple capsule proxy GLBs
       thumbnails/                Driver inventory thumbnails
       LICENSE.txt                CC0 dedication and original-character record
+    progression/
+      progression.json           Ranks, icons, frames, rewards and static fixtures
+      ranks/                     Ten compact runtime rank insignias
+      frames/                    Four scalable runtime rarity frames
+      icons.svg                  Local 20-symbol progression sprite
+      LICENSE.txt                CC0 dedication + linked-media attribution
     previews/                    Vehicle renders + illustrated package posters
     draco/                       Local Draco decoder for compatible assets
 scripts/
@@ -387,6 +435,7 @@ scripts/
   build-combat-assets.js         Original combat models, rigs and runtime generator
   build-social-assets.js         Original emblems, sprite, palettes and fixture generator
   build-driver-assets.js         Original drivers, rigid rigs, clips and fixture generator
+  build-progression-assets.js    Original ranks, icons, frames and reward fixture generator
   validate-assets.js             Vehicle geometry, LOD, collision and rig validation
   validate-track-assets.js       Both environments' glTF, layout and license validation
   validate-race-assets.js        Race glTF, controls, graphics and fixture validation
@@ -394,6 +443,7 @@ scripts/
   validate-combat-assets.js      Combat glTF, hierarchy, socket and package validation
   validate-social-assets.js      Independent vector, contrast, sprite and fixture validation
   validate-driver-assets.js      Khronos, rig, clip, LOD, cinematic and package validation
+  validate-progression-assets.js Independent vector, contrast, fixture and license validation
   embed_attribution.py           Update vehicle-master credit metadata
 tests/
   catalog.test.js                Vehicle collection/package checks
@@ -403,6 +453,7 @@ tests/
   combat.test.js                 Combat model/package and inspector checks
   social.test.js                 Social vector/package and inspector checks
   drivers.test.js                Driver animation/package and inspector checks
+  progression.test.js            Progression vector/package and inspector checks
 LICENSES.md                      Full attribution and modification record
 ```
 
@@ -431,6 +482,10 @@ LICENSES.md                      Full attribution and modification record
 - **Driver rigs are rigid, not skinned.** `DriverRoot` contains 17 articulated joints and rigid mesh children. Preserve the hierarchy when cloning or editing. The +Z-forward, Y-up, metre and ground-zero conventions match the other character-placement assets.
 - **Cinematic fixtures are reusable data.** Camera position/target/FOV, clip name, duration, loop state, and environment reference are recorded in `drivers.json`. They are composition hints, not camera splines, gameplay cinematics, seat constraints, or movie-renderer outputs.
 - **Driver capsules are simple proxies.** The 112-triangle GLBs are coarse presentation/collision starting shapes only. Character physics, locomotion, vehicle seating, IK, and constraint behavior remain separate future systems.
+- **Progression icons inherit `currentColor`.** Reference a local symbol with `<svg viewBox="0 0 24 24"><use href="/assets/progression/icons.svg#trophy"></use></svg>`. Use only IDs listed in the manifest and keep the sprite local.
+- **Rank and frame masters remain editable.** Preserve the 128 × 128 rank viewBox and 320 × 420 frame viewBox when deriving new treatments. Runtime frames are transparent overlays; reward-card layout and imagery remain separate.
+- **Progression fixtures are replaceable static data.** Rank levels, XP/credit labels, challenge percentages, stage states, and reward records are presentation fixtures only. A future approved progression system must supply validated rules and persistence separately.
+- **Linked media keeps its original license.** The progression manifest's `linkedMedia` records are authoritative for reused previews. Vector 84 remains CC BY 4.0 by drcollect; do not treat the CC0 vector-package dedication as covering that vehicle preview.
 - **Paint remains a viewer operation.** Vehicle paint selections are not baked into downloads.
 - **Masters remain separate.** Use `assets-src/` for source work and `public/assets/` for runtime deployment. Do not edit generated runtime files directly.
 - **Meshopt support is required for runtime visual LODs.** The included Three.js loaders support it; other tools may need a Meshopt-compatible importer. Collision GLBs are intentionally simple uncompressed geometry.
@@ -447,4 +502,4 @@ The attribution script changes only each vehicle-master GLB's JSON metadata chun
 
 ## Production names and marks
 
-The Mercedes-Benz, AMG, BMW, and M names/marks belong to their respective owners. Their model licenses permit reuse with attribution, but model copyright licensing does not grant manufacturer endorsement or separate trademark rights. Azurline Circuit, Kestrel Ridge, Velocity Race Control, Velocity Media Lab VFX/audio, Velocity Combat Kit, Velocity Social UI, and Velocity Driver Kit are original fictional CC0 assets. This is an independent asset collection.
+The Mercedes-Benz, AMG, BMW, and M names/marks belong to their respective owners. Their model licenses permit reuse with attribution, but model copyright licensing does not grant manufacturer endorsement or separate trademark rights. Azurline Circuit, Kestrel Ridge, Velocity Race Control, Velocity Media Lab VFX/audio, Velocity Combat Kit, Velocity Social UI, Velocity Driver Kit, and the original Velocity Progression Kit vectors are original fictional CC0 assets. Linked vehicle media retains its separate CC-BY terms. This is an independent asset collection.

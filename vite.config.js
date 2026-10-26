@@ -21,6 +21,7 @@ export default defineConfig({
         combat: resolve(process.cwd(), 'combat.html'),
         social: resolve(process.cwd(), 'social.html'),
         drivers: resolve(process.cwd(), 'drivers.html'),
+        progression: resolve(process.cwd(), 'progression.html'),
       },
     },
   },

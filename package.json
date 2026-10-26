@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "private": true,
   "type": "module",
-  "description": "A reusable local vehicle, multi-environment, race-presentation, VFX, audio, combat-model, social-UI and animated-driver asset library with interactive inspectors.",
+  "description": "A reusable local vehicle, environment, presentation, media, combat, social, animated-driver and progression-UI asset library with interactive inspectors.",
   "scripts": {
     "dev": "vite --host 0.0.0.0",
     "start": "vite --host 0.0.0.0",
@@ -17,6 +17,7 @@
     "build:combat": "node scripts/build-combat-assets.js",
     "build:social": "node scripts/build-social-assets.js",
     "build:drivers": "node scripts/build-driver-assets.js",
+    "build:progression": "node scripts/build-progression-assets.js",
     "preview": "vite preview --host 0.0.0.0",
     "test": "node --test tests/*.test.js",
     "validate:cars": "node scripts/validate-assets.js",
@@ -26,7 +27,8 @@
     "validate:combat": "node scripts/validate-combat-assets.js",
     "validate:social": "node scripts/validate-social-assets.js",
     "validate:drivers": "node scripts/validate-driver-assets.js",
-    "validate:assets": "npm run validate:cars && npm run validate:track && npm run validate:race && npm run validate:effects && npm run validate:combat && npm run validate:social && npm run validate:drivers"
+    "validate:progression": "node scripts/validate-progression-assets.js",
+    "validate:assets": "npm run validate:cars && npm run validate:track && npm run validate:race && npm run validate:effects && npm run validate:combat && npm run validate:social && npm run validate:drivers && npm run validate:progression"
   },
   "dependencies": {
     "@fontsource-variable/inter": "^5.2.8",

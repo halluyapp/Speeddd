@@ -1,0 +1,102 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#090e11" />
+    <meta name="description" content="Velocity Progression Kit — original rank insignias, reward icons, rarity frames and static fictional profile, season and reward-gallery presentation fixtures." />
+    <title>Progression Kit — Velocity Progression Lab</title>
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+  </head>
+  <body data-asset-ready="false" data-fixture="profile" data-rank="elite" data-reward="nova-driver">
+    <div id="progression-app">
+      <header class="progression-topbar">
+        <a class="progression-brand" href="./" aria-label="Back to Velocity vehicle library">
+          <svg viewBox="0 0 40 28" aria-hidden="true"><path d="M2 4h9l7 20h-8L2 4Zm13 0h8l6 14 5-14h5L26 24h-7L13 4Z" fill="currentColor" /></svg>
+          <span>VELOCITY<small>Progression division</small></span>
+        </a>
+        <div class="progression-breadcrumb"><span>Library</span><i>/</i><strong>Progression 09</strong></div>
+        <nav class="progression-nav" aria-label="Progression package resources">
+          <span class="progression-local"><i></i> Original · CC0</span>
+          <a href="./">Vehicles</a><a href="./track.html">Environments</a><a href="./race.html">Race</a><a href="./effects.html">FX</a><a href="./combat.html">Arsenal</a><a href="./social.html">Social</a><a href="./drivers.html">Drivers</a>
+          <a href="/assets/progression/progression.json" download="progression.json">Manifest</a>
+        </nav>
+      </header>
+
+      <main class="progression-workspace">
+        <aside class="progression-control-panel">
+          <div class="progression-heading"><p class="progression-eyebrow">Progression presentation / 01</p><h1>Progression <span>Lab</span></h1><p>Original rank insignias, reward vectors and rarity frames with isolated profile, season and gallery fixtures.</p></div>
+          <div class="progression-tags"><span>10 ranks</span><span>20 icons</span><span>4 frames</span><span>CC0</span></div>
+          <section class="progression-states" aria-labelledby="progression-states-title">
+            <div class="progression-section-title"><span id="progression-states-title">Preview fixture</span><small>Static only</small></div>
+            <div class="progression-state-list" role="group" aria-label="Select progression presentation fixture">
+              <button class="active" type="button" data-progression-view="profile" aria-pressed="true"><span>01</span><strong>Profile</strong><small>Rank + challenges</small></button>
+              <button type="button" data-progression-view="season" aria-pressed="false"><span>02</span><strong>Season</strong><small>5 static stages</small></button>
+              <button type="button" data-progression-view="rewards" aria-pressed="false"><span>03</span><strong>Rewards</strong><small>6 local records</small></button>
+            </div>
+          </section>
+          <section class="progression-rewards" aria-labelledby="progression-rewards-title">
+            <div class="progression-section-title"><span id="progression-rewards-title">Reward records</span><small>Inspect only</small></div>
+            <div id="progression-reward-list" class="progression-reward-list" role="group" aria-label="Inspect reward presentation record"></div>
+          </section>
+          <section class="selected-reward-card" aria-live="polite">
+            <div><span id="selected-reward-kind">DRIVER / SPORT</span><strong id="selected-reward-name">N09 Nova</strong></div>
+            <p id="selected-reward-description">Existing original CC0 driver thumbnail referenced from the Driver Kit.</p>
+            <dl><div><dt>Source</dt><dd id="selected-reward-source">drivers / n09</dd></div><div><dt>Media license</dt><dd id="selected-reward-license">CC0-1.0</dd></div></dl>
+          </section>
+          <p class="progression-scope-note">Presentation data only. No XP calculation, leveling, unlocks, purchases, balances, reward grants, saves, achievements, season rules or services.</p>
+        </aside>
+
+        <section class="progression-stage" id="progression-stage" aria-label="Progression presentation preview">
+          <div class="progression-poster" id="progression-poster" aria-hidden="true"><img src="/assets/previews/progression-kit.webp" width="1200" height="800" alt="" fetchpriority="high" decoding="async" /></div>
+          <div class="progression-screen">
+            <div class="progression-stage-topline"><span><i></i> Local presentation fixture</span><b id="stage-progression-count">10 RANK INSIGNIAS</b></div>
+            <section class="progression-hero">
+              <img id="progression-hero-image" src="/assets/previews/kestrel-ridge.webp" width="960" height="600" alt="Kestrel Ridge circuit map" decoding="async" />
+              <div class="progression-hero-shade"></div>
+              <div class="progression-hero-content"><span id="hero-eyebrow">DRIVER PROFILE / STATIC FIXTURE</span><h2 id="hero-title">Demo Driver 84</h2><p id="hero-description">Kestrel Ridge · local profile fixture</p></div>
+              <img class="progression-hero-rank" id="hero-rank" src="/assets/progression/ranks/elite.svg" width="128" height="128" alt="Elite rank insignia" />
+              <div class="progression-hero-meta"><span><small id="hero-metric-label-0">Profile</small><strong id="hero-metric-0">LEVEL 42</strong></span><span><small id="hero-metric-label-1">Progress fixture</small><strong id="hero-metric-1">18,400 / 22,000 XP</strong></span><span><small id="hero-metric-label-2">Credit fixture</small><strong id="hero-metric-2">12,600</strong></span></div>
+            </section>
+            <section class="progression-fixture" aria-live="polite">
+              <div class="progression-fixture-heading"><div><span id="fixture-eyebrow">DRIVER PROFILE / STATIC FIXTURE</span><h2 id="fixture-title">Demo Driver 84</h2><p id="fixture-description">A local profile and challenge layout using existing catalogue media.</p></div><span class="fixture-badge">STATIC DEMO</span></div>
+              <div id="progression-state-content" class="progression-state-content"></div>
+            </section>
+            <div class="progression-demo-note"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="/assets/progression/icons.svg#lock"></use></svg><span>Fictional local data. Fixture, rank and reward selection changes this preview only; nothing is unlocked, granted, saved or transmitted.</span></div>
+          </div>
+          <div class="progression-error" id="progression-error" hidden><strong>Progression assets could not be loaded</strong><p id="progression-error-message">Please retry the local manifest.</p><button id="retry-progression" type="button">Retry</button></div>
+        </section>
+
+        <aside class="progression-kit-panel">
+          <div class="progression-kit-heading"><div><p class="progression-eyebrow">Reusable package</p><h2>Progression UI</h2></div><span>LOCAL / CC0</span></div>
+          <section class="selected-rank-card" aria-live="polite">
+            <div class="selected-rank-main"><img id="selected-rank-image" src="/assets/progression/ranks/elite.svg" width="128" height="128" alt="Elite rank insignia" /><div><span id="selected-rank-level">RANK 05</span><strong id="selected-rank-name">Elite</strong><small id="selected-rank-description">Split diamond crest</small></div></div>
+            <dl><div><dt>Accent</dt><dd id="selected-rank-color">#c5a3ff</dd></div><div><dt>Preserved master</dt><dd><code id="selected-rank-master">assets-src/progression/ranks/elite.svg</code></dd></div></dl>
+          </section>
+          <section class="rank-section" aria-labelledby="rank-title">
+            <div class="progression-section-title"><span id="rank-title">Rank ladder</span><small>10 local SVGs</small></div>
+            <div id="progression-rank-list" class="progression-rank-list" role="group" aria-label="Select rank insignia"></div>
+          </section>
+          <section class="frame-section" aria-labelledby="frame-title">
+            <div class="progression-section-title"><span id="frame-title">Rarity frames</span><small>320 × 420</small></div>
+            <div id="progression-frame-list" class="progression-frame-list"></div>
+          </section>
+          <section class="icon-section" aria-labelledby="icon-title">
+            <div class="progression-section-title"><span id="icon-title">Progression icons</span><small>20 SVG symbols</small></div>
+            <div id="progression-icon-grid" class="progression-icon-grid"></div>
+          </section>
+          <div class="progression-downloads">
+            <a class="progression-primary-download" id="download-progression-rank" href="/assets/progression/ranks/elite.svg" download="elite.svg">Download selected rank <span>↓</span></a>
+            <a href="/assets/progression/icons.svg" download="progression-icons.svg">Complete icon sprite <span>SVG</span></a>
+            <a href="/assets/progression/progression.json" download="progression.json">Fixtures + design tokens <span>JSON</span></a>
+            <a href="/assets/progression/LICENSE.txt" download="progression-LICENSE.txt">CC0 + linked-media record <span>TXT</span></a>
+            <a href="/assets/cars/LICENSES.txt" download="vehicle-LICENSES.txt">Linked vehicle attribution <span>TXT</span></a>
+          </div>
+          <div class="progression-license"><strong>CC0 vectors / linked media separated</strong><p>Original ranks, icons and frames are CC0. Existing previews keep their package licenses; Vector 84 remains CC BY 4.0 by drcollect.</p></div>
+        </aside>
+      </main>
+      <footer class="progression-footer"><span><i></i> Asset foundation / presentation only</span><span id="active-progression-file">assets/progression/ranks/elite.svg</span></footer>
+    </div>
+    <script type="module" src="/src/progression.js"></script>
+  </body>
+</html>
