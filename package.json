@@ -9,9 +9,12 @@
     "start": "vite --host 0.0.0.0",
     "build": "vite build",
     "build:cars": "node scripts/build-car-assets.js",
+    "build:track": "node scripts/build-coastal-track.js",
     "preview": "vite preview --host 0.0.0.0",
     "test": "node --test tests/*.test.js",
-    "validate:assets": "node scripts/validate-assets.js"
+    "validate:cars": "node scripts/validate-assets.js",
+    "validate:track": "node scripts/validate-track-assets.js",
+    "validate:assets": "npm run validate:cars && npm run validate:track"
   },
   "dependencies": {
     "@fontsource-variable/inter": "^5.2.8",

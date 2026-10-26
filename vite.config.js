@@ -1,3 +1,4 @@
+import { resolve } from 'node:path';
 import { defineConfig } from 'vite';
 
 export default defineConfig({
@@ -11,5 +12,11 @@ export default defineConfig({
   },
   build: {
     chunkSizeWarningLimit: 800,
+    rollupOptions: {
+      input: {
+        main: resolve(process.cwd(), 'index.html'),
+        track: resolve(process.cwd(), 'track.html'),
+      },
+    },
   },
 });

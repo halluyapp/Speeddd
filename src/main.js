@@ -35,6 +35,7 @@ const ICONS = {
   fullscreen: '<path d="M8 3H3v5m13-5h5v5M3 16v5h5m13-5v5h-5"/>',
   exitFullscreen: '<path d="M3 8h5V3m8 0v5h5M8 21v-5H3m18 0h-5v5"/>',
   mouse: '<rect x="6" y="2" width="12" height="20" rx="6"/><path d="M12 6v4"/>',
+  map: '<path d="m3 6 6-3 6 3 6-3v15l-6 3-6-3-6 3V6Z"/><path d="M9 3v15m6-12v15"/>',
   sliders: '<path d="M4 7h10m4 0h2M4 17h3m4 0h9"/><circle cx="16" cy="7" r="2"/><circle cx="9" cy="17" r="2"/>',
   close: '<path d="m6 6 12 12M18 6 6 18"/>',
   info: '<circle cx="12" cy="12" r="9"/><path d="M12 11v6m0-10v.01"/>',

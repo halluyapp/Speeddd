@@ -1,0 +1,137 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#0a1115" />
+    <meta name="description" content="Azurline Circuit — an original reusable coastal racing environment with four LODs, collision and race metadata." />
+    <title>Azurline Circuit — Velocity Environments</title>
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+  </head>
+  <body>
+    <div id="track-app">
+      <header class="track-topbar">
+        <a class="track-brand" href="./" aria-label="Back to Velocity vehicle library">
+          <svg viewBox="0 0 40 28" aria-hidden="true"><path d="M2 4h9l7 20h-8L2 4Zm13 0h8l6 14 5-14h5L26 24h-7L13 4Z" fill="currentColor" /></svg>
+          <span>VELOCITY<small>Environment division</small></span>
+        </a>
+        <div class="track-breadcrumb"><span>Library</span><i>/</i><strong>Environment 02</strong></div>
+        <nav class="track-nav" aria-label="Environment resources">
+          <span class="track-local"><i></i> Original · CC0</span>
+          <a href="./">Vehicles</a>
+          <a id="download-manifest" href="/assets/tracks/azurline-circuit.json" download="azurline-circuit.json">Manifest</a>
+        </nav>
+      </header>
+
+      <main class="track-workspace">
+        <aside class="track-info-panel">
+          <div class="track-heading">
+            <p class="track-eyebrow">Atlantic coast / 01</p>
+            <h1>Azurline <span>Circuit</span></h1>
+            <p class="track-description">Fast coastal sweepers. A technical inner loop. Sixty-four metres of elevation above the Atlantic.</p>
+          </div>
+
+          <div class="track-tags"><span>Closed circuit</span><span>Road / hill climb</span></div>
+
+          <div class="track-stat-grid">
+            <div><span>Lap distance</span><strong id="track-length">2,799 m</strong></div>
+            <div><span>Road width</span><strong id="track-width">14 m</strong></div>
+            <div><span>Elevation</span><strong id="track-elevation">64.2 m</strong></div>
+            <div><span>Grid capacity</span><strong id="track-grid-count">16 cars</strong></div>
+          </div>
+
+          <section class="track-map-card" aria-label="Circuit map">
+            <div class="track-section-title"><span>Circuit map</span><small>Not to scale</small></div>
+            <svg id="track-map" viewBox="0 0 280 210" role="img" aria-label="Azurline Circuit centerline with checkpoints and start position"></svg>
+            <div class="track-map-key"><span><i class="start-dot"></i> Start / finish</span><span><i class="checkpoint-dot"></i> Checkpoint</span></div>
+          </section>
+
+          <section class="track-sectors">
+            <div class="track-section-title"><span>Sectors</span><small>3 splits</small></div>
+            <div id="sector-list"></div>
+          </section>
+
+          <p class="track-scope-note">Environment and race-layout metadata only. Driving, lap timing and AI are not part of this pack.</p>
+        </aside>
+
+        <section class="track-stage" id="track-stage" aria-label="Interactive 3D coastal circuit preview">
+          <div id="track-canvas" aria-hidden="true"></div>
+          <div class="track-poster" id="track-poster" aria-hidden="true">
+            <img id="track-poster-image" src="/assets/previews/azurline-circuit.webp" width="960" height="600" alt="" fetchpriority="high" decoding="async" />
+          </div>
+          <div class="track-stage-shade" aria-hidden="true"></div>
+
+          <div class="track-stage-topline">
+            <span class="track-preview-label"><i></i> Real-time environment</span>
+            <span class="track-stage-lod" id="stage-lod-label">LOD0 / 134K</span>
+          </div>
+
+          <div class="track-stage-title" aria-hidden="true"><span>Velocity originals</span><strong>AZURLINE</strong></div>
+
+          <div class="track-loader" id="track-loader" role="status" aria-live="polite">
+            <span class="track-loader-ring"></span>
+            <div><strong id="track-loader-title">Preparing Azurline</strong><span id="track-loader-detail">Map preview · 3D loading…</span><i><b id="track-loader-progress"></b></i></div>
+          </div>
+
+          <div class="track-error" id="track-error" hidden>
+            <strong>Environment could not be displayed</strong>
+            <p id="track-error-message">Please retry the local asset.</p>
+            <button id="retry-track" type="button">Retry</button>
+          </div>
+
+          <div class="track-camera-dock" role="group" aria-label="Track camera">
+            <button class="active" type="button" data-view="overview" aria-pressed="true">Overview</button>
+            <button type="button" data-view="start" aria-pressed="false">Start grid</button>
+            <button type="button" data-view="hairpin" aria-pressed="false">Hairpin</button>
+            <button type="button" data-view="coast" aria-pressed="false">Coast</button>
+          </div>
+
+          <div class="track-stage-actions">
+            <button id="toggle-track-rotate" type="button" aria-pressed="false" aria-label="Start automatic orbit">Auto orbit</button>
+            <button id="reset-track-view" type="button" aria-label="Reset to overview">Reset</button>
+          </div>
+        </section>
+
+        <aside class="track-package-panel">
+          <div class="track-package-heading">
+            <p class="track-eyebrow">Reusable package</p>
+            <h2>Runtime detail</h2>
+            <span class="track-verified">● Local / validated</span>
+          </div>
+
+          <div class="track-current-lod">
+            <span id="current-lod-name">LOD0</span>
+            <strong id="current-lod-triangles">133,986</strong>
+            <small>triangles · <b id="current-lod-size">0.9 MB</b></small>
+          </div>
+
+          <div class="track-lod-list" id="lod-list" role="group" aria-label="Select runtime level of detail"></div>
+
+          <div class="track-downloads">
+            <a class="track-primary-download" id="download-track" href="/assets/tracks/lods/azurline-circuit-lod0.glb" download="azurline-circuit-lod0.glb">Download LOD0 GLB <span>↓</span></a>
+            <a id="download-collision" href="/assets/tracks/collisions/azurline-circuit-collision.glb" download="azurline-circuit-collision.glb">Collision mesh <span>GLB</span></a>
+            <a id="download-race-data" href="/assets/tracks/azurline-circuit.json" download="azurline-circuit.json">Race-layout data <span>JSON</span></a>
+          </div>
+
+          <dl class="track-package-facts">
+            <div><dt>Checkpoints</dt><dd id="checkpoint-count">12 / ordered</dd></div>
+            <div><dt>Grid slots</dt><dd>16 / staggered</dd></div>
+            <div><dt>Collision</dt><dd id="collision-triangles">10,740 tris</dd></div>
+            <div><dt>Conventions</dt><dd>Metres · Y-up</dd></div>
+            <div><dt>Compression</dt><dd>Meshopt</dd></div>
+          </dl>
+
+          <div class="track-master-record">
+            <span>Preserved master</span>
+            <code>assets-src/tracks/azurline-circuit.glb</code>
+          </div>
+
+          <div class="track-license-card"><strong>CC0 1.0</strong><p>Original procedural geometry, layout, materials and metadata. No third-party environment assets.</p></div>
+        </aside>
+      </main>
+
+      <footer class="track-footer"><span><i></i> Asset foundation / no gameplay systems</span><span id="active-track-file">assets/tracks/lods/azurline-circuit-lod0.glb</span></footer>
+    </div>
+    <script type="module" src="/src/track.js"></script>
+  </body>
+</html>

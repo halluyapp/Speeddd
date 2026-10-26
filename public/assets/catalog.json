@@ -1,9 +1,9 @@
 {
   "collection": "Velocity Vehicle Library",
-  "version": 1,
+  "version": 2,
   "units": "metres",
   "upAxis": "Y",
-  "forwardAxis": "+Z (after showroom normalization)",
+  "forwardAxis": "+Z (baked into runtime vehicle assets)",
   "performanceNote": "Performance figures are fictional design targets unless a production specification is identified in the description. They are metadata only; no gameplay is implemented.",
   "cars": [
     {
@@ -652,5 +652,14 @@
     "lodLevels": 4,
     "collision": "single convex hull per vehicle",
     "rigMetadata": "public/assets/cars/rigs"
-  }
+  },
+  "tracks": [
+    {
+      "id": "azurline-circuit",
+      "name": "Azurline Circuit",
+      "manifest": "assets/tracks/azurline-circuit.json",
+      "preview": "assets/previews/azurline-circuit.webp",
+      "page": "track.html"
+    }
+  ]
 }
