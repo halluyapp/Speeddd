@@ -18,6 +18,8 @@
     "build:social": "node scripts/build-social-assets.js",
     "build:drivers": "node scripts/build-driver-assets.js",
     "build:progression": "node scripts/build-progression-assets.js",
+    "prepare:godot": "node scripts/prepare-godot-assets.js",
+    "test:godot": "godot --headless --path godot --script res://tests/smoke_test.gd",
     "preview": "vite preview --host 0.0.0.0",
     "test": "node --test tests/*.test.js",
     "validate:cars": "node scripts/validate-assets.js",

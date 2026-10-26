@@ -2,6 +2,24 @@
 
 A local, reusable asset foundation containing **11 detailed vehicles**, two original environments—**Azurline Circuit** and **Kestrel Ridge**—the original **Race Control** presentation kit, original procedural **VFX and synthesized audio**, the original **Combat Kit** of vehicular weapon/projectile models, the original **Social UI kit**, the original **Driver Kit** of animated fictional characters, and the original **Progression Kit** of rank and reward presentation assets. Vehicles include untouched masters, four runtime LODs, convex collision meshes, and wheel-rig metadata. Each environment includes four purpose-built LODs, drive-surface/terrain/barrier collision, and race-layout metadata. Race Control adds modular hardware, addressable light/display nodes, vector flags, and broadcast presentation fixtures. Media Lab adds eight real flipbook/sprite packages and eleven original sounds. Combat Lab adds five models with mounting, articulation and muzzle-socket records. Social Lab adds eight vector emblems, a 24-symbol sprite, four checked palettes, and ten fictional players across three static fixtures. Driver Lab adds three rigid-rigged helmeted drivers, twelve embedded clips, four cinematic camera fixtures, and capsule proxies. Progression Lab adds ten rank insignias, twenty icons, four rarity frames, six reward records, and three static fixtures. The pages are **asset inspectors only**—there are no driving, racing, AI, physics, live-timing, multiplayer, firing, damage, fire-control, combat gameplay, live networking, locomotion, seat-constraint, cinematic gameplay, XP calculation, unlock, purchase, save, or progression-service systems.
 
+## Native Godot combat racer
+
+The `godot/` project is the separate native **PROJECT VELOCITY** runtime. Its current playable milestone includes the complete eleven-car roster, both existing circuits, all four weapon hardpoints, four-car offline AI races, two-lap checkpoint validation, drifting, nitro, damage, missiles, destruction/respawn, a 3D garage, landscape touch controls, HUD, pause and results. Every race is combative; race position still comes from ordered course progress rather than takedowns.
+
+The Android low-spec preset uses four racers, reduced LODs, no real-time shadows or post-processing, per-event loading and a 30 FPS render cap. Higher-detail desktop inspection remains available. This is the first native gameplay milestone, not the completed career/game release.
+
+```bash
+npm ci
+npm run prepare:godot       # stage and convert local resources into godot/assets/
+godot --headless --path godot --editor --import --quit
+godot --path godot           # run with the pinned Godot 4.7.2 standard editor
+npm run test:godot           # native smoke suite, after importing
+```
+
+Keyboard controls: **WASD/arrows** drive, **Space** drifts, **Shift** engages nitro, **F** or the left mouse button fires, and **Escape** pauses. Android uses the landscape touch controls.
+
+`.github/workflows/android.yml` validates all source packages, runs the web and native tests, and exports an installable ARM64 debug APK with Godot 4.7.2. Download the `velocity-android-debug` artifact from a successful GitHub Actions run. The debug APK is for testing only; release signing and Play distribution are separate steps.
+
 ## Run the inspectors
 
 ```bash
