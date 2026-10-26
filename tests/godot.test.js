@@ -25,7 +25,7 @@ test('Android workflow builds and tests a native APK without remote runtime asse
     read('.github/workflows/android.yml'), read('godot/export_presets.cfg'), read('godot/scripts/game.gd'),
   ]);
   assert.match(workflow, /actions\/setup-java@v4/);
-  assert.match(workflow, /actions\/setup-android@v3/);
+  assert.match(workflow, /android-actions\/setup-android@v4/);
   assert.match(workflow, /--export-debug Android/);
   assert.match(workflow, /upload-artifact@v4/);
   assert.match(workflow, /smoke_test\.gd/);

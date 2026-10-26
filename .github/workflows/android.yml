@@ -28,7 +28,7 @@ jobs:
         with:
           distribution: temurin
           java-version: '17'
-      - uses: android-actions/setup-android@v3
+      - uses: android-actions/setup-android@v4.0.4
       - name: Install dependencies and validate source packages
         run: |
           npm ci
