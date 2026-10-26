@@ -61,6 +61,9 @@
         <main class="showcase">
           <section class="stage" id="stage" aria-label="Interactive 3D vehicle preview">
             <div id="canvas-container" aria-hidden="true"></div>
+            <div class="stage-poster" id="stage-poster" data-car-id="car-concept" aria-hidden="true">
+              <img id="stage-poster-image" src="/assets/previews/car-concept.webp" width="480" height="300" alt="" fetchpriority="high" decoding="async" />
+            </div>
             <div class="stage-grid" aria-hidden="true"></div>
             <div class="stage-vignette" aria-hidden="true"></div>
 
@@ -78,7 +81,7 @@
               <div class="loader-ring"></div>
               <div class="loader-copy">
                 <strong id="loader-title">Preparing collection</strong>
-                <span id="loader-detail">Loading vehicle asset…</span>
+                <span id="loader-detail">Instant preview · optimized 3D loading…</span>
                 <div class="loader-track"><i id="loader-progress"></i></div>
               </div>
             </div>
@@ -166,7 +169,7 @@
       <footer class="statusbar">
         <span><i class="status-dot"></i> Asset viewer only — no gameplay systems</span>
         <div class="keyboard-hints"><span><kbd>←</kbd><kbd>→</kbd> Switch car</span><span><kbd>Space</kbd> Rotate</span><span><kbd>R</kbd> Reset</span></div>
-        <span id="active-file">assets/cars/car-concept.glb</span>
+        <span id="active-file">assets/cars/lods/car-concept-lod0.glb</span>
       </footer>
     </div>
 

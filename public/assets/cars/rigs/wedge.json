@@ -1,0 +1,100 @@
+{
+  "id": "wedge",
+  "units": "metres",
+  "upAxis": "+Y",
+  "forwardAxis": "+Z",
+  "groundY": 0,
+  "normalized": true,
+  "dimensions": {
+    "length": 4.4,
+    "width": 2.054,
+    "height": 1.197
+  },
+  "wheels": [
+    {
+      "id": "FL",
+      "sourceNode": "Wedge_Wheel_FR_Tyre",
+      "position": [
+        0.8095,
+        0.3476,
+        1.2552
+      ],
+      "radius": 0.3476,
+      "width": 0.2682,
+      "axle": "front",
+      "side": "left",
+      "steering": true
+    },
+    {
+      "id": "FR",
+      "sourceNode": "Wedge_Wheel_FL_Tyre",
+      "position": [
+        -0.8095,
+        0.3476,
+        1.2552
+      ],
+      "radius": 0.3476,
+      "width": 0.2682,
+      "axle": "front",
+      "side": "right",
+      "steering": true
+    },
+    {
+      "id": "RL",
+      "sourceNode": "Wedge_Wheel_RR_Tyre",
+      "position": [
+        0.7946,
+        0.3625,
+        -1.4718
+      ],
+      "radius": 0.3625,
+      "width": 0.3079,
+      "axle": "rear",
+      "side": "left",
+      "steering": false
+    },
+    {
+      "id": "RR",
+      "sourceNode": "Wedge_Wheel_RL_Tyre",
+      "position": [
+        -0.7946,
+        0.3625,
+        -1.4718
+      ],
+      "radius": 0.3625,
+      "width": 0.3079,
+      "axle": "rear",
+      "side": "right",
+      "steering": false
+    }
+  ],
+  "collision": {
+    "path": "assets/cars/collisions/wedge-collision.glb",
+    "shape": "convex-hull",
+    "triangles": 278,
+    "bytes": 21232,
+    "note": "Basic single-hull collision asset for arcade physics. Wheel suspension and chassis tuning must be validated in the driving prototype."
+  },
+  "lods": {
+    "0": {
+      "path": "assets/cars/lods/wedge-lod0.glb",
+      "triangles": 70592,
+      "bytes": 308832
+    },
+    "1": {
+      "path": "assets/cars/lods/wedge-lod1.glb",
+      "triangles": 37068,
+      "bytes": 245152
+    },
+    "2": {
+      "path": "assets/cars/lods/wedge-lod2.glb",
+      "triangles": 20172,
+      "bytes": 175108
+    },
+    "3": {
+      "path": "assets/cars/lods/wedge-lod3.glb",
+      "triangles": 13068,
+      "bytes": 145768
+    }
+  }
+}

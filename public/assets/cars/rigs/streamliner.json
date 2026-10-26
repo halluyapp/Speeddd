@@ -1,0 +1,100 @@
+{
+  "id": "streamliner",
+  "units": "metres",
+  "upAxis": "+Y",
+  "forwardAxis": "+Z",
+  "groundY": 0,
+  "normalized": true,
+  "dimensions": {
+    "length": 5.2,
+    "width": 1.625,
+    "height": 1.284
+  },
+  "wheels": [
+    {
+      "id": "FL",
+      "sourceNode": "Streamliner_Wheel_FR_Tyre",
+      "position": [
+        0.7428,
+        0.3474,
+        2.026
+      ],
+      "radius": 0.3474,
+      "width": 0.1396,
+      "axle": "front",
+      "side": "left",
+      "steering": true
+    },
+    {
+      "id": "FR",
+      "sourceNode": "Streamliner_Wheel_FL_Tyre",
+      "position": [
+        -0.7428,
+        0.3474,
+        2.026
+      ],
+      "radius": 0.3474,
+      "width": 0.1396,
+      "axle": "front",
+      "side": "right",
+      "steering": true
+    },
+    {
+      "id": "RL",
+      "sourceNode": "Streamliner_Wheel_RR_Tyre",
+      "position": [
+        0.2841,
+        0.3474,
+        -0.9343
+      ],
+      "radius": 0.3474,
+      "width": 0.1396,
+      "axle": "rear",
+      "side": "left",
+      "steering": false
+    },
+    {
+      "id": "RR",
+      "sourceNode": "Streamliner_Wheel_RL_Tyre",
+      "position": [
+        -0.2841,
+        0.3474,
+        -0.9343
+      ],
+      "radius": 0.3474,
+      "width": 0.1396,
+      "axle": "rear",
+      "side": "right",
+      "steering": false
+    }
+  ],
+  "collision": {
+    "path": "assets/cars/collisions/streamliner-collision.glb",
+    "shape": "convex-hull",
+    "triangles": 982,
+    "bytes": 71952,
+    "note": "Basic single-hull collision asset for arcade physics. Wheel suspension and chassis tuning must be validated in the driving prototype."
+  },
+  "lods": {
+    "0": {
+      "path": "assets/cars/lods/streamliner-lod0.glb",
+      "triangles": 386736,
+      "bytes": 1115904
+    },
+    "1": {
+      "path": "assets/cars/lods/streamliner-lod1.glb",
+      "triangles": 194274,
+      "bytes": 727120
+    },
+    "2": {
+      "path": "assets/cars/lods/streamliner-lod2.glb",
+      "triangles": 85292,
+      "bytes": 353696
+    },
+    "3": {
+      "path": "assets/cars/lods/streamliner-lod3.glb",
+      "triangles": 31428,
+      "bytes": 152368
+    }
+  }
+}

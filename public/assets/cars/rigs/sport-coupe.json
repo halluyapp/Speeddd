@@ -1,0 +1,100 @@
+{
+  "id": "sport-coupe",
+  "units": "metres",
+  "upAxis": "+Y",
+  "forwardAxis": "+Z",
+  "groundY": 0,
+  "normalized": true,
+  "dimensions": {
+    "length": 4.52,
+    "width": 2.176,
+    "height": 1.294
+  },
+  "wheels": [
+    {
+      "id": "FL",
+      "sourceNode": "Coupe-Wheel.Ft.L_03",
+      "position": [
+        0.8027,
+        0.3626,
+        1.3713
+      ],
+      "radius": 0.3616,
+      "width": 0.2977,
+      "axle": "front",
+      "side": "left",
+      "steering": true
+    },
+    {
+      "id": "FR",
+      "sourceNode": "Coupe-Wheel.Ft.R_06",
+      "position": [
+        -0.7976,
+        0.3626,
+        1.3694
+      ],
+      "radius": 0.3616,
+      "width": 0.2977,
+      "axle": "front",
+      "side": "right",
+      "steering": true
+    },
+    {
+      "id": "RL",
+      "sourceNode": "Coupe-Wheel.Bk.L_04",
+      "position": [
+        0.8001,
+        0.3616,
+        -1.4423
+      ],
+      "radius": 0.3616,
+      "width": 0.3439,
+      "axle": "rear",
+      "side": "left",
+      "steering": false
+    },
+    {
+      "id": "RR",
+      "sourceNode": "Coupe-Wheel.Bk.R_05",
+      "position": [
+        -0.8047,
+        0.3616,
+        -1.4437
+      ],
+      "radius": 0.3616,
+      "width": 0.3439,
+      "axle": "rear",
+      "side": "right",
+      "steering": false
+    }
+  ],
+  "collision": {
+    "path": "assets/cars/collisions/sport-coupe-collision.glb",
+    "shape": "convex-hull",
+    "triangles": 260,
+    "bytes": 20020,
+    "note": "Basic single-hull collision asset for arcade physics. Wheel suspension and chassis tuning must be validated in the driving prototype."
+  },
+  "lods": {
+    "0": {
+      "path": "assets/cars/lods/sport-coupe-lod0.glb",
+      "triangles": 113622,
+      "bytes": 1929804
+    },
+    "1": {
+      "path": "assets/cars/lods/sport-coupe-lod1.glb",
+      "triangles": 59772,
+      "bytes": 1513408
+    },
+    "2": {
+      "path": "assets/cars/lods/sport-coupe-lod2.glb",
+      "triangles": 34268,
+      "bytes": 852924
+    },
+    "3": {
+      "path": "assets/cars/lods/sport-coupe-lod3.glb",
+      "triangles": 22054,
+      "bytes": 598536
+    }
+  }
+}

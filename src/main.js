@@ -55,7 +55,7 @@ function injectIcons(root = document) {
 
 const dom = Object.fromEntries(
   [
-    'car-list', 'fleet-count', 'visible-count', 'stage', 'canvas-container', 'stage-index', 'stage-total',
+    'car-list', 'fleet-count', 'visible-count', 'stage', 'canvas-container', 'stage-poster', 'stage-poster-image', 'stage-index', 'stage-total',
     'stage-series', 'stage-watermark', 'stage-loader', 'loader-title', 'loader-detail', 'loader-progress',
     'stage-error', 'stage-error-message', 'retry-model', 'toggle-auto', 'reset-view', 'toggle-fullscreen',
     'vehicle-class', 'vehicle-year', 'vehicle-name', 'vehicle-description', 'stat-speed', 'stat-acceleration',
@@ -132,7 +132,7 @@ function initScene() {
   renderer.toneMapping = THREE.ACESFilmicToneMapping;
   renderer.toneMappingExposure = 1.12;
   renderer.shadowMap.enabled = true;
-  renderer.shadowMap.type = THREE.PCFSoftShadowMap;
+  renderer.shadowMap.type = THREE.PCFShadowMap;
   renderer.setClearColor(0x000000, 0);
   dom['canvas-container'].appendChild(renderer.domElement);
 
@@ -322,12 +322,12 @@ function rememberPaint(material) {
   return material;
 }
 
-function prepareCar(car, source) {
+function prepareCar(car, source, rig) {
   const model = source.scene;
   const root = new THREE.Group();
   const fit = new THREE.Group();
   root.name = `${car.id}-showroom-root`;
-  fit.name = `${car.id}-normalized-asset`;
+  fit.name = `${car.id}-${car.normalized ? 'baked' : 'normalized'}-asset`;
   fit.add(model);
   root.add(fit);
 
@@ -337,29 +337,41 @@ function prepareCar(car, source) {
   });
 
   root.updateMatrixWorld(true);
-  let box = modelBounds(model);
-  let size = box.getSize(new THREE.Vector3());
+  let box;
+  let size;
 
-  if (car.forward === '-Z') {
-    fit.rotation.y = Math.PI;
-  } else if (car.orientation === 'auto' && size.x > size.z) {
-    fit.rotation.y = Math.PI / 2;
+  // Pack 01 bounds are measured from decoded geometry during the reproducible build.
+  // Reuse those validated dimensions instead of repeating an expensive browser measurement.
+  if (car.normalized) {
+    size = new THREE.Vector3(car.dimensions.width, car.dimensions.height, car.dimensions.length);
+  } else {
+    box = modelBounds(model);
+    size = box.getSize(new THREE.Vector3());
   }
 
-  root.updateMatrixWorld(true);
-  box = modelBounds(model);
-  size = box.getSize(new THREE.Vector3());
-  const length = Math.max(size.z, 0.001);
-  fit.scale.setScalar(car.length / length);
+  // Keep the legacy branch only for unnormalized third-party additions to the catalogue.
+  if (!car.normalized) {
+    if (car.forward === '-Z') {
+      fit.rotation.y = Math.PI;
+    } else if (car.orientation === 'auto' && size.x > size.z) {
+      fit.rotation.y = Math.PI / 2;
+    }
 
-  root.updateMatrixWorld(true);
-  box = modelBounds(model);
-  const center = box.getCenter(new THREE.Vector3());
-  fit.position.set(-center.x, -box.min.y, -center.z);
-  root.updateMatrixWorld(true);
+    root.updateMatrixWorld(true);
+    box = modelBounds(model);
+    size = box.getSize(new THREE.Vector3());
+    const length = Math.max(size.z, 0.001);
+    fit.scale.setScalar(car.length / length);
 
-  box = modelBounds(model);
-  size = box.getSize(new THREE.Vector3());
+    root.updateMatrixWorld(true);
+    box = modelBounds(model);
+    const center = box.getCenter(new THREE.Vector3());
+    fit.position.set(-center.x, -box.min.y, -center.z);
+    root.updateMatrixWorld(true);
+
+    box = modelBounds(model);
+    size = box.getSize(new THREE.Vector3());
+  }
 
   const paintMaterials = [];
   const paintNames = new Set(car.paintMaterials || []);
@@ -389,12 +401,15 @@ function prepareCar(car, source) {
   });
 
   root.userData.assetId = car.id;
-  return { car, root, model, paintMaterials, dimensions: size, loadedAt: performance.now() };
+  root.userData.normalized = Boolean(car.normalized);
+  root.userData.rig = rig;
+  return { car, root, model, rig, paintMaterials, dimensions: size, loadedAt: performance.now() };
 }
 
 function setLoading(visible, switching = false) {
   dom['stage-loader'].classList.toggle('is-complete', !visible);
   dom['stage-loader'].classList.toggle('is-switching', switching && visible);
+  dom['stage-poster'].classList.toggle('is-hidden', !visible);
   if (visible) {
     dom['loader-progress'].style.width = '6%';
     dom['stage-error'].hidden = true;
@@ -419,22 +434,22 @@ function loadCarAsset(car, token) {
   }
   if (pending.has(car.id)) return pending.get(car.id);
 
-  const promise = new Promise((resolve, reject) => {
+  const modelPromise = new Promise((resolve, reject) => {
     loader.load(
       assetUrl(car.model),
-      (gltf) => {
-        try {
-          resolve(prepareCar(car, gltf));
-        } catch (error) {
-          reject(error);
-        }
-      },
+      resolve,
       (event) => {
         if (token === state.loadToken) updateLoadProgress(event);
       },
       reject,
     );
   });
+  const rigPromise = fetch(assetUrl(car.rig)).then((response) => {
+    if (!response.ok) throw new Error(`Wheel-rig request failed (${response.status})`);
+    return response.json();
+  });
+  const promise = Promise.all([modelPromise, rigPromise])
+    .then(([gltf, rig]) => prepareCar(car, gltf, rig));
   pending.set(car.id, promise);
   promise.then(
     () => pending.delete(car.id),
@@ -484,10 +499,13 @@ async function selectCar(id, { initial = false, updateHash = true } = {}) {
   updateDetails(car);
   updateCarList();
   updateViewButtons();
+  dom['stage-poster-image'].src = assetUrl(car.preview);
+  dom['stage-poster'].dataset.carId = car.id;
+  document.body.dataset.posterCar = car.id;
 
   if (updateHash) history.replaceState(null, '', `${location.pathname}${location.search}#${id}`);
   dom['loader-title'].textContent = initial ? 'Preparing collection' : car.name;
-  dom['loader-detail'].textContent = 'Loading local GLB…';
+  dom['loader-detail'].textContent = 'Optimized 3D loading in the background…';
   setLoading(true, !initial && Boolean(state.currentEntry));
 
   try {
@@ -527,6 +545,7 @@ async function selectCar(id, { initial = false, updateHash = true } = {}) {
     if (token !== state.loadToken) return;
     console.error(`Failed to load ${car.model}`, error);
     setLoading(false);
+    dom['stage-poster'].classList.remove('is-hidden');
     dom['stage-error'].hidden = false;
     dom['stage-error-message'].textContent = `${car.name}: ${error.message || 'the local GLB could not be read.'}`;
     document.body.dataset.assetReady = 'error';
@@ -752,13 +771,17 @@ function openAssetDetails() {
   const car = getSelectedCar();
   if (!car) return;
   const credit = car.credit;
+  const lodLinks = Object.entries(car.lods || { 0: car.model }).map(([level, modelPath]) => (
+    `<a href="${assetUrl(modelPath)}" download="velocity-${car.id}-lod${level}.glb">LOD${level} · ${formatNumber(car.lodTriangles?.[level] || car.triangles)} tris</a>`
+  )).join(' · ');
   dom['asset-dialog-title'].textContent = car.name;
   dom['asset-dialog-body'].innerHTML = `
     <div class="asset-detail-grid">
       <div class="detail-block"><span>Geometry</span><strong>${formatNumber(car.triangles)} triangles</strong></div>
       <div class="detail-block"><span>Download</span><strong>${car.fileSize} · GLB</strong></div>
       <div class="detail-block"><span>Normalized length</span><strong>${car.length.toFixed(2)} metres</strong></div>
-      <div class="detail-block"><span>Scene convention</span><strong>Y-up · +Z forward</strong></div>
+      <div class="detail-block"><span>Scene convention</span><strong>Y-up · +Z forward · baked</strong></div>
+      <div class="detail-block"><span>Game-readiness</span><strong>4 LODs · convex hull · 4 wheel records</strong></div>
     </div>
     <dl class="asset-credit">
       <div><dt>Source model</dt><dd>${escapeHtml(credit.title)}</dd></div>
@@ -766,12 +789,16 @@ function openAssetDetails() {
       <div><dt>License</dt><dd><a href="https://creativecommons.org/licenses/by/4.0/" target="_blank" rel="noreferrer">${escapeHtml(credit.license)}</a> — attribution required</dd></div>
       <div><dt>Source</dt><dd><a href="${escapeHtml(credit.source)}" target="_blank" rel="noreferrer">View original asset record ${icon('external')}</a></dd></div>
       <div><dt>Distribution</dt><dd><a href="${escapeHtml(credit.distribution)}" target="_blank" rel="noreferrer">View source distribution ${icon('external')}</a></dd></div>
-      <div><dt>Changes</dt><dd>${escapeHtml(credit.changes)}</dd></div>
+      <div><dt>Source changes</dt><dd>${escapeHtml(credit.changes)}</dd></div>
+      <div><dt>Runtime processing</dt><dd>${escapeHtml(credit.runtimeChanges || 'Optimized runtime GLB.')}</dd></div>
       ${credit.notice ? `<div><dt>Legal notice</dt><dd>${escapeHtml(credit.notice)}</dd></div>` : ''}
-      <div><dt>Local file</dt><dd><code>${escapeHtml(car.model)}</code></dd></div>
+      <div><dt>Reusable LODs</dt><dd>${lodLinks}</dd></div>
+      <div><dt>Physics / rig</dt><dd><a href="${assetUrl(car.collision)}" download="${car.id}-collision.glb">Convex collision GLB</a> · <a href="${assetUrl(car.rig)}" download="${car.id}-rig.json">Wheel-rig JSON</a></dd></div>
+      <div><dt>Runtime LOD0</dt><dd><code>${escapeHtml(car.model)}</code></dd></div>
+      <div><dt>Untouched master</dt><dd><code>${escapeHtml(car.master)}</code> (repository only)</dd></div>
     </dl>
     <a class="primary-button" href="${assetUrl(car.model)}" download="velocity-${car.id}.glb">${icon('download')} Download this GLB</a>
-    <p class="license-notice">The GLB is the reusable asset. Paint changes and showroom normalization are viewer operations and do not modify the source file. Performance values are design metadata, not a vehicle simulation.</p>
+    <p class="license-notice">Every runtime GLB has baked metre scale, Y-up/+Z-forward orientation and ground-zero placement. Paint remains a viewer operation. Collision and wheel data are starting points; suspension behavior still requires driving-prototype tuning. Performance values are design metadata, not a vehicle simulation.</p>
   `;
   dom['asset-dialog'].showModal();
 }

@@ -1,0 +1,61 @@
+VELOCITY VEHICLE LIBRARY — ASSET CREDITS
+
+Every vehicle is CC BY 4.0. Attribution is required.
+License: https://creativecommons.org/licenses/by/4.0/
+
+01. VX-1 Concept / assets/cars/car-concept.glb
+    Car Concept — Eric Chadwick / Darmstadt Graphics Group GmbH; original model by Unity Fan
+    Source: https://github.com/KhronosGroup/glTF-Sample-Assets/tree/main/Models/CarConcept
+    Changes: Original geometry, textures and materials preserved; Velocity attribution metadata added to the GLB. Showroom scale, grounding, camera framing and paint selection are applied at runtime.
+
+02. Aether HX / assets/cars/hypercar.glb
+    Hypercar — Collect Cars — drcollect
+    Source: https://github.com/drcollect/collect-cars
+    Changes: Original uncompressed geometry and materials preserved; Velocity attribution metadata added. Display name, showroom setup and optional paint finishes are applied by this project.
+
+03. Vector 84 / assets/cars/wedge.glb
+    80s Wedge — Collect Cars — drcollect
+    Source: https://github.com/drcollect/collect-cars
+    Changes: Original uncompressed geometry and materials preserved; Velocity attribution metadata added. Display name, showroom setup and optional paint finishes are applied by this project.
+
+04. Raptor XRT / assets/cars/rally-raid.glb
+    Rally-Raid — Collect Cars — drcollect
+    Source: https://github.com/drcollect/collect-cars
+    Changes: Original uncompressed geometry and materials preserved; Velocity attribution metadata added. Display name, showroom setup and optional paint finishes are applied by this project.
+
+05. Ender LM-9 / assets/cars/endurance.glb
+    Endurance — Collect Cars — drcollect
+    Source: https://github.com/drcollect/collect-cars
+    Changes: Original uncompressed geometry and materials preserved; Velocity attribution metadata added. Display name, showroom setup and optional paint finishes are applied by this project.
+
+06. Silverline S1 / assets/cars/streamliner.glb
+    Streamliner — Collect Cars — drcollect
+    Source: https://github.com/drcollect/collect-cars
+    Changes: Original uncompressed geometry and materials preserved; Velocity attribution metadata added. Display name, showroom setup and optional paint finishes are applied by this project.
+
+07. Corsa RS / assets/cars/sport-coupe.glb
+    Generic Sport Coupé Car — Márcio Meireles (mmcworks)
+    Source: https://sketchfab.com/3d-models/generic-sport-coupe-car-820a13c4831c41959ce75e6c2014e882
+    Changes: Original geometry and materials preserved; Velocity attribution metadata added. Display name, showroom normalization and optional solid paint are applied at runtime.
+
+08. Sovereign S / assets/cars/grand-sedan.glb
+    Generic Sedan Car — Márcio Meireles (mmcworks)
+    Source: https://sketchfab.com/3d-models/generic-sedan-car-58c33766470d46e7b2aed542650494e5
+    Changes: Original geometry and materials preserved; Velocity attribution metadata added. Display name, showroom normalization and optional solid paint are applied at runtime.
+
+09. Goblin V12 / assets/cars/v12-goblin.glb
+    Fictional supercar - V12 Goblin — Olli Teittinen (ollitei)
+    Source: https://sketchfab.com/3d-models/fictional-supercar-v12-goblin-0a20e49ad5774d778567cb5c3f345786
+    Changes: Converted from legacy specular/glossiness to standard metallic/roughness PBR and embedded Velocity attribution metadata. The supplied shadow plane is hidden; showroom orientation, scale and paint are applied at runtime.
+
+10. Mercedes-AMG SL 63 / assets/cars/mercedes-sl63.glb
+    Mersedes-Benz SL63 AMG [Free] — Black Snow
+    Source: https://sketchfab.com/3d-models/mersedes-benz-sl63-amg-free-f7a625e6f5de425e89e84ae2e92cad65
+    Changes: Meshopt/WebP-optimized distribution by OkeahDavid; geometry and materials preserved and Velocity attribution metadata added. Showroom normalization and paint are applied at runtime. Mercedes-Benz and AMG marks belong to their respective owner; no endorsement is implied.
+
+11. BMW M4 CSL / assets/cars/bmw-m4-csl.glb
+    BMW m4 CSL 2023 — Black Snow
+    Source: https://sketchfab.com/3d-models/bmw-m4-csl-2023-26d05968e63b4fc28205cbb9abb0ea41
+    Changes: Meshopt/WebP-optimized distribution by OkeahDavid; geometry and materials preserved and Velocity attribution metadata added. Showroom normalization and paint are applied at runtime. BMW and M marks belong to their respective owner; no endorsement is implied.
+
+See LICENSES.md and public/assets/catalog.json for the complete records.

@@ -14,11 +14,11 @@
       "category": "concept",
       "class": "Concept Grand Tourer",
       "year": "2024",
-      "model": "assets/cars/car-concept.glb",
+      "model": "assets/cars/lods/car-concept-lod0.glb",
       "preview": "assets/previews/car-concept.webp",
       "length": 4.6,
       "triangles": 213347,
-      "fileSize": "11.8 MB",
+      "fileSize": "3.0 MB",
       "description": "A highly detailed concept grand tourer with a complete cockpit, articulated body panels and layered PBR paint.",
       "performance": {
         "topSpeed": 320,
@@ -37,8 +37,31 @@
         "license": "CC BY 4.0",
         "source": "https://github.com/KhronosGroup/glTF-Sample-Assets/tree/main/Models/CarConcept",
         "distribution": "https://github.com/KhronosGroup/glTF-Sample-Assets/blob/main/Models/CarConcept/glTF-Binary/CarConcept.glb",
-        "changes": "Original geometry, textures and materials preserved; Velocity attribution metadata added to the GLB. Showroom scale, grounding, camera framing and paint selection are applied at runtime.",
-        "notice": "The original Unity Fan model is CC0. Khronos and 3D Commerce logos retain their separate trademark terms; see the source legal notice."
+        "changes": "Master geometry, textures and materials preserved; Velocity attribution metadata added. Generated runtime processing is recorded separately.",
+        "notice": "The original Unity Fan model is CC0. Khronos and 3D Commerce logos retain their separate trademark terms; see the source legal notice.",
+        "runtimeChanges": "Master retained separately. Runtime copies are normalized to metres/Y-up/+Z-forward/ground-zero, Meshopt-compressed and WebP-textured. LOD1–3 are simplified derivatives; a convex collision hull and wheel-rig metadata were generated."
+      },
+      "master": "assets-src/cars/car-concept.glb",
+      "masterFileSize": "11.8 MB",
+      "normalized": true,
+      "dimensions": {
+        "length": 4.6,
+        "width": 2.684,
+        "height": 1.213
+      },
+      "rig": "assets/cars/rigs/car-concept.json",
+      "collision": "assets/cars/collisions/car-concept-collision.glb",
+      "lods": {
+        "0": "assets/cars/lods/car-concept-lod0.glb",
+        "1": "assets/cars/lods/car-concept-lod1.glb",
+        "2": "assets/cars/lods/car-concept-lod2.glb",
+        "3": "assets/cars/lods/car-concept-lod3.glb"
+      },
+      "lodTriangles": {
+        "0": 213347,
+        "1": 112195,
+        "2": 61191,
+        "3": 39995
       }
     },
     {
@@ -49,11 +72,11 @@
       "category": "concept",
       "class": "Electric Hypercar",
       "year": "Concept 01",
-      "model": "assets/cars/hypercar.glb",
+      "model": "assets/cars/lods/hypercar-lod0.glb",
       "preview": "assets/previews/hypercar.webp",
       "length": 4.7,
-      "triangles": 196500,
-      "fileSize": "3.8 MB",
+      "triangles": 189012,
+      "fileSize": "0.7 MB",
       "description": "A low electric hypercar with a forward glass canopy, illuminated wheel rings and a floating rear wing.",
       "performance": {
         "topSpeed": 352,
@@ -71,7 +94,30 @@
         "license": "CC BY 4.0",
         "source": "https://github.com/drcollect/collect-cars",
         "distribution": "https://github.com/drcollect/collect-cars/blob/main/models/full/hypercar.glb",
-        "changes": "Original uncompressed geometry and materials preserved; Velocity attribution metadata added. Display name, showroom setup and optional paint finishes are applied by this project."
+        "changes": "Master geometry and materials preserved; Velocity attribution metadata added. Generated runtime processing is recorded separately.",
+        "runtimeChanges": "Master retained separately. Runtime copies are normalized to metres/Y-up/+Z-forward/ground-zero, Meshopt-compressed and WebP-textured. LOD1–3 are simplified derivatives; a convex collision hull and wheel-rig metadata were generated."
+      },
+      "master": "assets-src/cars/hypercar.glb",
+      "masterFileSize": "3.8 MB",
+      "normalized": true,
+      "dimensions": {
+        "length": 4.7,
+        "width": 2.043,
+        "height": 1.249
+      },
+      "rig": "assets/cars/rigs/hypercar.json",
+      "collision": "assets/cars/collisions/hypercar-collision.glb",
+      "lods": {
+        "0": "assets/cars/lods/hypercar-lod0.glb",
+        "1": "assets/cars/lods/hypercar-lod1.glb",
+        "2": "assets/cars/lods/hypercar-lod2.glb",
+        "3": "assets/cars/lods/hypercar-lod3.glb"
+      },
+      "lodTriangles": {
+        "0": 189012,
+        "1": 96230,
+        "2": 43196,
+        "3": 17336
       }
     },
     {
@@ -82,11 +128,11 @@
       "category": "concept",
       "class": "Retro Wedge Coupe",
       "year": "Concept 02",
-      "model": "assets/cars/wedge.glb",
+      "model": "assets/cars/lods/wedge-lod0.glb",
       "preview": "assets/previews/wedge.webp",
       "length": 4.4,
-      "triangles": 71240,
-      "fileSize": "1.8 MB",
+      "triangles": 70592,
+      "fileSize": "0.3 MB",
       "description": "An eighties-inspired wedge with crisp body creases, rear-window louvres, pop-up panels and a full-width nose light.",
       "performance": {
         "topSpeed": 294,
@@ -104,7 +150,30 @@
         "license": "CC BY 4.0",
         "source": "https://github.com/drcollect/collect-cars",
         "distribution": "https://github.com/drcollect/collect-cars/blob/main/models/full/wedge.glb",
-        "changes": "Original uncompressed geometry and materials preserved; Velocity attribution metadata added. Display name, showroom setup and optional paint finishes are applied by this project."
+        "changes": "Master geometry and materials preserved; Velocity attribution metadata added. Generated runtime processing is recorded separately.",
+        "runtimeChanges": "Master retained separately. Runtime copies are normalized to metres/Y-up/+Z-forward/ground-zero, Meshopt-compressed and WebP-textured. LOD1–3 are simplified derivatives; a convex collision hull and wheel-rig metadata were generated."
+      },
+      "master": "assets-src/cars/wedge.glb",
+      "masterFileSize": "1.8 MB",
+      "normalized": true,
+      "dimensions": {
+        "length": 4.4,
+        "width": 2.054,
+        "height": 1.197
+      },
+      "rig": "assets/cars/rigs/wedge.json",
+      "collision": "assets/cars/collisions/wedge-collision.glb",
+      "lods": {
+        "0": "assets/cars/lods/wedge-lod0.glb",
+        "1": "assets/cars/lods/wedge-lod1.glb",
+        "2": "assets/cars/lods/wedge-lod2.glb",
+        "3": "assets/cars/lods/wedge-lod3.glb"
+      },
+      "lodTriangles": {
+        "0": 70592,
+        "1": 37068,
+        "2": 20172,
+        "3": 13068
       }
     },
     {
@@ -115,11 +184,11 @@
       "category": "track",
       "class": "Rally-Raid Prototype",
       "year": "Concept 03",
-      "model": "assets/cars/rally-raid.glb",
+      "model": "assets/cars/lods/rally-raid-lod0.glb",
       "preview": "assets/previews/rally-raid.webp",
       "length": 4.6,
-      "triangles": 127812,
-      "fileSize": "4.5 MB",
+      "triangles": 66732,
+      "fileSize": "0.5 MB",
       "description": "A raised desert racer with six light pods, all-terrain tyres, visible suspension, skid plates and a roof scoop.",
       "performance": {
         "topSpeed": 228,
@@ -137,7 +206,30 @@
         "license": "CC BY 4.0",
         "source": "https://github.com/drcollect/collect-cars",
         "distribution": "https://github.com/drcollect/collect-cars/blob/main/models/full/rally.glb",
-        "changes": "Original uncompressed geometry and materials preserved; Velocity attribution metadata added. Display name, showroom setup and optional paint finishes are applied by this project."
+        "changes": "Master geometry and materials preserved; Velocity attribution metadata added. Generated runtime processing is recorded separately.",
+        "runtimeChanges": "Master retained separately. Runtime copies are normalized to metres/Y-up/+Z-forward/ground-zero, Meshopt-compressed and WebP-textured. LOD1–3 are simplified derivatives; a convex collision hull and wheel-rig metadata were generated."
+      },
+      "master": "assets-src/cars/rally-raid.glb",
+      "masterFileSize": "4.5 MB",
+      "normalized": true,
+      "dimensions": {
+        "length": 4.6,
+        "width": 2.078,
+        "height": 1.776
+      },
+      "rig": "assets/cars/rigs/rally-raid.json",
+      "collision": "assets/cars/collisions/rally-raid-collision.glb",
+      "lods": {
+        "0": "assets/cars/lods/rally-raid-lod0.glb",
+        "1": "assets/cars/lods/rally-raid-lod1.glb",
+        "2": "assets/cars/lods/rally-raid-lod2.glb",
+        "3": "assets/cars/lods/rally-raid-lod3.glb"
+      },
+      "lodTriangles": {
+        "0": 66732,
+        "1": 48690,
+        "2": 38538,
+        "3": 32402
       }
     },
     {
@@ -148,11 +240,11 @@
       "category": "track",
       "class": "Endurance Prototype",
       "year": "Concept 04",
-      "model": "assets/cars/endurance.glb",
+      "model": "assets/cars/lods/endurance-lod0.glb",
       "preview": "assets/previews/endurance.webp",
       "length": 4.9,
-      "triangles": 247752,
-      "fileSize": "5.0 MB",
+      "triangles": 238680,
+      "fileSize": "0.9 MB",
       "description": "A 24-hour prototype with a tall shark fin, bubble canopy, split light blade and deeply channelled aero surfaces.",
       "performance": {
         "topSpeed": 338,
@@ -170,7 +262,30 @@
         "license": "CC BY 4.0",
         "source": "https://github.com/drcollect/collect-cars",
         "distribution": "https://github.com/drcollect/collect-cars/blob/main/models/full/endurance.glb",
-        "changes": "Original uncompressed geometry and materials preserved; Velocity attribution metadata added. Display name, showroom setup and optional paint finishes are applied by this project."
+        "changes": "Master geometry and materials preserved; Velocity attribution metadata added. Generated runtime processing is recorded separately.",
+        "runtimeChanges": "Master retained separately. Runtime copies are normalized to metres/Y-up/+Z-forward/ground-zero, Meshopt-compressed and WebP-textured. LOD1–3 are simplified derivatives; a convex collision hull and wheel-rig metadata were generated."
+      },
+      "master": "assets-src/cars/endurance.glb",
+      "masterFileSize": "5.0 MB",
+      "normalized": true,
+      "dimensions": {
+        "length": 4.9,
+        "width": 1.966,
+        "height": 1.315
+      },
+      "rig": "assets/cars/rigs/endurance.json",
+      "collision": "assets/cars/collisions/endurance-collision.glb",
+      "lods": {
+        "0": "assets/cars/lods/endurance-lod0.glb",
+        "1": "assets/cars/lods/endurance-lod1.glb",
+        "2": "assets/cars/lods/endurance-lod2.glb",
+        "3": "assets/cars/lods/endurance-lod3.glb"
+      },
+      "lodTriangles": {
+        "0": 238680,
+        "1": 123096,
+        "2": 57266,
+        "3": 25280
       }
     },
     {
@@ -181,11 +296,11 @@
       "category": "concept",
       "class": "Experimental Streamliner",
       "year": "Concept 05",
-      "model": "assets/cars/streamliner.glb",
+      "model": "assets/cars/lods/streamliner-lod0.glb",
       "preview": "assets/previews/streamliner.webp",
       "length": 5.2,
-      "triangles": 389520,
-      "fileSize": "9.0 MB",
+      "triangles": 386736,
+      "fileSize": "1.1 MB",
       "description": "A liquid-metal teardrop with outboard front wheels and one continuous light line wrapped around its body.",
       "performance": {
         "topSpeed": 402,
@@ -203,7 +318,30 @@
         "license": "CC BY 4.0",
         "source": "https://github.com/drcollect/collect-cars",
         "distribution": "https://github.com/drcollect/collect-cars/blob/main/models/full/streamliner.glb",
-        "changes": "Original uncompressed geometry and materials preserved; Velocity attribution metadata added. Display name, showroom setup and optional paint finishes are applied by this project."
+        "changes": "Master geometry and materials preserved; Velocity attribution metadata added. Generated runtime processing is recorded separately.",
+        "runtimeChanges": "Master retained separately. Runtime copies are normalized to metres/Y-up/+Z-forward/ground-zero, Meshopt-compressed and WebP-textured. LOD1–3 are simplified derivatives; a convex collision hull and wheel-rig metadata were generated."
+      },
+      "master": "assets-src/cars/streamliner.glb",
+      "masterFileSize": "9.0 MB",
+      "normalized": true,
+      "dimensions": {
+        "length": 5.2,
+        "width": 1.625,
+        "height": 1.284
+      },
+      "rig": "assets/cars/rigs/streamliner.json",
+      "collision": "assets/cars/collisions/streamliner-collision.glb",
+      "lods": {
+        "0": "assets/cars/lods/streamliner-lod0.glb",
+        "1": "assets/cars/lods/streamliner-lod1.glb",
+        "2": "assets/cars/lods/streamliner-lod2.glb",
+        "3": "assets/cars/lods/streamliner-lod3.glb"
+      },
+      "lodTriangles": {
+        "0": 386736,
+        "1": 194274,
+        "2": 85292,
+        "3": 31428
       }
     },
     {
@@ -214,11 +352,11 @@
       "category": "road",
       "class": "Sport Coupe",
       "year": "Production Study",
-      "model": "assets/cars/sport-coupe.glb",
+      "model": "assets/cars/lods/sport-coupe-lod0.glb",
       "preview": "assets/previews/sport-coupe.webp",
       "length": 4.52,
       "triangles": 113622,
-      "fileSize": "14.9 MB",
+      "fileSize": "1.9 MB",
       "description": "An unbranded rear-drive coupe with a detailed cabin, textured lights, brake assemblies and a balanced grand-touring silhouette.",
       "performance": {
         "topSpeed": 286,
@@ -236,7 +374,30 @@
         "license": "CC BY 4.0",
         "source": "https://sketchfab.com/3d-models/generic-sport-coupe-car-820a13c4831c41959ce75e6c2014e882",
         "distribution": "https://github.com/timo-hoen-ias/sls-racing/tree/main/assets-src/cars/coupe",
-        "changes": "Original geometry and materials preserved; Velocity attribution metadata added. Display name, showroom normalization and optional solid paint are applied at runtime."
+        "changes": "Master geometry and materials preserved; Velocity attribution metadata added. Generated runtime processing is recorded separately.",
+        "runtimeChanges": "Master retained separately. Runtime copies are normalized to metres/Y-up/+Z-forward/ground-zero, Meshopt-compressed and WebP-textured. LOD1–3 are simplified derivatives; a convex collision hull and wheel-rig metadata were generated."
+      },
+      "master": "assets-src/cars/sport-coupe.glb",
+      "masterFileSize": "14.9 MB",
+      "normalized": true,
+      "dimensions": {
+        "length": 4.52,
+        "width": 2.176,
+        "height": 1.294
+      },
+      "rig": "assets/cars/rigs/sport-coupe.json",
+      "collision": "assets/cars/collisions/sport-coupe-collision.glb",
+      "lods": {
+        "0": "assets/cars/lods/sport-coupe-lod0.glb",
+        "1": "assets/cars/lods/sport-coupe-lod1.glb",
+        "2": "assets/cars/lods/sport-coupe-lod2.glb",
+        "3": "assets/cars/lods/sport-coupe-lod3.glb"
+      },
+      "lodTriangles": {
+        "0": 113622,
+        "1": 59772,
+        "2": 34268,
+        "3": 22054
       }
     },
     {
@@ -247,11 +408,11 @@
       "category": "road",
       "class": "Executive Sports Sedan",
       "year": "Production Study",
-      "model": "assets/cars/grand-sedan.glb",
+      "model": "assets/cars/lods/grand-sedan-lod0.glb",
       "preview": "assets/previews/grand-sedan.webp",
       "length": 4.78,
-      "triangles": 113191,
-      "fileSize": "16.7 MB",
+      "triangles": 102219,
+      "fileSize": "2.5 MB",
       "description": "A detailed unbranded sports sedan with a full interior, four-door proportions, textured optics and separate wheel components.",
       "performance": {
         "topSpeed": 260,
@@ -269,7 +430,30 @@
         "license": "CC BY 4.0",
         "source": "https://sketchfab.com/3d-models/generic-sedan-car-58c33766470d46e7b2aed542650494e5",
         "distribution": "https://github.com/timo-hoen-ias/sls-racing/tree/main/assets-src/cars/sedan",
-        "changes": "Original geometry and materials preserved; Velocity attribution metadata added. Display name, showroom normalization and optional solid paint are applied at runtime."
+        "changes": "Master geometry and materials preserved; Velocity attribution metadata added. Generated runtime processing is recorded separately.",
+        "runtimeChanges": "Master retained separately. Runtime copies are normalized to metres/Y-up/+Z-forward/ground-zero, Meshopt-compressed and WebP-textured. LOD1–3 are simplified derivatives; a convex collision hull and wheel-rig metadata were generated."
+      },
+      "master": "assets-src/cars/grand-sedan.glb",
+      "masterFileSize": "16.7 MB",
+      "normalized": true,
+      "dimensions": {
+        "length": 4.78,
+        "width": 2.073,
+        "height": 1.439
+      },
+      "rig": "assets/cars/rigs/grand-sedan.json",
+      "collision": "assets/cars/collisions/grand-sedan-collision.glb",
+      "lods": {
+        "0": "assets/cars/lods/grand-sedan-lod0.glb",
+        "1": "assets/cars/lods/grand-sedan-lod1.glb",
+        "2": "assets/cars/lods/grand-sedan-lod2.glb",
+        "3": "assets/cars/lods/grand-sedan-lod3.glb"
+      },
+      "lodTriangles": {
+        "0": 102219,
+        "1": 58797,
+        "2": 34693,
+        "3": 18439
       }
     },
     {
@@ -280,11 +464,11 @@
       "category": "track",
       "class": "Fictional Supercar",
       "year": "Design Study",
-      "model": "assets/cars/v12-goblin.glb",
+      "model": "assets/cars/lods/v12-goblin-lod0.glb",
       "preview": "assets/previews/v12-goblin.webp",
       "length": 4.55,
       "triangles": 86623,
-      "fileSize": "5.4 MB",
+      "fileSize": "1.0 MB",
       "description": "A fictional mid-engine supercar with dramatic haunches, a dark glass canopy and separate suspension and brake nodes.",
       "performance": {
         "topSpeed": 346,
@@ -311,7 +495,30 @@
         "license": "CC BY 4.0",
         "source": "https://sketchfab.com/3d-models/fictional-supercar-v12-goblin-0a20e49ad5774d778567cb5c3f345786",
         "distribution": "https://github.com/timo-hoen-ias/sls-racing/tree/main/assets-src/cars/goblin",
-        "changes": "Converted from legacy specular/glossiness to standard metallic/roughness PBR and embedded Velocity attribution metadata. The supplied shadow plane is hidden; showroom orientation, scale and paint are applied at runtime."
+        "changes": "Master converted from legacy specular/glossiness to standard metallic/roughness PBR with Velocity attribution metadata added. The supplied shadow plane is hidden in runtime derivatives.",
+        "runtimeChanges": "Master retained separately. Runtime copies are normalized to metres/Y-up/+Z-forward/ground-zero, Meshopt-compressed and WebP-textured. LOD1–3 are simplified derivatives; a convex collision hull and wheel-rig metadata were generated."
+      },
+      "master": "assets-src/cars/v12-goblin.glb",
+      "masterFileSize": "5.4 MB",
+      "normalized": true,
+      "dimensions": {
+        "length": 4.55,
+        "width": 2.178,
+        "height": 1.159
+      },
+      "rig": "assets/cars/rigs/v12-goblin.json",
+      "collision": "assets/cars/collisions/v12-goblin-collision.glb",
+      "lods": {
+        "0": "assets/cars/lods/v12-goblin-lod0.glb",
+        "1": "assets/cars/lods/v12-goblin-lod1.glb",
+        "2": "assets/cars/lods/v12-goblin-lod2.glb",
+        "3": "assets/cars/lods/v12-goblin-lod3.glb"
+      },
+      "lodTriangles": {
+        "0": 86623,
+        "1": 49137,
+        "2": 24389,
+        "3": 15553
       }
     },
     {
@@ -322,11 +529,11 @@
       "category": "road",
       "class": "Luxury Performance Roadster",
       "year": "R232 · 2022",
-      "model": "assets/cars/mercedes-sl63.glb",
+      "model": "assets/cars/lods/mercedes-sl63-lod0.glb",
       "preview": "assets/previews/mercedes-sl63.webp",
       "length": 4.71,
       "triangles": 359979,
-      "fileSize": "4.4 MB",
+      "fileSize": "4.6 MB",
       "description": "A highly detailed R232 roadster with a complete cockpit and underbody. Production reference: 4.0-litre biturbo V8 and all-wheel drive.",
       "performance": {
         "topSpeed": 315,
@@ -344,9 +551,32 @@
         "license": "CC BY 4.0",
         "source": "https://sketchfab.com/3d-models/mersedes-benz-sl63-amg-free-f7a625e6f5de425e89e84ae2e92cad65",
         "distribution": "https://github.com/OkeahDavid/midnight-showroom",
-        "changes": "Meshopt/WebP-optimized distribution by OkeahDavid; geometry and materials preserved and Velocity attribution metadata added. Showroom normalization and paint are applied at runtime. Mercedes-Benz and AMG marks belong to their respective owner; no endorsement is implied."
+        "changes": "Meshopt/WebP-optimized source distribution by OkeahDavid; master geometry and materials preserved and Velocity attribution metadata added. Mercedes-Benz and AMG marks belong to their respective owner; no endorsement is implied.",
+        "runtimeChanges": "Master retained separately. Runtime copies are normalized to metres/Y-up/+Z-forward/ground-zero, Meshopt-compressed and WebP-textured. LOD1–3 are simplified derivatives; a convex collision hull and wheel-rig metadata were generated."
       },
-      "orientation": "auto"
+      "orientation": "auto",
+      "master": "assets-src/cars/mercedes-sl63.glb",
+      "masterFileSize": "4.4 MB",
+      "normalized": true,
+      "dimensions": {
+        "length": 4.71,
+        "width": 2.031,
+        "height": 1.331
+      },
+      "rig": "assets/cars/rigs/mercedes-sl63.json",
+      "collision": "assets/cars/collisions/mercedes-sl63-collision.glb",
+      "lods": {
+        "0": "assets/cars/lods/mercedes-sl63-lod0.glb",
+        "1": "assets/cars/lods/mercedes-sl63-lod1.glb",
+        "2": "assets/cars/lods/mercedes-sl63-lod2.glb",
+        "3": "assets/cars/lods/mercedes-sl63-lod3.glb"
+      },
+      "lodTriangles": {
+        "0": 359979,
+        "1": 203487,
+        "2": 116321,
+        "3": 74881
+      }
     },
     {
       "id": "bmw-m4-csl",
@@ -356,11 +586,11 @@
       "category": "track",
       "class": "Limited Production Track Coupe",
       "year": "G82 · 2022",
-      "model": "assets/cars/bmw-m4-csl.glb",
+      "model": "assets/cars/lods/bmw-m4-csl-lod0.glb",
       "preview": "assets/previews/bmw-m4-csl.webp",
       "length": 4.8,
       "triangles": 286137,
-      "fileSize": "2.5 MB",
+      "fileSize": "2.0 MB",
       "description": "A detailed G82 track coupe with cockpit, engine and chassis geometry. Production reference: twin-turbo inline-six and rear-wheel drive.",
       "performance": {
         "topSpeed": 307,
@@ -381,9 +611,46 @@
         "license": "CC BY 4.0",
         "source": "https://sketchfab.com/3d-models/bmw-m4-csl-2023-26d05968e63b4fc28205cbb9abb0ea41",
         "distribution": "https://github.com/OkeahDavid/midnight-showroom",
-        "changes": "Meshopt/WebP-optimized distribution by OkeahDavid; geometry and materials preserved and Velocity attribution metadata added. Showroom normalization and paint are applied at runtime. BMW and M marks belong to their respective owner; no endorsement is implied."
+        "changes": "Meshopt/WebP-optimized source distribution by OkeahDavid; master geometry and materials preserved and Velocity attribution metadata added. BMW and M marks belong to their respective owner; no endorsement is implied.",
+        "runtimeChanges": "Master retained separately. Runtime copies are normalized to metres/Y-up/+Z-forward/ground-zero, Meshopt-compressed and WebP-textured. LOD1–3 are simplified derivatives; a convex collision hull and wheel-rig metadata were generated."
       },
-      "orientation": "auto"
+      "orientation": "auto",
+      "master": "assets-src/cars/bmw-m4-csl.glb",
+      "masterFileSize": "2.5 MB",
+      "normalized": true,
+      "dimensions": {
+        "length": 4.8,
+        "width": 2.083,
+        "height": 1.501
+      },
+      "rig": "assets/cars/rigs/bmw-m4-csl.json",
+      "collision": "assets/cars/collisions/bmw-m4-csl-collision.glb",
+      "lods": {
+        "0": "assets/cars/lods/bmw-m4-csl-lod0.glb",
+        "1": "assets/cars/lods/bmw-m4-csl-lod1.glb",
+        "2": "assets/cars/lods/bmw-m4-csl-lod2.glb",
+        "3": "assets/cars/lods/bmw-m4-csl-lod3.glb"
+      },
+      "lodTriangles": {
+        "0": 286137,
+        "1": 174046,
+        "2": 109401,
+        "3": 78439
+      }
     }
-  ]
+  ],
+  "runtimeProfile": {
+    "masterDirectory": "assets-src/cars",
+    "runtimeDirectory": "public/assets/cars",
+    "normalized": true,
+    "units": "metres",
+    "upAxis": "+Y",
+    "forwardAxis": "+Z",
+    "groundY": 0,
+    "geometryCompression": "EXT_meshopt_compression",
+    "textureFormat": "WebP",
+    "lodLevels": 4,
+    "collision": "single convex hull per vehicle",
+    "rigMetadata": "public/assets/cars/rigs"
+  }
 }

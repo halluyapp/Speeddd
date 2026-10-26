@@ -1,0 +1,100 @@
+{
+  "id": "rally-raid",
+  "units": "metres",
+  "upAxis": "+Y",
+  "forwardAxis": "+Z",
+  "groundY": 0,
+  "normalized": true,
+  "dimensions": {
+    "length": 4.6,
+    "width": 2.078,
+    "height": 1.776
+  },
+  "wheels": [
+    {
+      "id": "FL",
+      "sourceNode": "Rally_Wheel_FL_Tyre",
+      "position": [
+        0.862,
+        0.5156,
+        1.6193
+      ],
+      "radius": 0.4847,
+      "width": 0.3266,
+      "axle": "front",
+      "side": "left",
+      "steering": true
+    },
+    {
+      "id": "FR",
+      "sourceNode": "Rally_Wheel_FR_Tyre",
+      "position": [
+        -0.862,
+        0.5156,
+        1.6193
+      ],
+      "radius": 0.4847,
+      "width": 0.3266,
+      "axle": "front",
+      "side": "right",
+      "steering": true
+    },
+    {
+      "id": "RL",
+      "sourceNode": "Rally_Wheel_RL_Tyre",
+      "position": [
+        0.862,
+        0.5156,
+        -1.5902
+      ],
+      "radius": 0.4847,
+      "width": 0.3266,
+      "axle": "rear",
+      "side": "left",
+      "steering": false
+    },
+    {
+      "id": "RR",
+      "sourceNode": "Rally_Wheel_RR_Tyre",
+      "position": [
+        -0.862,
+        0.5156,
+        -1.5902
+      ],
+      "radius": 0.4847,
+      "width": 0.3266,
+      "axle": "rear",
+      "side": "right",
+      "steering": false
+    }
+  ],
+  "collision": {
+    "path": "assets/cars/collisions/rally-raid-collision.glb",
+    "shape": "convex-hull",
+    "triangles": 322,
+    "bytes": 24420,
+    "note": "Basic single-hull collision asset for arcade physics. Wheel suspension and chassis tuning must be validated in the driving prototype."
+  },
+  "lods": {
+    "0": {
+      "path": "assets/cars/lods/rally-raid-lod0.glb",
+      "triangles": 66732,
+      "bytes": 544044
+    },
+    "1": {
+      "path": "assets/cars/lods/rally-raid-lod1.glb",
+      "triangles": 48690,
+      "bytes": 489496
+    },
+    "2": {
+      "path": "assets/cars/lods/rally-raid-lod2.glb",
+      "triangles": 38538,
+      "bytes": 441972
+    },
+    "3": {
+      "path": "assets/cars/lods/rally-raid-lod3.glb",
+      "triangles": 32402,
+      "bytes": 410340
+    }
+  }
+}

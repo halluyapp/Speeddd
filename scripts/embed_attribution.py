@@ -43,7 +43,7 @@ def main() -> None:
     catalog = json.loads(CATALOG.read_text())
     for car in catalog["cars"]:
         credit = car["credit"]
-        path = ROOT / "public" / car["model"]
+        path = ROOT / car.get("master", f"assets-src/cars/{car['id']}.glb")
         document, remaining = read_glb(path)
         asset = document.setdefault("asset", {})
         asset.setdefault("version", "2.0")
@@ -61,7 +61,7 @@ def main() -> None:
             "catalog": "assets/catalog.json",
             "license": credit["license"],
             "source": credit["source"],
-            "note": "Showroom normalization and paint are runtime operations; see catalog.json.",
+            "note": "Master asset; run npm run build:cars after credit edits. Runtime normalization is baked by the build pipeline.",
         }
         write_glb(path, document, remaining)
         print(f"Embedded attribution: {path.name}")

@@ -1,0 +1,100 @@
+{
+  "id": "grand-sedan",
+  "units": "metres",
+  "upAxis": "+Y",
+  "forwardAxis": "+Z",
+  "groundY": 0,
+  "normalized": true,
+  "dimensions": {
+    "length": 4.78,
+    "width": 2.073,
+    "height": 1.439
+  },
+  "wheels": [
+    {
+      "id": "FL",
+      "sourceNode": "Name-Wheel.Ft.L_123",
+      "position": [
+        0.7831,
+        0.3309,
+        1.5149
+      ],
+      "radius": 0.33,
+      "width": 0.507,
+      "axle": "front",
+      "side": "left",
+      "steering": true
+    },
+    {
+      "id": "FR",
+      "sourceNode": "Name-Wheel.Ft.R_127",
+      "position": [
+        -0.7831,
+        0.3309,
+        1.5149
+      ],
+      "radius": 0.33,
+      "width": 0.507,
+      "axle": "front",
+      "side": "right",
+      "steering": true
+    },
+    {
+      "id": "RL",
+      "sourceNode": "Name-Wheel.Bk.L_131",
+      "position": [
+        0.7831,
+        0.3299,
+        -1.2849
+      ],
+      "radius": 0.3299,
+      "width": 0.2472,
+      "axle": "rear",
+      "side": "left",
+      "steering": false
+    },
+    {
+      "id": "RR",
+      "sourceNode": "Name-Wheel.Bk.R_135",
+      "position": [
+        -0.7831,
+        0.3299,
+        -1.2849
+      ],
+      "radius": 0.3299,
+      "width": 0.2472,
+      "axle": "rear",
+      "side": "right",
+      "steering": false
+    }
+  ],
+  "collision": {
+    "path": "assets/cars/collisions/grand-sedan-collision.glb",
+    "shape": "convex-hull",
+    "triangles": 392,
+    "bytes": 29516,
+    "note": "Basic single-hull collision asset for arcade physics. Wheel suspension and chassis tuning must be validated in the driving prototype."
+  },
+  "lods": {
+    "0": {
+      "path": "assets/cars/lods/grand-sedan-lod0.glb",
+      "triangles": 102219,
+      "bytes": 2474672
+    },
+    "1": {
+      "path": "assets/cars/lods/grand-sedan-lod1.glb",
+      "triangles": 58797,
+      "bytes": 1986168
+    },
+    "2": {
+      "path": "assets/cars/lods/grand-sedan-lod2.glb",
+      "triangles": 34693,
+      "bytes": 958144
+    },
+    "3": {
+      "path": "assets/cars/lods/grand-sedan-lod3.glb",
+      "triangles": 18439,
+      "bytes": 552304
+    }
+  }
+}

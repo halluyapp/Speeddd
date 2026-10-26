@@ -1,61 +1,119 @@
-VELOCITY VEHICLE LIBRARY — ASSET CREDITS
+VELOCITY — VEHICLE ASSET ATTRIBUTION
 
-Every vehicle is CC BY 4.0. Attribution is required.
+All 11 vehicles are CC BY 4.0. Attribution is required for masters, runtime derivatives, collision meshes and rendered previews.
 License: https://creativecommons.org/licenses/by/4.0/
 
-01. VX-1 Concept / assets/cars/car-concept.glb
-    Car Concept — Eric Chadwick / Darmstadt Graphics Group GmbH; original model by Unity Fan
-    Source: https://github.com/KhronosGroup/glTF-Sample-Assets/tree/main/Models/CarConcept
-    Changes: Original geometry, textures and materials preserved; Velocity attribution metadata added to the GLB. Showroom scale, grounding, camera framing and paint selection are applied at runtime.
+Runtime LODs are normalized to metres, Y-up, +Z-forward and ground-zero; Meshopt compressed and WebP textured.
+Untouched masters are stored outside the public runtime directory in assets-src/cars/.
+Collision meshes are basic convex hulls. Wheel-rig JSON is metadata for future driving-prototype tuning, not a completed physics setup.
 
-02. Aether HX / assets/cars/hypercar.glb
-    Hypercar — Collect Cars — drcollect
-    Source: https://github.com/drcollect/collect-cars
-    Changes: Original uncompressed geometry and materials preserved; Velocity attribution metadata added. Display name, showroom setup and optional paint finishes are applied by this project.
+01. VX-1 Concept
+Source: Car Concept — Eric Chadwick / Darmstadt Graphics Group GmbH; original model by Unity Fan
+License: CC BY 4.0
+Original record: https://github.com/KhronosGroup/glTF-Sample-Assets/tree/main/Models/CarConcept
+Distribution: https://github.com/KhronosGroup/glTF-Sample-Assets/blob/main/Models/CarConcept/glTF-Binary/CarConcept.glb
+Master: assets-src/cars/car-concept.glb
+Runtime LOD0: public/assets/cars/lods/car-concept-lod0.glb
+Source/master changes: Master geometry, textures and materials preserved; Velocity attribution metadata added. Generated runtime processing is recorded separately.
+Runtime changes: Master retained separately. Runtime copies are normalized to metres/Y-up/+Z-forward/ground-zero, Meshopt-compressed and WebP-textured. LOD1–3 are simplified derivatives; a convex collision hull and wheel-rig metadata were generated.
+Additional notice: The original Unity Fan model is CC0. Khronos and 3D Commerce logos retain their separate trademark terms; see the source legal notice.
 
-03. Vector 84 / assets/cars/wedge.glb
-    80s Wedge — Collect Cars — drcollect
-    Source: https://github.com/drcollect/collect-cars
-    Changes: Original uncompressed geometry and materials preserved; Velocity attribution metadata added. Display name, showroom setup and optional paint finishes are applied by this project.
+02. Aether HX
+Source: Hypercar — Collect Cars — drcollect
+License: CC BY 4.0
+Original record: https://github.com/drcollect/collect-cars
+Distribution: https://github.com/drcollect/collect-cars/blob/main/models/full/hypercar.glb
+Master: assets-src/cars/hypercar.glb
+Runtime LOD0: public/assets/cars/lods/hypercar-lod0.glb
+Source/master changes: Master geometry and materials preserved; Velocity attribution metadata added. Generated runtime processing is recorded separately.
+Runtime changes: Master retained separately. Runtime copies are normalized to metres/Y-up/+Z-forward/ground-zero, Meshopt-compressed and WebP-textured. LOD1–3 are simplified derivatives; a convex collision hull and wheel-rig metadata were generated.
 
-04. Raptor XRT / assets/cars/rally-raid.glb
-    Rally-Raid — Collect Cars — drcollect
-    Source: https://github.com/drcollect/collect-cars
-    Changes: Original uncompressed geometry and materials preserved; Velocity attribution metadata added. Display name, showroom setup and optional paint finishes are applied by this project.
+03. Vector 84
+Source: 80s Wedge — Collect Cars — drcollect
+License: CC BY 4.0
+Original record: https://github.com/drcollect/collect-cars
+Distribution: https://github.com/drcollect/collect-cars/blob/main/models/full/wedge.glb
+Master: assets-src/cars/wedge.glb
+Runtime LOD0: public/assets/cars/lods/wedge-lod0.glb
+Source/master changes: Master geometry and materials preserved; Velocity attribution metadata added. Generated runtime processing is recorded separately.
+Runtime changes: Master retained separately. Runtime copies are normalized to metres/Y-up/+Z-forward/ground-zero, Meshopt-compressed and WebP-textured. LOD1–3 are simplified derivatives; a convex collision hull and wheel-rig metadata were generated.
 
-05. Ender LM-9 / assets/cars/endurance.glb
-    Endurance — Collect Cars — drcollect
-    Source: https://github.com/drcollect/collect-cars
-    Changes: Original uncompressed geometry and materials preserved; Velocity attribution metadata added. Display name, showroom setup and optional paint finishes are applied by this project.
+04. Raptor XRT
+Source: Rally-Raid — Collect Cars — drcollect
+License: CC BY 4.0
+Original record: https://github.com/drcollect/collect-cars
+Distribution: https://github.com/drcollect/collect-cars/blob/main/models/full/rally.glb
+Master: assets-src/cars/rally-raid.glb
+Runtime LOD0: public/assets/cars/lods/rally-raid-lod0.glb
+Source/master changes: Master geometry and materials preserved; Velocity attribution metadata added. Generated runtime processing is recorded separately.
+Runtime changes: Master retained separately. Runtime copies are normalized to metres/Y-up/+Z-forward/ground-zero, Meshopt-compressed and WebP-textured. LOD1–3 are simplified derivatives; a convex collision hull and wheel-rig metadata were generated.
 
-06. Silverline S1 / assets/cars/streamliner.glb
-    Streamliner — Collect Cars — drcollect
-    Source: https://github.com/drcollect/collect-cars
-    Changes: Original uncompressed geometry and materials preserved; Velocity attribution metadata added. Display name, showroom setup and optional paint finishes are applied by this project.
+05. Ender LM-9
+Source: Endurance — Collect Cars — drcollect
+License: CC BY 4.0
+Original record: https://github.com/drcollect/collect-cars
+Distribution: https://github.com/drcollect/collect-cars/blob/main/models/full/endurance.glb
+Master: assets-src/cars/endurance.glb
+Runtime LOD0: public/assets/cars/lods/endurance-lod0.glb
+Source/master changes: Master geometry and materials preserved; Velocity attribution metadata added. Generated runtime processing is recorded separately.
+Runtime changes: Master retained separately. Runtime copies are normalized to metres/Y-up/+Z-forward/ground-zero, Meshopt-compressed and WebP-textured. LOD1–3 are simplified derivatives; a convex collision hull and wheel-rig metadata were generated.
 
-07. Corsa RS / assets/cars/sport-coupe.glb
-    Generic Sport Coupé Car — Márcio Meireles (mmcworks)
-    Source: https://sketchfab.com/3d-models/generic-sport-coupe-car-820a13c4831c41959ce75e6c2014e882
-    Changes: Original geometry and materials preserved; Velocity attribution metadata added. Display name, showroom normalization and optional solid paint are applied at runtime.
+06. Silverline S1
+Source: Streamliner — Collect Cars — drcollect
+License: CC BY 4.0
+Original record: https://github.com/drcollect/collect-cars
+Distribution: https://github.com/drcollect/collect-cars/blob/main/models/full/streamliner.glb
+Master: assets-src/cars/streamliner.glb
+Runtime LOD0: public/assets/cars/lods/streamliner-lod0.glb
+Source/master changes: Master geometry and materials preserved; Velocity attribution metadata added. Generated runtime processing is recorded separately.
+Runtime changes: Master retained separately. Runtime copies are normalized to metres/Y-up/+Z-forward/ground-zero, Meshopt-compressed and WebP-textured. LOD1–3 are simplified derivatives; a convex collision hull and wheel-rig metadata were generated.
 
-08. Sovereign S / assets/cars/grand-sedan.glb
-    Generic Sedan Car — Márcio Meireles (mmcworks)
-    Source: https://sketchfab.com/3d-models/generic-sedan-car-58c33766470d46e7b2aed542650494e5
-    Changes: Original geometry and materials preserved; Velocity attribution metadata added. Display name, showroom normalization and optional solid paint are applied at runtime.
+07. Corsa RS
+Source: Generic Sport Coupé Car — Márcio Meireles (mmcworks)
+License: CC BY 4.0
+Original record: https://sketchfab.com/3d-models/generic-sport-coupe-car-820a13c4831c41959ce75e6c2014e882
+Distribution: https://github.com/timo-hoen-ias/sls-racing/tree/main/assets-src/cars/coupe
+Master: assets-src/cars/sport-coupe.glb
+Runtime LOD0: public/assets/cars/lods/sport-coupe-lod0.glb
+Source/master changes: Master geometry and materials preserved; Velocity attribution metadata added. Generated runtime processing is recorded separately.
+Runtime changes: Master retained separately. Runtime copies are normalized to metres/Y-up/+Z-forward/ground-zero, Meshopt-compressed and WebP-textured. LOD1–3 are simplified derivatives; a convex collision hull and wheel-rig metadata were generated.
 
-09. Goblin V12 / assets/cars/v12-goblin.glb
-    Fictional supercar - V12 Goblin — Olli Teittinen (ollitei)
-    Source: https://sketchfab.com/3d-models/fictional-supercar-v12-goblin-0a20e49ad5774d778567cb5c3f345786
-    Changes: Converted from legacy specular/glossiness to standard metallic/roughness PBR and embedded Velocity attribution metadata. The supplied shadow plane is hidden; showroom orientation, scale and paint are applied at runtime.
+08. Sovereign S
+Source: Generic Sedan Car — Márcio Meireles (mmcworks)
+License: CC BY 4.0
+Original record: https://sketchfab.com/3d-models/generic-sedan-car-58c33766470d46e7b2aed542650494e5
+Distribution: https://github.com/timo-hoen-ias/sls-racing/tree/main/assets-src/cars/sedan
+Master: assets-src/cars/grand-sedan.glb
+Runtime LOD0: public/assets/cars/lods/grand-sedan-lod0.glb
+Source/master changes: Master geometry and materials preserved; Velocity attribution metadata added. Generated runtime processing is recorded separately.
+Runtime changes: Master retained separately. Runtime copies are normalized to metres/Y-up/+Z-forward/ground-zero, Meshopt-compressed and WebP-textured. LOD1–3 are simplified derivatives; a convex collision hull and wheel-rig metadata were generated.
 
-10. Mercedes-AMG SL 63 / assets/cars/mercedes-sl63.glb
-    Mersedes-Benz SL63 AMG [Free] — Black Snow
-    Source: https://sketchfab.com/3d-models/mersedes-benz-sl63-amg-free-f7a625e6f5de425e89e84ae2e92cad65
-    Changes: Meshopt/WebP-optimized distribution by OkeahDavid; geometry and materials preserved and Velocity attribution metadata added. Showroom normalization and paint are applied at runtime. Mercedes-Benz and AMG marks belong to their respective owner; no endorsement is implied.
+09. Goblin V12
+Source: Fictional supercar - V12 Goblin — Olli Teittinen (ollitei)
+License: CC BY 4.0
+Original record: https://sketchfab.com/3d-models/fictional-supercar-v12-goblin-0a20e49ad5774d778567cb5c3f345786
+Distribution: https://github.com/timo-hoen-ias/sls-racing/tree/main/assets-src/cars/goblin
+Master: assets-src/cars/v12-goblin.glb
+Runtime LOD0: public/assets/cars/lods/v12-goblin-lod0.glb
+Source/master changes: Master converted from legacy specular/glossiness to standard metallic/roughness PBR with Velocity attribution metadata added. The supplied shadow plane is hidden in runtime derivatives.
+Runtime changes: Master retained separately. Runtime copies are normalized to metres/Y-up/+Z-forward/ground-zero, Meshopt-compressed and WebP-textured. LOD1–3 are simplified derivatives; a convex collision hull and wheel-rig metadata were generated.
 
-11. BMW M4 CSL / assets/cars/bmw-m4-csl.glb
-    BMW m4 CSL 2023 — Black Snow
-    Source: https://sketchfab.com/3d-models/bmw-m4-csl-2023-26d05968e63b4fc28205cbb9abb0ea41
-    Changes: Meshopt/WebP-optimized distribution by OkeahDavid; geometry and materials preserved and Velocity attribution metadata added. Showroom normalization and paint are applied at runtime. BMW and M marks belong to their respective owner; no endorsement is implied.
+10. Mercedes-AMG SL 63
+Source: Mersedes-Benz SL63 AMG [Free] — Black Snow
+License: CC BY 4.0
+Original record: https://sketchfab.com/3d-models/mersedes-benz-sl63-amg-free-f7a625e6f5de425e89e84ae2e92cad65
+Distribution: https://github.com/OkeahDavid/midnight-showroom
+Master: assets-src/cars/mercedes-sl63.glb
+Runtime LOD0: public/assets/cars/lods/mercedes-sl63-lod0.glb
+Source/master changes: Meshopt/WebP-optimized source distribution by OkeahDavid; master geometry and materials preserved and Velocity attribution metadata added. Mercedes-Benz and AMG marks belong to their respective owner; no endorsement is implied.
+Runtime changes: Master retained separately. Runtime copies are normalized to metres/Y-up/+Z-forward/ground-zero, Meshopt-compressed and WebP-textured. LOD1–3 are simplified derivatives; a convex collision hull and wheel-rig metadata were generated.
 
-See LICENSES.md and public/assets/catalog.json for the complete records.
+11. BMW M4 CSL
+Source: BMW m4 CSL 2023 — Black Snow
+License: CC BY 4.0
+Original record: https://sketchfab.com/3d-models/bmw-m4-csl-2023-26d05968e63b4fc28205cbb9abb0ea41
+Distribution: https://github.com/OkeahDavid/midnight-showroom
+Master: assets-src/cars/bmw-m4-csl.glb
+Runtime LOD0: public/assets/cars/lods/bmw-m4-csl-lod0.glb
+Source/master changes: Meshopt/WebP-optimized source distribution by OkeahDavid; master geometry and materials preserved and Velocity attribution metadata added. BMW and M marks belong to their respective owner; no endorsement is implied.
+Runtime changes: Master retained separately. Runtime copies are normalized to metres/Y-up/+Z-forward/ground-zero, Meshopt-compressed and WebP-textured. LOD1–3 are simplified derivatives; a convex collision hull and wheel-rig metadata were generated.

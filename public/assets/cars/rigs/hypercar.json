@@ -1,0 +1,100 @@
+{
+  "id": "hypercar",
+  "units": "metres",
+  "upAxis": "+Y",
+  "forwardAxis": "+Z",
+  "groundY": 0,
+  "normalized": true,
+  "dimensions": {
+    "length": 4.7,
+    "width": 2.043,
+    "height": 1.249
+  },
+  "wheels": [
+    {
+      "id": "FL",
+      "sourceNode": "Hypercar_Wheel_FR_Tyre",
+      "position": [
+        0.8073,
+        0.3847,
+        1.4654
+      ],
+      "radius": 0.3847,
+      "width": 0.299,
+      "axle": "front",
+      "side": "left",
+      "steering": true
+    },
+    {
+      "id": "FR",
+      "sourceNode": "Hypercar_Wheel_FL_Tyre",
+      "position": [
+        -0.8073,
+        0.3847,
+        1.4654
+      ],
+      "radius": 0.3847,
+      "width": 0.299,
+      "axle": "front",
+      "side": "right",
+      "steering": true
+    },
+    {
+      "id": "RL",
+      "sourceNode": "Hypercar_Wheel_RR_Tyre",
+      "position": [
+        0.8073,
+        0.4126,
+        -1.7525
+      ],
+      "radius": 0.4126,
+      "width": 0.3588,
+      "axle": "rear",
+      "side": "left",
+      "steering": false
+    },
+    {
+      "id": "RR",
+      "sourceNode": "Hypercar_Wheel_RL_Tyre",
+      "position": [
+        -0.8073,
+        0.4126,
+        -1.7525
+      ],
+      "radius": 0.4126,
+      "width": 0.3588,
+      "axle": "rear",
+      "side": "right",
+      "steering": false
+    }
+  ],
+  "collision": {
+    "path": "assets/cars/collisions/hypercar-collision.glb",
+    "shape": "convex-hull",
+    "triangles": 450,
+    "bytes": 33632,
+    "note": "Basic single-hull collision asset for arcade physics. Wheel suspension and chassis tuning must be validated in the driving prototype."
+  },
+  "lods": {
+    "0": {
+      "path": "assets/cars/lods/hypercar-lod0.glb",
+      "triangles": 189012,
+      "bytes": 661608
+    },
+    "1": {
+      "path": "assets/cars/lods/hypercar-lod1.glb",
+      "triangles": 96230,
+      "bytes": 432256
+    },
+    "2": {
+      "path": "assets/cars/lods/hypercar-lod2.glb",
+      "triangles": 43196,
+      "bytes": 232944
+    },
+    "3": {
+      "path": "assets/cars/lods/hypercar-lod3.glb",
+      "triangles": 17336,
+      "bytes": 129100
+    }
+  }
+}

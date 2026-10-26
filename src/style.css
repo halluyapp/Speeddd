@@ -514,6 +514,35 @@ svg {
   z-index: 2;
 }
 
+.stage-poster {
+  position: absolute;
+  inset: 0;
+  z-index: 4;
+  display: grid;
+  place-items: center;
+  visibility: visible;
+  opacity: 1;
+  pointer-events: none;
+  transition: opacity 240ms ease, visibility 0s;
+}
+
+.stage-poster img {
+  width: min(86%, 720px);
+  height: auto;
+  max-height: 76%;
+  object-fit: contain;
+  opacity: 0.94;
+  filter: saturate(0.92) contrast(1.03);
+  mask-image: radial-gradient(ellipse 72% 70% at 50% 50%, #000 52%, transparent 100%);
+  transform: scale(1.02);
+}
+
+.stage-poster.is-hidden {
+  visibility: hidden;
+  opacity: 0;
+  transition: opacity 240ms ease, visibility 0s 240ms;
+}
+
 #canvas-container canvas {
   display: block;
   width: 100%;
@@ -738,14 +767,20 @@ svg {
 
 .stage-loader {
   position: absolute;
-  inset: 0;
+  inset: auto 50% 82px auto;
   z-index: 12;
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 15px;
-  background: rgba(13, 15, 17, 0.82);
+  gap: 12px;
+  width: min(290px, calc(100% - 32px));
+  padding: 12px 15px;
+  border: 1px solid var(--line);
+  border-radius: 9px;
+  background: rgba(13, 15, 17, 0.88);
   backdrop-filter: blur(8px);
+  box-shadow: 0 12px 36px rgba(0, 0, 0, 0.22);
+  transform: translateX(50%);
   transition: opacity 260ms ease;
 }
 
@@ -755,14 +790,7 @@ svg {
 }
 
 .stage-loader.is-switching {
-  inset: auto 50% 82px auto;
-  gap: 10px;
-  width: 230px;
-  padding: 11px 14px;
-  border: 1px solid var(--line);
-  border-radius: 9px;
-  background: rgba(13, 15, 17, 0.9);
-  transform: translateX(50%);
+  background: rgba(13, 15, 17, 0.92);
 }
 
 .loader-ring {
@@ -1369,6 +1397,16 @@ kbd {
   text-decoration: underline;
 }
 
+.asset-credit a svg,
+.license-source a svg,
+.license-intro a svg {
+  display: inline-block;
+  width: 11px;
+  height: 11px;
+  margin-left: 3px;
+  vertical-align: -2px;
+}
+
 .asset-modal .primary-button {
   width: 100%;
   margin-top: 20px;
@@ -1763,8 +1801,13 @@ kbd {
     font-size: 8px;
   }
 
-  .stage-loader.is-switching {
+  .stage-loader {
     bottom: 70px;
+  }
+
+  .stage-poster img {
+    width: min(104%, 620px);
+    max-height: 68%;
   }
 
   .toast {
