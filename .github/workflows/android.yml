@@ -62,12 +62,16 @@ jobs:
           fi
       - name: Export installable Android APK
         run: |
+          mkdir -p godot/build
+          ls -lh "$HOME/.local/share/godot/export_templates/${GODOT_VERSION}.stable/"android*
+          command -v apksigner || true
+          command -v zipalign || true
           set +e
-          godot --headless --path godot --export-debug Android build/velocity-debug.apk > /tmp/velocity-android-export.log 2>&1
+          godot --verbose --headless --path godot --export-debug Android build/velocity-debug.apk > /tmp/velocity-android-export.log 2>&1
           status=$?
           cat /tmp/velocity-android-export.log
           if [ "$status" -ne 0 ]; then
-            tail -100 /tmp/velocity-android-export.log | while IFS= read -r line; do printf '::error::%s\n' "$line"; done
+            tail -140 /tmp/velocity-android-export.log | sed -r 's/\x1B\[[0-9;]*[mK]//g' | while IFS= read -r line; do printf '::error::%s\n' "$line"; done
             exit "$status"
           fi
       - uses: actions/upload-artifact@v4
