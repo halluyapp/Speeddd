@@ -16,6 +16,7 @@ export default defineConfig({
       input: {
         main: resolve(process.cwd(), 'index.html'),
         track: resolve(process.cwd(), 'track.html'),
+        race: resolve(process.cwd(), 'race.html'),
       },
     },
   },

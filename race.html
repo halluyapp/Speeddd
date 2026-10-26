@@ -1,0 +1,143 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#090e11" />
+    <meta name="description" content="Velocity Race Control — original reusable race hardware, flags and broadcast presentation assets with an interactive demo." />
+    <title>Race Control — Velocity Presentation</title>
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+  </head>
+  <body data-asset-ready="false" data-race-state="grid" data-sequence="idle" data-hud="visible">
+    <div id="race-app">
+      <header class="race-topbar">
+        <a class="race-brand" href="./" aria-label="Back to Velocity vehicle library">
+          <svg viewBox="0 0 40 28" aria-hidden="true"><path d="M2 4h9l7 20h-8L2 4Zm13 0h8l6 14 5-14h5L26 24h-7L13 4Z" fill="currentColor" /></svg>
+          <span>VELOCITY<small>Presentation division</small></span>
+        </a>
+        <div class="race-breadcrumb"><span>Library</span><i>/</i><strong>Presentation 03</strong></div>
+        <nav class="race-nav" aria-label="Presentation resources">
+          <span class="race-local"><i></i> Original · CC0</span>
+          <a href="./">Vehicles</a>
+          <a href="./track.html">Azurline</a>
+          <a id="download-race-manifest" href="/assets/race/race-presentation.json" download="race-presentation.json">Manifest</a>
+        </nav>
+      </header>
+
+      <main class="race-workspace">
+        <aside class="race-control-panel">
+          <div class="race-heading">
+            <p class="race-eyebrow">Race presentation / 01</p>
+            <h1>Race <span>Control</span></h1>
+            <p>Modular circuit hardware, race flags and broadcast graphics. One original package, ready for a future racing runtime.</p>
+          </div>
+          <div class="race-tags"><span>3 hardware assets</span><span>7 flags</span><span>CC0</span></div>
+
+          <section class="race-states" aria-labelledby="race-states-title">
+            <div class="race-section-title"><span id="race-states-title">Presentation state</span><small>Demo fixtures</small></div>
+            <div id="race-state-list" class="race-state-list" role="group" aria-label="Select race presentation state">
+              <button class="active" type="button" data-state="grid" aria-pressed="true"><i></i><span>Grid</span><small>01</small></button>
+              <button type="button" data-state="armed" aria-pressed="false"><i></i><span>Lights armed</span><small>02</small></button>
+              <button type="button" data-state="green" aria-pressed="false"><i></i><span>Green flag</span><small>03</small></button>
+              <button type="button" data-state="yellow" aria-pressed="false"><i></i><span>Yellow flag</span><small>04</small></button>
+              <button type="button" data-state="finish" aria-pressed="false"><i></i><span>Chequered</span><small>05</small></button>
+              <button type="button" data-state="results" aria-pressed="false"><i></i><span>Results</span><small>06</small></button>
+            </div>
+          </section>
+
+          <section class="race-flag-card" aria-live="polite">
+            <img id="race-flag" src="/assets/race/graphics/flag-white.svg" width="320" height="200" alt="White racing flag" />
+            <div><span id="race-flag-status">FORMATION</span><strong id="race-flag-message">Cars in grid formation</strong><small id="race-flag-detail">Start procedure standing by</small></div>
+          </section>
+
+          <button class="race-sequence-button" id="replay-start" type="button" disabled>
+            <svg viewBox="0 0 24 24" aria-hidden="true"><use href="/assets/race/graphics/icons.svg#play"></use></svg>
+            Replay light sequence <span>5 → 0</span>
+          </button>
+          <p class="race-scope-note">Presentation assets and static demo data only. No timing computation, physics, AI or race rules.</p>
+        </aside>
+
+        <section class="race-stage" id="race-stage" aria-label="Interactive 3D race-control hardware and broadcast graphics preview">
+          <div id="race-canvas" aria-hidden="true"></div>
+          <div class="race-poster" id="race-poster" aria-hidden="true"><img src="/assets/previews/race-presentation.webp" width="1200" height="800" alt="" fetchpriority="high" decoding="async" /></div>
+          <div class="race-stage-shade" aria-hidden="true"></div>
+          <div class="race-stage-topline"><span><i></i> Real-time presentation</span><b id="stage-race-lod">03 ASSETS / LOCAL</b></div>
+          <div class="race-stage-title" aria-hidden="true"><span>Velocity originals</span><strong>RACE / 03</strong></div>
+
+          <div class="race-loader" id="race-loader" role="status" aria-live="polite">
+            <span class="race-loader-ring"></span><div><strong id="race-loader-title">Preparing Race Control</strong><span id="race-loader-detail">Illustrated preview · 3D loading…</span><i><b id="race-loader-progress"></b></i></div>
+          </div>
+          <div class="race-error" id="race-error" hidden><strong>Presentation could not be displayed</strong><p id="race-error-message">Please retry the local assets.</p><button id="retry-race" type="button">Retry</button></div>
+
+          <div class="race-hud" id="race-hud">
+            <div class="broadcast-bar">
+              <div><span id="hud-event">ATLANTIC TROPHY</span><small id="hud-circuit">AZURLINE CIRCUIT</small></div>
+              <strong>LAP <b id="hud-lap">06</b><i>/</i><span id="hud-total-laps">12</span></strong>
+              <em id="hud-status">FORMATION</em>
+            </div>
+            <div class="race-director-message" id="race-director-message"><span>RACE CONTROL</span><strong id="hud-message">Cars in grid formation</strong></div>
+            <div class="start-sequence-hud" id="start-sequence-hud" aria-label="Start light sequence" hidden>
+              <div data-light="0"><i></i><i></i></div><div data-light="1"><i></i><i></i></div><div data-light="2"><i></i><i></i></div><div data-light="3"><i></i><i></i></div><div data-light="4"><i></i><i></i></div>
+            </div>
+            <div class="telemetry-card">
+              <div class="telemetry-position"><span>P</span><strong id="telemetry-position">3</strong><small id="telemetry-number">#84</small></div>
+              <div class="telemetry-driver"><span id="telemetry-tag">V84</span><strong id="telemetry-vehicle">VECTOR 84</strong><small id="telemetry-gap">GAP +1.284</small></div>
+              <div class="telemetry-speed"><strong id="telemetry-speed">268</strong><span>KM/H</span></div>
+              <div class="telemetry-gear"><span>GEAR</span><strong id="telemetry-gear">6</strong></div>
+              <div class="telemetry-rpm"><i id="telemetry-rpm"></i></div>
+              <small class="demo-data-label">STATIC DEMO</small>
+            </div>
+          </div>
+
+          <div class="race-stage-actions">
+            <button id="toggle-race-hud" type="button" aria-pressed="true">HUD on</button>
+            <button id="toggle-race-orbit" type="button" aria-pressed="false">Auto orbit</button>
+            <button id="reset-race-view" type="button">Reset</button>
+          </div>
+          <div class="race-camera-dock" role="group" aria-label="Inspect presentation asset">
+            <button class="active" type="button" data-view="overview" aria-pressed="true">Full kit</button>
+            <button type="button" data-view="race-start-lights" aria-pressed="false">Start lights</button>
+            <button type="button" data-view="race-timing-pylon" aria-pressed="false">Timing</button>
+            <button type="button" data-view="race-marshal-panel" aria-pressed="false">Marshal</button>
+          </div>
+        </section>
+
+        <aside class="race-broadcast-panel">
+          <div class="race-tabs" role="tablist" aria-label="Timing and asset package">
+            <button id="timing-tab" class="active" type="button" role="tab" aria-selected="true" aria-controls="timing-panel" data-tab="timing">Live timing</button>
+            <button id="package-tab" type="button" role="tab" aria-selected="false" aria-controls="package-panel" data-tab="package">Asset package</button>
+          </div>
+
+          <section id="timing-panel" class="timing-panel" role="tabpanel" aria-labelledby="timing-tab">
+            <div class="timing-heading"><div><span id="timing-event">Azurline Atlantic Trophy</span><strong>Feature race</strong></div><small>DEMO</small></div>
+            <div class="timing-columns"><span>Pos / Driver</span><span>Gap</span><span>Last lap</span></div>
+            <div id="timing-rows" class="timing-rows"></div>
+            <div class="timing-focus">
+              <div><span>Best lap</span><strong id="timing-best">1:30.772</strong></div><div><span>Last lap</span><strong id="timing-last">1:31.084</strong></div>
+            </div>
+            <div class="sector-key"><span><i class="purple"></i>Best</span><span><i class="green"></i>Improved</span><span><i class="yellow"></i>Slower</span></div>
+            <p class="timing-note">Fictional static timing data demonstrates the reusable broadcast layout. Values are not calculated from the circuit.</p>
+          </section>
+
+          <section id="package-panel" class="package-panel" role="tabpanel" aria-labelledby="package-tab" hidden>
+            <div class="package-heading"><p class="race-eyebrow">Reusable package</p><h2>Race hardware</h2><span>● Local / validated</span></div>
+            <div id="race-asset-list" class="race-asset-list" role="group" aria-label="Select downloadable asset"></div>
+            <div class="package-current"><span id="package-asset-name">Five-column start lights</span><strong id="package-triangles">6,268</strong><small>triangles · <b id="package-size">47 KB</b></small></div>
+            <div id="race-lod-list" class="race-lod-list" role="group" aria-label="Select asset level of detail"></div>
+            <div class="package-downloads">
+              <a class="package-primary" id="download-race-model" href="/assets/race/lods/race-start-lights-lod0.glb" download="race-start-lights-lod0.glb">Download LOD0 GLB <span>↓</span></a>
+              <a id="download-race-collision" href="/assets/race/collisions/race-start-lights-collision.glb" download="race-start-lights-collision.glb">Collision mesh <span>GLB</span></a>
+              <a href="/assets/race/graphics/icons.svg" download="race-control-icons.svg">Vector icon sprite <span>SVG</span></a>
+              <a href="/assets/race/race-presentation.json" download="race-presentation.json">Complete package manifest <span>JSON</span></a>
+            </div>
+            <dl class="package-facts"><div><dt>Collision</dt><dd id="package-collision">60 tris</dd></div><div><dt>Conventions</dt><dd>Metres · Y-up · +Z</dd></div><div><dt>Compression</dt><dd>Meshopt</dd></div><div><dt>Control nodes</dt><dd id="package-control">10 lenses</dd></div></dl>
+            <div class="package-master"><span>Preserved master</span><code id="package-master-path">assets-src/race/race-start-lights.glb</code></div>
+            <div class="package-license"><strong>CC0 1.0</strong><p>Original procedural models, vector graphics and demo metadata. No third-party race assets.</p></div>
+          </section>
+        </aside>
+      </main>
+      <footer class="race-footer"><span><i></i> Asset foundation / presentation only</span><span id="active-race-file">assets/race/lods/race-start-lights-lod0.glb</span></footer>
+    </div>
+    <script type="module" src="/src/race.js"></script>
+  </body>
+</html>

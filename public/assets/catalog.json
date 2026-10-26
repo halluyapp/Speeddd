@@ -1,6 +1,6 @@
 {
-  "collection": "Velocity Vehicle Library",
-  "version": 2,
+  "collection": "Velocity Asset Library",
+  "version": 3,
   "units": "metres",
   "upAxis": "Y",
   "forwardAxis": "+Z (baked into runtime vehicle assets)",
@@ -660,6 +660,15 @@
       "manifest": "assets/tracks/azurline-circuit.json",
       "preview": "assets/previews/azurline-circuit.webp",
       "page": "track.html"
+    }
+  ],
+  "presentation": [
+    {
+      "id": "race-control-presentation",
+      "name": "Velocity Race Control — Presentation 01",
+      "manifest": "assets/race/race-presentation.json",
+      "preview": "assets/previews/race-presentation.webp",
+      "page": "race.html"
     }
   ]
 }

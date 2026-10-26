@@ -6,7 +6,7 @@ const catalog = JSON.parse(await fs.readFile(new URL('../public/assets/catalog.j
 const track = JSON.parse(await fs.readFile(new URL('../public/assets/tracks/azurline-circuit.json', import.meta.url), 'utf8'));
 
 test('main catalogue references one local coastal environment manifest', () => {
-  assert.equal(catalog.version, 2);
+  assert.ok(catalog.version >= 2);
   assert.equal(catalog.tracks.length, 1);
   assert.deepEqual(catalog.tracks[0], {
     id: 'azurline-circuit',

@@ -3,18 +3,20 @@
   "version": "1.0.0",
   "private": true,
   "type": "module",
-  "description": "A reusable collection of licensed vehicle assets with an interactive Three.js showcase.",
+  "description": "A reusable local vehicle, environment and race-presentation asset library with interactive Three.js inspectors.",
   "scripts": {
     "dev": "vite --host 0.0.0.0",
     "start": "vite --host 0.0.0.0",
     "build": "vite build",
     "build:cars": "node scripts/build-car-assets.js",
     "build:track": "node scripts/build-coastal-track.js",
+    "build:race": "node scripts/build-race-presentation.js",
     "preview": "vite preview --host 0.0.0.0",
     "test": "node --test tests/*.test.js",
     "validate:cars": "node scripts/validate-assets.js",
     "validate:track": "node scripts/validate-track-assets.js",
-    "validate:assets": "npm run validate:cars && npm run validate:track"
+    "validate:race": "node scripts/validate-race-assets.js",
+    "validate:assets": "npm run validate:cars && npm run validate:track && npm run validate:race"
   },
   "dependencies": {
     "@fontsource-variable/inter": "^5.2.8",

@@ -887,7 +887,7 @@ catalog.tracks = [{
   preview: metadata.preview,
   page: 'track.html',
 }];
-catalog.version = 2;
+catalog.version = Math.max(Number(catalog.version) || 1, 2);
 catalog.forwardAxis = '+Z (baked into runtime vehicle assets)';
 await fs.writeFile(catalogPath, `${JSON.stringify(catalog, null, 2)}\n`);
 console.log(`Collision: ${metadata.collisionTriangles.toLocaleString()} tris · ${GRID_COUNT} grid slots · ${CHECKPOINT_COUNT} checkpoints`);

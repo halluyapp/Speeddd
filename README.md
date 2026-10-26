@@ -1,6 +1,6 @@
 # Velocity — Asset Library
 
-A local, reusable asset foundation containing **11 detailed vehicles** and the original **Azurline Circuit** coastal environment. Vehicles include untouched masters, four runtime LODs, convex collision meshes, and wheel-rig metadata. The track includes four purpose-built LODs, drive-surface/terrain/barrier collision, and race-layout metadata. The Three.js pages are **asset inspectors only**—there are no driving, racing, AI, physics, or multiplayer systems.
+A local, reusable asset foundation containing **11 detailed vehicles**, the original **Azurline Circuit** coastal environment, and the original **Race Control** presentation kit. Vehicles include untouched masters, four runtime LODs, convex collision meshes, and wheel-rig metadata. The track includes four purpose-built LODs, drive-surface/terrain/barrier collision, and race-layout metadata. Race Control adds modular hardware, addressable light/display nodes, vector flags, and broadcast presentation fixtures. The Three.js pages are **asset inspectors only**—there are no driving, racing, AI, physics, live-timing, or multiplayer systems.
 
 ## Run the inspectors
 
@@ -13,17 +13,19 @@ Open the local URL printed by Vite. A local HTTP server is required; do not open
 
 - `index.html` — vehicle collection and paint showroom
 - `track.html` — Azurline Circuit environment inspector
+- `race.html` — Race Control hardware and broadcast-presentation inspector
 
 ```bash
 npm run build           # production multi-page site in dist/
 npm run preview         # serve the production build
-npm test                # vehicle and track catalogue/package checks
-npm run validate:assets # all vehicle + track geometry and metadata checks
+npm test                # vehicle, track and presentation package checks
+npm run validate:assets # all vehicle + track + presentation geometry/metadata checks
 npm run validate:cars   # vehicle checks only
 npm run validate:track  # coastal-track checks only
+npm run validate:race   # race-presentation checks only
 ```
 
-All runtime libraries, fonts, previews, decoders, and models are served locally. Neither inspector makes CDN or third-party runtime requests.
+All runtime libraries, fonts, previews, decoders, graphics, and models are served locally. No inspector makes CDN or third-party runtime requests.
 
 ## Rebuild the vehicle packages
 
@@ -62,6 +64,22 @@ npm run validate:track
 
 The four track LODs are purpose-built from the same centerline rather than aggressively simplifying the road. They preserve the closed driving layout while reducing terrain, ocean, vegetation, and decorative detail.
 
+## Rebuild Race Control presentation assets
+
+```bash
+npm run build:race
+npm run validate:race
+```
+
+`scripts/build-race-presentation.js` deterministically generates the original hardware masters, runtime derivatives, collision meshes, SVG flags/icons, illustrated poster, demo fixtures, and package manifest. All presentation assets are original **CC0 1.0** work. Outputs include:
+
+- `assets-src/race/<asset-id>.glb` — three preserved procedural hardware masters
+- `public/assets/race/lods/<asset-id>-lod0.glb` through `-lod3.glb` — 12 Meshopt runtime LODs
+- `public/assets/race/collisions/<asset-id>-collision.glb` — three simple structural collision meshes
+- `public/assets/race/graphics/` — seven standalone racing flags and a reusable SVG icon sprite
+- `public/assets/race/race-presentation.json` — hardware packages, bounds, control records, graphics, and static demo data
+- `public/assets/previews/race-presentation.webp` — instant illustrated poster
+
 ## Vehicle collection
 
 Triangle counts below are for runtime LOD0 after cleanup. Each vehicle asset-details dialog exposes all four LOD downloads and their exact counts.
@@ -97,20 +115,35 @@ Triangle counts below are for runtime LOD0 after cleanup. Each vehicle asset-det
 
 The environment includes the elevated road loop, edge markings, red/white curbs, guardrails and tire barriers, start gantry and grid markings, pit garages, grandstand, track lights, brake boards, coastal terrain, ocean and shoreline, rocks, palms, and scrub. The inspector provides overview, start-grid, hairpin, and coast cameras; a live circuit map; working LOD switches; and direct GLB/JSON downloads.
 
+## Race Control package
+
+| Hardware | LOD0–LOD3 triangles | Collision triangles | Reusable control |
+|---|---|---:|---|
+| Five-column start lights | 6,268 / 3,852 / 2,724 / 1,380 | 60 | 10 individually named lenses |
+| Trackside timing pylon | 3,988 / 3,476 / 3,380 / 1,894 | 24 | Eight geometric display rows |
+| Marshal light panel | 1,276 / 828 / 420 / 276 | 36 | Addressable emissive display |
+
+The package contains three masters, 12 runtime LODs, three collision GLBs, seven racing flags, an icon sprite, poster, and manifest. Hardware uses metres, Y-up, +Z-forward, and ground-zero placement. Start lenses expose `startLightIndex` and `startLightRow`; the marshal display exposes the `flag-display` role, so future runtime code can operate them without editing geometry.
+
+The `race.html` inspector combines the real GLBs with six selectable presentation states, a replayable five-light sequence, flag/status graphics, an eight-row timing tower, telemetry layout, HUD toggle, automatic orbit, responsive cameras, and per-asset LOD/download controls. All timing, speed, gap, and race-state values are **static fictional demo fixtures**. The inspector does not calculate laps, results, flags, physics, AI, or race rules.
+
 ## Repository layout
 
 ```text
 assets-src/
   cars/                          Untouched vehicle masters + source attribution
   tracks/                        Original procedural environment masters
+  race/                          Original procedural race-hardware masters
 index.html                       Vehicle showroom
 track.html                       Coastal environment inspector
+race.html                        Race hardware + broadcast-presentation inspector
 src/
   main.js / style.css            Vehicle viewer and responsive showroom
   track.js / track.css           Environment viewer, map, LOD and camera UI
+  race.js / race.css             Race hardware, state, HUD, timing and package UI
 public/
   assets/
-    catalog.json                 Vehicle collection + track-manifest index
+    catalog.json                 Vehicle + track + presentation package index
     cars/
       lods/                      Vehicle LOD0–LOD3 GLBs
       collisions/                Vehicle convex collision GLBs
@@ -119,17 +152,25 @@ public/
       azurline-circuit.json      Layout, grid, checkpoints, sectors and package data
       lods/                      Track LOD0–LOD3 GLBs
       collisions/                Road, terrain and barrier collision GLB
-    previews/                    Vehicle renders + illustrated track poster
+    race/
+      race-presentation.json     Hardware, graphics, controls and demo fixtures
+      lods/                      Race-hardware LOD0–LOD3 GLBs
+      collisions/                Structural collision GLBs
+      graphics/                  Seven racing flags + SVG icon sprite
+    previews/                    Vehicle renders + illustrated track/race posters
     draco/                       Local Draco decoder for compatible assets
 scripts/
   build-car-assets.js            Vehicle master → runtime pipeline
   build-coastal-track.js         Original coastal master + runtime generator
+  build-race-presentation.js     Original race hardware + graphics generator
   validate-assets.js             Vehicle geometry, LOD, collision and rig validation
   validate-track-assets.js       Track glTF, layout and package validation
+  validate-race-assets.js        Race glTF, controls, graphics and fixture validation
   embed_attribution.py           Update vehicle-master credit metadata
 tests/
   catalog.test.js                Vehicle collection/package checks
   track.test.js                  Coastal environment/package checks
+  race.test.js                   Race presentation/package checks
 LICENSES.md                      Full attribution and modification record
 ```
 
@@ -141,6 +182,9 @@ LICENSES.md                      Full attribution and modification record
 - **Wheel metadata is reusable.** Rig JSON provides `FL`, `FR`, `RL`, and `RR` records, source node names, positions, radii, widths, and steering/axle labels. It is not an animation or suspension controller.
 - **Track race data is reusable.** The manifest provides a closed centerline, start transform, 16 staggered grid slots, 12 ordered checkpoint/respawn transforms, three sectors, road bounds, and camera hints. It does not implement lap validation or race rules.
 - **Track collision is separated by role.** The collision GLB contains `collision-road`, `collision-terrain`, `collision-barriers`, and start-structure geometry. Final physics layering and trigger volumes belong to the driving prototype.
+- **Race-control nodes are addressable.** Start-light GLBs retain ten lens nodes with zero-based column/row metadata. Marshal panels retain separate base and LED `flag-display` roles. Clone their materials per runtime instance before applying state, as the inspector does.
+- **Presentation fixtures are replaceable data.** The race manifest's event, standings, telemetry, and six states demonstrate schema and layout only. Replace them with validated runtime data in a future game; do not treat them as race-rule implementations.
+- **Race graphics stay local and reusable.** Standalone flag SVGs can be used in HUDs, trackside displays, or future UI. The icon sprite uses local symbol IDs and requires no icon-font or network service.
 - **Paint remains a viewer operation.** Vehicle paint selections are not baked into downloads.
 - **Masters remain separate.** Use `assets-src/` for source work and `public/assets/` for runtime deployment. Do not edit generated runtime files directly.
 - **Meshopt support is required for runtime visual LODs.** The included Three.js loaders support it; other tools may need a Meshopt-compatible importer. Collision GLBs are intentionally simple uncompressed geometry.
@@ -157,4 +201,4 @@ The attribution script changes only each vehicle-master GLB's JSON metadata chun
 
 ## Production names and marks
 
-The Mercedes-Benz, AMG, BMW, and M names/marks belong to their respective owners. Their model licenses permit reuse with attribution, but model copyright licensing does not grant manufacturer endorsement or separate trademark rights. Azurline Circuit is an original fictional environment. This is an independent asset collection.
+The Mercedes-Benz, AMG, BMW, and M names/marks belong to their respective owners. Their model licenses permit reuse with attribution, but model copyright licensing does not grant manufacturer endorsement or separate trademark rights. Azurline Circuit and Velocity Race Control are original fictional assets. This is an independent asset collection.
