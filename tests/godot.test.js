@@ -18,6 +18,7 @@ test('native Godot project exposes the complete local combat-racing content and 
   assert.match(vehicle, /func _respawn/);
   assert.match(prepare, /catalog\.cars/);
   assert.match(prepare, /EXT_meshopt_compression/);
+  assert.match(prepare, /relative\.replace\(\/\^assets\\\/\/, ''\)/);
 });
 
 test('Android workflow builds and tests a native APK without remote runtime assets', async () => {

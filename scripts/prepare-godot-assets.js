@@ -7,6 +7,7 @@ import { MeshoptDecoder } from 'meshoptimizer';
 
 const root = process.cwd();
 const output = path.join(root, 'godot', 'assets');
+const assetDestination = (relative) => path.join(output, relative.replace(/^assets\//, ''));
 const io = new NodeIO()
   .registerExtensions(ALL_EXTENSIONS)
   .registerDependencies({ 'meshopt.decoder': MeshoptDecoder });
@@ -21,13 +22,13 @@ await fs.rm(output, { recursive: true, force: true });
 await fs.mkdir(output, { recursive: true });
 
 async function copyAsset(relative) {
-  const destination = path.join(output, relative);
+  const destination = assetDestination(relative);
   await fs.mkdir(path.dirname(destination), { recursive: true });
   await fs.copyFile(path.join(root, 'public', relative), destination);
 }
 
 async function convertGLB(relative) {
-  const destination = path.join(output, relative);
+  const destination = assetDestination(relative);
   await fs.mkdir(path.dirname(destination), { recursive: true });
   const document = await io.read(path.join(root, 'public', relative));
   for (const extension of document.getRoot().listExtensionsUsed()) {
@@ -89,7 +90,7 @@ const fonts = [
   ['node_modules/@fontsource-variable/space-grotesk/files/space-grotesk-latin-wght-normal.woff2', 'assets/fonts/space-grotesk.woff2'],
 ];
 for (const [source, relative] of fonts) {
-  const destination = path.join(output, relative);
+  const destination = assetDestination(relative);
   await fs.mkdir(path.dirname(destination), { recursive: true });
   await fs.copyFile(path.join(root, source), destination);
 }
