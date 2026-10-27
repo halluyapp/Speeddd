@@ -13,9 +13,14 @@ const io = new NodeIO()
   .registerDependencies({ 'meshopt.decoder': MeshoptDecoder });
 
 const catalog = JSON.parse(await fs.readFile(path.join(root, 'public/assets/catalog.json'), 'utf8'));
-const combat = JSON.parse(await fs.readFile(path.join(root, 'public/assets/combat/combat.json'), 'utf8'));
 const media = JSON.parse(await fs.readFile(path.join(root, 'public/assets/media/vfx-audio.json'), 'utf8'));
-const trackIds = ['azurline-circuit', 'kestrel-ridge'];
+const starterCar = catalog.cars.find((car) => car.id === 'sport-coupe');
+if (!starterCar) throw new Error('APEX DRIVE requires the local Corsa RS starter asset.');
+const trackIds = ['azurline-circuit'];
+const audioIds = new Set([
+  'engine-idle-loop', 'engine-high-loop', 'tire-skid-loop', 'coastal-wind-loop',
+  'gear-shift', 'heavy-impact', 'race-countdown', 'race-go', 'ui-confirm',
+]);
 const tracks = [];
 
 await fs.rm(output, { recursive: true, force: true });
@@ -42,26 +47,26 @@ async function convertGLB(relative) {
 }
 
 const glbs = new Set();
-for (const car of catalog.cars) {
-  glbs.add(car.lods['2']);
-  glbs.add(car.lods['3']);
-  await copyAsset(car.preview);
-}
+for (const lod of ['1', '2', '3']) glbs.add(starterCar.lods[lod]);
+await copyAsset(starterCar.preview);
+await copyAsset(starterCar.rig);
 for (const id of trackIds) {
   const track = JSON.parse(await fs.readFile(path.join(root, `public/assets/tracks/${id}.json`), 'utf8'));
-  tracks.push({ id: track.id, name: track.name, manifest: `assets/tracks/${id}.json`, preview: track.preview });
+  tracks.push({
+    id: track.id,
+    name: id === 'azurline-circuit' ? 'Azure Coast' : track.name,
+    sourceName: track.name,
+    manifest: `assets/tracks/${id}.json`,
+    preview: track.preview,
+  });
   await copyAsset(`assets/tracks/${id}.json`);
   await copyAsset(track.preview);
   glbs.add(track.lods['2']);
   glbs.add(track.lods['3']);
   glbs.add(track.collision);
 }
-for (const weapon of combat.assets) {
-  glbs.add(weapon.lods['3']);
-  await copyAsset(weapon.thumbnail);
-}
-for (const effect of media.effects) await copyAsset(effect.runtime);
-for (const sound of media.audio) await copyAsset(sound.runtime);
+const audio = media.audio.filter((sound) => audioIds.has(sound.id));
+for (const sound of audio) await copyAsset(sound.runtime);
 
 let converted = 0;
 for (const relative of [...glbs].sort()) {
@@ -73,12 +78,9 @@ for (const relative of [...glbs].sort()) {
 const licenseFiles = [
   'assets/cars/LICENSES.txt',
   'assets/tracks/LICENSE.txt',
-  'assets/combat/LICENSE.txt',
   'assets/media/LICENSE.txt',
-  'assets/drivers/LICENSE.txt',
-  'assets/progression/LICENSE.txt',
 ];
-const attribution = ['PROJECT VELOCITY — ASSET ATTRIBUTION', ''];
+const attribution = ['APEX DRIVE — JAG STUDIOS — ASSET ATTRIBUTION', ''];
 for (const relative of licenseFiles) {
   const text = await fs.readFile(path.join(root, 'public', relative), 'utf8');
   attribution.push(text.trim(), '', '='.repeat(72), '');
@@ -96,29 +98,25 @@ for (const [source, relative] of fonts) {
 }
 
 const content = {
-  id: 'project-velocity-content',
-  version: 1,
-  cars: catalog.cars.map((car) => ({
-    id: car.id,
-    name: car.name,
-    shortName: car.shortName,
-    preview: car.preview,
-    lods: car.lods,
-    dimensions: car.dimensions,
-    performance: car.performance,
-    defaultPaint: car.defaultPaint,
-  })),
+  id: 'apex-drive-content',
+  version: 2,
+  brand: { studio: 'JAG STUDIOS', title: 'APEX DRIVE', tagline: 'Earn Every Corner.' },
+  cars: [{
+    id: starterCar.id,
+    name: starterCar.name,
+    shortName: starterCar.shortName,
+    class: 'Sport Coupe',
+    driveType: 'RWD',
+    preview: starterCar.preview,
+    lods: starterCar.lods,
+    dimensions: starterCar.dimensions,
+    performance: starterCar.performance,
+    paintMaterials: starterCar.paintMaterials,
+    defaultPaint: starterCar.defaultPaint,
+    rig: starterCar.rig,
+  }],
   tracks,
-  weapons: combat.assets.filter((asset) => asset.kind === 'turret').map((weapon) => ({
-    id: weapon.id,
-    name: weapon.name,
-    shortName: weapon.shortName,
-    category: weapon.category,
-    lods: weapon.lods,
-  })),
-  projectile: combat.assets.find((asset) => asset.id === 'micro-missile'),
-  effects: media.effects,
-  audio: media.audio,
+  audio,
 };
 await fs.writeFile(path.join(output, 'content.json'), `${JSON.stringify(content, null, 2)}\n`);
-console.log(`Prepared ${converted} Godot-compatible GLBs, ${catalog.cars.length} cars, ${tracks.length} tracks, ${content.weapons.length} weapons, ${media.effects.length} effects and ${media.audio.length} sounds.`);
+console.log(`Prepared ${converted} Godot-compatible GLBs for the APEX DRIVE vertical slice: one starter car, Azure Coast and ${audio.length} local sounds.`);

@@ -1,10 +1,10 @@
-; PROJECT VELOCITY — native Godot 4 combat racer
+; APEX DRIVE — JAG STUDIOS — native Godot 4 racing game
 config_version=5
 
 [application]
 
-config/name="PROJECT VELOCITY"
-config/description="Offline AI combat racing built from the Velocity asset library."
+config/name="APEX DRIVE"
+config/description="Earn Every Corner. Offline mobile circuit racing by JAG STUDIOS."
 run/main_scene="res://scenes/main.tscn"
 config/features=PackedStringArray("4.7", "GL Compatibility")
 config/icon="res://icon.svg"

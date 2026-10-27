@@ -6,17 +6,20 @@ var checkpoints: Array = []
 var visual: Node3D
 var collision: Node3D
 
-func setup(track_data: Dictionary) -> void:
+func setup(track_data: Dictionary, visual_scene: PackedScene = null, collision_scene: PackedScene = null, graphics: String = "low") -> void:
 	data = track_data
 	checkpoints = data.get("checkpoints", [])
 	for point in data.get("centerline", []):
 		centerline.append(Vector3(point[0], point[1], point[2]))
-	var lod_key: String = "3" if OS.has_feature("mobile") else "2"
-	var visual_path: String = "res://" + data["lods"][lod_key]
-	visual = load(visual_path).instantiate()
+	var lod_key: String = "3" if graphics == "low" else "2"
+	if visual_scene == null:
+		visual_scene = load("res://" + data["lods"][lod_key])
+	visual = visual_scene.instantiate()
 	visual.name = "TrackVisual"
 	add_child(visual)
-	collision = load("res://" + data["collision"]).instantiate()
+	if collision_scene == null:
+		collision_scene = load("res://" + data["collision"])
+	collision = collision_scene.instantiate()
 	collision.name = "TrackCollision"
 	add_child(collision)
 	_add_collision_shapes(collision)

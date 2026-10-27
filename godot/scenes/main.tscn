@@ -2,5 +2,5 @@
 
 [ext_resource type="Script" path="res://scripts/game.gd" id="1_game"]
 
-[node name="ProjectVelocity" type="Node3D"]
+[node name="ApexDrive" type="Node3D"]
 script = ExtResource("1_game")

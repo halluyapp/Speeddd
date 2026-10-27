@@ -1,24 +1,36 @@
-# Velocity — Asset Library
+# APEX DRIVE — JAG STUDIOS
 
-A local, reusable asset foundation containing **11 detailed vehicles**, two original environments—**Azurline Circuit** and **Kestrel Ridge**—the original **Race Control** presentation kit, original procedural **VFX and synthesized audio**, the original **Combat Kit** of vehicular weapon/projectile models, the original **Social UI kit**, the original **Driver Kit** of animated fictional characters, and the original **Progression Kit** of rank and reward presentation assets. Vehicles include untouched masters, four runtime LODs, convex collision meshes, and wheel-rig metadata. Each environment includes four purpose-built LODs, drive-surface/terrain/barrier collision, and race-layout metadata. Race Control adds modular hardware, addressable light/display nodes, vector flags, and broadcast presentation fixtures. Media Lab adds eight real flipbook/sprite packages and eleven original sounds. Combat Lab adds five models with mounting, articulation and muzzle-socket records. Social Lab adds eight vector emblems, a 24-symbol sprite, four checked palettes, and ten fictional players across three static fixtures. Driver Lab adds three rigid-rigged helmeted drivers, twelve embedded clips, four cinematic camera fixtures, and capsule proxies. Progression Lab adds ten rank insignias, twenty icons, four rarity frames, six reward records, and three static fixtures. The pages are **asset inspectors only**—there are no driving, racing, AI, physics, live-timing, multiplayer, firing, damage, fire-control, combat gameplay, live networking, locomotion, seat-constraint, cinematic gameplay, XP calculation, unlock, purchase, save, or progression-service systems.
+**Earn Every Corner.** The native Godot project is an offline, landscape Android racing game. The repository also retains the reusable **Velocity asset library** and its separate browser inspectors; those inspectors are not the game.
 
-## Native Godot combat racer
+## Native Godot racing vertical slice
 
-The `godot/` project is the separate native **PROJECT VELOCITY** runtime. Its current playable milestone includes the complete eleven-car roster, both existing circuits, all four weapon hardpoints, four-car offline AI races, two-lap checkpoint validation, drifting, nitro, damage, missiles, destruction/respawn, a 3D garage, landscape touch controls, HUD, pause and results. Every race is combative; race position still comes from ordered course progress rather than takedowns.
+The `godot/` project is the separate native **APEX DRIVE** runtime. Its current vertical slice includes:
 
-The Android low-spec preset uses four racers, reduced LODs, no real-time shadows or post-processing, per-event loading and a 30 FPS render cap. Higher-detail desktop inspection remains available. This is the first native gameplay milestone, not the completed career/game release.
+- JAG STUDIOS ident, skippable real-3D Corsa RS cinematic, first-launch offline driver setup, and staged resource-loading presentation.
+- Home, race setup, garage, local driver record, and settings navigation.
+- One detailed starter car with paint customization, wheel animation, inspection views, and saved selections.
+- **Azure Coast**, using the existing complete Azurline road/collision/checkpoint asset under its native display name.
+- **Quick Race** with three named AI opponents and **Time Trial** with no physical opponents.
+- Ordered checkpoints, lap validation, finish order, best laps, results, pause, restart, and abandon confirmation.
+- Simcade and Arcade handling profiles, assists, handbrake, off-road grip loss, collision recovery, and chase/hood/bumper cameras.
+- Responsive landscape touch controls, an actual circuit map, race HUD, local PCM audio, and Low/Balanced graphics presets.
+- Versioned local saves with temporary-file writes, backup recovery, settings, paint, race history, wins, and per-mode best laps.
+
+Standard racing contains **no guns, missiles, nitro, or Power Run pickups**. The current driving controller is a tuned kinematic simcade approximation with speed-sensitive steering, lateral grip and weight-response presentation; it is not yet a four-wheel `VehicleBody3D` suspension/tire simulation. Career championships, additional cars/circuits, weather, ghosts, and Power Run remain deferred until this core loop is validated.
 
 ```bash
 npm ci
-npm run prepare:godot       # stage and convert local resources into godot/assets/
+npm run prepare:godot       # stage and convert only the vertical-slice resources
 godot --headless --path godot --editor --import --quit
 godot --path godot           # run with the pinned Godot 4.7.2 standard editor
 npm run test:godot           # native smoke suite, after importing
 ```
 
-Keyboard controls: **WASD/arrows** drive, **Space** drifts, **Shift** engages nitro, **F** or the left mouse button fires, and **Escape** pauses. Android uses the landscape touch controls.
+Keyboard controls: **WASD/arrows** drive, **Space** applies the handbrake, **C** cycles cameras, and **Escape** pauses. Android uses scalable landscape touch controls. Drag the garage car to rotate it and use the inspection/zoom controls for alternate views.
 
-`.github/workflows/android.yml` validates all source packages, runs the web and native tests, and exports one universal **ARM32, ARM64, x86 and x86_64 debug APK** with Godot 4.7.2. The Compatibility renderer requires **Android 7.0 / API 24 or newer with OpenGL ES 3 support**. Download the `velocity-android-debug` artifact from a successful GitHub Actions run, extract the ZIP before installing, and uninstall any earlier Velocity debug build if Android reports a signature conflict. CI verifies the APK signature and all four packaged ABIs. The debug APK is for testing only; release signing and Play distribution are separate steps.
+`.github/workflows/android.yml` validates the source packages, runs web/static and native tests, and exports one universal **ARM32, ARM64, x86 and x86_64 debug APK** with Godot 4.7.2. The Compatibility renderer requires **Android 7.0 / API 24 or newer with OpenGL ES 3 support**. Download the `apex-drive-android-debug` artifact from a successful GitHub Actions run, extract the ZIP, and install `apex-drive-debug.apk`. CI verifies archive integrity, the debug signature, minimum SDK and all four packaged ABIs. The debug APK is for testing only; release signing and Play distribution are separate steps.
+
+**Validation boundary:** native CI can prove resource loading, race logic, save reloads, cleanup, and APK integrity. It does not prove installation, touch feel, thermal behavior, or stable 30 FPS on the user's physical 2 GB phone. Those still require exact-device testing.
 
 ## Run the inspectors
 

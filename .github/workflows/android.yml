@@ -50,7 +50,7 @@ jobs:
         uses: actions/cache@v4
         with:
           path: ~/.android/debug.keystore
-          key: velocity-android-debug-keystore-v1
+          key: apex-drive-android-debug-keystore-v1
       - name: Generate standard Android debug signing key when absent
         run: |
           if [ ! -f "$HOME/.android/debug.keystore" ]; then
@@ -62,12 +62,12 @@ jobs:
       - name: Run native smoke tests
         run: |
           set +e
-          timeout 45s godot --headless --path godot --script res://tests/smoke_test.gd > /tmp/velocity-native-test.log 2>&1
+          timeout 45s godot --headless --path godot --script res://tests/smoke_test.gd > /tmp/apex-drive-native-test.log 2>&1
           status=$?
-          if grep -qE 'SCRIPT ERROR:|^ERROR:' /tmp/velocity-native-test.log; then status=1; fi
-          cat /tmp/velocity-native-test.log
+          if grep -qE 'SCRIPT ERROR:|^ERROR:' /tmp/apex-drive-native-test.log; then status=1; fi
+          cat /tmp/apex-drive-native-test.log
           if [ "$status" -ne 0 ]; then
-            report=$(printf 'Native smoke exit code %s\n' "$status"; tail -100 /tmp/velocity-native-test.log | sed -r 's/\x1B\[[0-9;]*[mK]//g')
+            report=$(printf 'Native smoke exit code %s\n' "$status"; tail -100 /tmp/apex-drive-native-test.log | sed -r 's/\x1B\[[0-9;]*[mK]//g')
             report=${report//'%'/'%25'}
             report=${report//$'\r'/'%0D'}
             report=${report//$'\n'/'%0A'}
@@ -81,16 +81,16 @@ jobs:
           command -v apksigner || true
           command -v zipalign || true
           set +e
-          godot --verbose --headless --path godot --export-debug Android build/velocity-debug.apk > /tmp/velocity-android-export.log 2>&1
+          godot --verbose --headless --path godot --export-debug Android build/apex-drive-debug.apk > /tmp/apex-drive-android-export.log 2>&1
           status=$?
-          cat /tmp/velocity-android-export.log
+          cat /tmp/apex-drive-android-export.log
           if [ "$status" -ne 0 ]; then
-            tail -140 /tmp/velocity-android-export.log | sed -r 's/\x1B\[[0-9;]*[mK]//g' | while IFS= read -r line; do printf '::error::%s\n' "$line"; done
+            tail -140 /tmp/apex-drive-android-export.log | sed -r 's/\x1B\[[0-9;]*[mK]//g' | while IFS= read -r line; do printf '::error::%s\n' "$line"; done
             exit "$status"
           fi
       - name: Verify APK integrity, signature and Android compatibility
         run: |
-          APK=godot/build/velocity-debug.apk
+          APK=godot/build/apex-drive-debug.apk
           SDK_ROOT=${ANDROID_HOME:-$ANDROID_SDK_ROOT}
           APKSIGNER=$(find "$SDK_ROOT/build-tools" -type f -name apksigner | sort -V | tail -1)
           AAPT=$(find "$SDK_ROOT/build-tools" -type f -name aapt | sort -V | tail -1)
@@ -98,16 +98,16 @@ jobs:
           test -x "$AAPT"
           unzip -t "$APK" >/dev/null
           "$APKSIGNER" verify --verbose --print-certs "$APK"
-          "$AAPT" dump badging "$APK" > /tmp/velocity-apk-badging.txt
-          grep -E '^package:|^sdkVersion|^targetSdkVersion|^native-code' /tmp/velocity-apk-badging.txt
-          grep -q "sdkVersion:'24'" /tmp/velocity-apk-badging.txt
-          grep '^native-code' /tmp/velocity-apk-badging.txt | grep -q 'armeabi-v7a'
-          grep '^native-code' /tmp/velocity-apk-badging.txt | grep -q 'arm64-v8a'
-          grep '^native-code' /tmp/velocity-apk-badging.txt | grep -q "'x86'"
-          grep '^native-code' /tmp/velocity-apk-badging.txt | grep -q 'x86_64'
+          "$AAPT" dump badging "$APK" > /tmp/apex-drive-apk-badging.txt
+          grep -E '^package:|^sdkVersion|^targetSdkVersion|^native-code' /tmp/apex-drive-apk-badging.txt
+          grep -q "sdkVersion:'24'" /tmp/apex-drive-apk-badging.txt
+          grep '^native-code' /tmp/apex-drive-apk-badging.txt | grep -q 'armeabi-v7a'
+          grep '^native-code' /tmp/apex-drive-apk-badging.txt | grep -q 'arm64-v8a'
+          grep '^native-code' /tmp/apex-drive-apk-badging.txt | grep -q "'x86'"
+          grep '^native-code' /tmp/apex-drive-apk-badging.txt | grep -q 'x86_64'
       - uses: actions/upload-artifact@v4
         with:
-          name: velocity-android-debug
-          path: godot/build/velocity-debug.apk
+          name: apex-drive-android-debug
+          path: godot/build/apex-drive-debug.apk
           if-no-files-found: error
           retention-days: 14
