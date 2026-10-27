@@ -46,8 +46,17 @@ jobs:
           cp -a /tmp/godot-templates/templates/. "$HOME/.local/share/godot/export_templates/${GODOT_VERSION}.stable/"
           install -m 755 "/tmp/godot-editor/Godot_v${GODOT_RELEASE}_linux.x86_64" /usr/local/bin/godot
           godot --headless --version
-      - name: Generate standard Android debug signing key
-        run: keytool -genkeypair -noprompt -keystore "$HOME/.android/debug.keystore" -storepass android -alias androiddebugkey -keypass android -dname "CN=Android Debug,O=Android,C=US" -keyalg RSA -keysize 2048 -validity 10000
+      - name: Restore persistent debug signing key
+        uses: actions/cache@v4
+        with:
+          path: ~/.android/debug.keystore
+          key: velocity-android-debug-keystore-v1
+      - name: Generate standard Android debug signing key when absent
+        run: |
+          if [ ! -f "$HOME/.android/debug.keystore" ]; then
+            keytool -genkeypair -noprompt -keystore "$HOME/.android/debug.keystore" -storepass android -alias androiddebugkey -keypass android -dname "CN=Android Debug,O=Android,C=US" -keyalg RSA -keysize 2048 -validity 10000
+          fi
+          keytool -list -keystore "$HOME/.android/debug.keystore" -storepass android -alias androiddebugkey
       - name: Import Godot resources
         run: godot --headless --path godot --editor --import --quit
       - name: Run native smoke tests
@@ -79,6 +88,21 @@ jobs:
             tail -140 /tmp/velocity-android-export.log | sed -r 's/\x1B\[[0-9;]*[mK]//g' | while IFS= read -r line; do printf '::error::%s\n' "$line"; done
             exit "$status"
           fi
+      - name: Verify APK integrity, signature and Android compatibility
+        run: |
+          APK=godot/build/velocity-debug.apk
+          SDK_ROOT=${ANDROID_HOME:-$ANDROID_SDK_ROOT}
+          APKSIGNER=$(find "$SDK_ROOT/build-tools" -type f -name apksigner | sort -V | tail -1)
+          AAPT=$(find "$SDK_ROOT/build-tools" -type f -name aapt | sort -V | tail -1)
+          test -x "$APKSIGNER"
+          test -x "$AAPT"
+          unzip -t "$APK" >/dev/null
+          "$APKSIGNER" verify --verbose --print-certs "$APK"
+          "$AAPT" dump badging "$APK" > /tmp/velocity-apk-badging.txt
+          grep -E '^package:|^sdkVersion|^targetSdkVersion|^native-code' /tmp/velocity-apk-badging.txt
+          grep -q "sdkVersion:'24'" /tmp/velocity-apk-badging.txt
+          grep '^native-code' /tmp/velocity-apk-badging.txt | grep -q 'armeabi-v7a'
+          grep '^native-code' /tmp/velocity-apk-badging.txt | grep -q 'arm64-v8a'
       - uses: actions/upload-artifact@v4
         with:
           name: velocity-android-debug

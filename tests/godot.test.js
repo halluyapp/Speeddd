@@ -29,7 +29,11 @@ test('Android workflow builds and tests a native APK without remote runtime asse
   assert.match(workflow, /android-actions\/setup-android@v4/);
   assert.match(workflow, /--export-debug Android/);
   assert.match(workflow, /upload-artifact@v4/);
+  assert.match(workflow, /actions\/cache@v4/);
+  assert.match(workflow, /apksigner/);
+  assert.match(workflow, /native-code/);
   assert.match(workflow, /smoke_test\.gd/);
+  assert.match(preset, /architectures\/armeabi-v7a=true/);
   assert.match(preset, /architectures\/arm64-v8a=true/);
   assert.match(preset, /texture_format\/etc2_astc=true/);
   assert.doesNotMatch(scripts, /https?:\/\//);
