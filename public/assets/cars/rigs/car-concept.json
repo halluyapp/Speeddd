@@ -1,0 +1,100 @@
+{
+  "id": "car-concept",
+  "units": "metres",
+  "upAxis": "+Y",
+  "forwardAxis": "+Z",
+  "groundY": 0,
+  "normalized": true,
+  "dimensions": {
+    "length": 4.6,
+    "width": 2.684,
+    "height": 1.213
+  },
+  "wheels": [
+    {
+      "id": "FL",
+      "sourceNode": "WheelFrontL",
+      "position": [
+        1.0301,
+        0.4054,
+        1.3167
+      ],
+      "radius": 0.4054,
+      "width": 0.6237,
+      "axle": "front",
+      "side": "left",
+      "steering": true
+    },
+    {
+      "id": "FR",
+      "sourceNode": "WheelFrontR",
+      "position": [
+        -1.0308,
+        0.4054,
+        1.3149
+      ],
+      "radius": 0.4038,
+      "width": 0.6223,
+      "axle": "front",
+      "side": "right",
+      "steering": true
+    },
+    {
+      "id": "RL",
+      "sourceNode": "WheelRearL",
+      "position": [
+        1.0397,
+        0.4054,
+        -1.639
+      ],
+      "radius": 0.4054,
+      "width": 0.2999,
+      "axle": "rear",
+      "side": "left",
+      "steering": false
+    },
+    {
+      "id": "RR",
+      "sourceNode": "WheelRearR",
+      "position": [
+        -1.0387,
+        0.4054,
+        -1.639
+      ],
+      "radius": 0.4038,
+      "width": 0.3007,
+      "axle": "rear",
+      "side": "right",
+      "steering": false
+    }
+  ],
+  "collision": {
+    "path": "assets/cars/collisions/car-concept-collision.glb",
+    "shape": "convex-hull",
+    "triangles": 366,
+    "bytes": 27860,
+    "note": "Basic single-hull collision asset for arcade physics. Wheel suspension and chassis tuning must be validated in the driving prototype."
+  },
+  "lods": {
+    "0": {
+      "path": "assets/cars/lods/car-concept-lod0.glb",
+      "triangles": 213347,
+      "bytes": 2965408
+    },
+    "1": {
+      "path": "assets/cars/lods/car-concept-lod1.glb",
+      "triangles": 112195,
+      "bytes": 1912444
+    },
+    "2": {
+      "path": "assets/cars/lods/car-concept-lod2.glb",
+      "triangles": 61191,
+      "bytes": 1303472
+    },
+    "3": {
+      "path": "assets/cars/lods/car-concept-lod3.glb",
+      "triangles": 39995,
+      "bytes": 979696
+    }
+  }
+}

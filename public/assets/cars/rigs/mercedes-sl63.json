@@ -1,0 +1,100 @@
+{
+  "id": "mercedes-sl63",
+  "units": "metres",
+  "upAxis": "+Y",
+  "forwardAxis": "+Z",
+  "groundY": 0,
+  "normalized": true,
+  "dimensions": {
+    "length": 4.71,
+    "width": 2.031,
+    "height": 1.331
+  },
+  "wheels": [
+    {
+      "id": "FL",
+      "sourceNode": "SL63_wheel",
+      "position": [
+        0.8034,
+        0.3751,
+        1.3544
+      ],
+      "radius": 0.3033,
+      "width": 0.3256,
+      "axle": "front",
+      "side": "left",
+      "steering": true
+    },
+    {
+      "id": "FR",
+      "sourceNode": "SL63_wheel.002",
+      "position": [
+        -0.8029,
+        0.3751,
+        1.3544
+      ],
+      "radius": 0.3033,
+      "width": 0.3256,
+      "axle": "front",
+      "side": "right",
+      "steering": true
+    },
+    {
+      "id": "RL",
+      "sourceNode": "SL63_wheel.001",
+      "position": [
+        0.8034,
+        0.3751,
+        -1.3504
+      ],
+      "radius": 0.3033,
+      "width": 0.3256,
+      "axle": "rear",
+      "side": "left",
+      "steering": false
+    },
+    {
+      "id": "RR",
+      "sourceNode": "SL63_wheel.003",
+      "position": [
+        -0.8029,
+        0.3751,
+        -1.3504
+      ],
+      "radius": 0.3033,
+      "width": 0.3256,
+      "axle": "rear",
+      "side": "right",
+      "steering": false
+    }
+  ],
+  "collision": {
+    "path": "assets/cars/collisions/mercedes-sl63-collision.glb",
+    "shape": "convex-hull",
+    "triangles": 368,
+    "bytes": 27804,
+    "note": "Basic single-hull collision asset for arcade physics. Wheel suspension and chassis tuning must be validated in the driving prototype."
+  },
+  "lods": {
+    "0": {
+      "path": "assets/cars/lods/mercedes-sl63-lod0.glb",
+      "triangles": 359979,
+      "bytes": 4559340
+    },
+    "1": {
+      "path": "assets/cars/lods/mercedes-sl63-lod1.glb",
+      "triangles": 203487,
+      "bytes": 3195876
+    },
+    "2": {
+      "path": "assets/cars/lods/mercedes-sl63-lod2.glb",
+      "triangles": 116321,
+      "bytes": 1802936
+    },
+    "3": {
+      "path": "assets/cars/lods/mercedes-sl63-lod3.glb",
+      "triangles": 74881,
+      "bytes": 1238532
+    }
+  }
+}

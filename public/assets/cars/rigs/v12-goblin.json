@@ -1,0 +1,100 @@
+{
+  "id": "v12-goblin",
+  "units": "metres",
+  "upAxis": "+Y",
+  "forwardAxis": "+Z",
+  "groundY": 0,
+  "normalized": true,
+  "dimensions": {
+    "length": 4.55,
+    "width": 2.178,
+    "height": 1.159
+  },
+  "wheels": [
+    {
+      "id": "FL",
+      "sourceNode": "car_wheel_FL",
+      "position": [
+        0.7918,
+        0.3488,
+        1.204
+      ],
+      "radius": 0.3446,
+      "width": 0.3711,
+      "axle": "front",
+      "side": "left",
+      "steering": true
+    },
+    {
+      "id": "FR",
+      "sourceNode": "car_wheel_FR",
+      "position": [
+        -0.7918,
+        0.3446,
+        1.204
+      ],
+      "radius": 0.3446,
+      "width": 0.3711,
+      "axle": "front",
+      "side": "right",
+      "steering": true
+    },
+    {
+      "id": "RL",
+      "sourceNode": "car_wheel_BL",
+      "position": [
+        0.8979,
+        0.3643,
+        -1.3999
+      ],
+      "radius": 0.3617,
+      "width": 0.3821,
+      "axle": "rear",
+      "side": "left",
+      "steering": false
+    },
+    {
+      "id": "RR",
+      "sourceNode": "car_wheel_BR",
+      "position": [
+        -0.8979,
+        0.364,
+        -1.3999
+      ],
+      "radius": 0.3617,
+      "width": 0.3821,
+      "axle": "rear",
+      "side": "right",
+      "steering": false
+    }
+  ],
+  "collision": {
+    "path": "assets/cars/collisions/v12-goblin-collision.glb",
+    "shape": "convex-hull",
+    "triangles": 310,
+    "bytes": 23628,
+    "note": "Basic single-hull collision asset for arcade physics. Wheel suspension and chassis tuning must be validated in the driving prototype."
+  },
+  "lods": {
+    "0": {
+      "path": "assets/cars/lods/v12-goblin-lod0.glb",
+      "triangles": 86623,
+      "bytes": 991656
+    },
+    "1": {
+      "path": "assets/cars/lods/v12-goblin-lod1.glb",
+      "triangles": 49137,
+      "bytes": 738040
+    },
+    "2": {
+      "path": "assets/cars/lods/v12-goblin-lod2.glb",
+      "triangles": 24389,
+      "bytes": 389624
+    },
+    "3": {
+      "path": "assets/cars/lods/v12-goblin-lod3.glb",
+      "triangles": 15553,
+      "bytes": 250272
+    }
+  }
+}

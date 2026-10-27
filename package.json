@@ -1,0 +1,49 @@
+{
+  "name": "velocity-vehicle-assets",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "A reusable local vehicle, environment, presentation, media, combat, social, animated-driver and progression-UI asset library with interactive inspectors.",
+  "scripts": {
+    "dev": "vite --host 0.0.0.0",
+    "start": "vite --host 0.0.0.0",
+    "build": "vite build",
+    "build:cars": "node scripts/build-car-assets.js",
+    "build:track": "node scripts/build-coastal-track.js",
+    "build:ridge": "node scripts/build-kestrel-ridge.js",
+    "build:tracks": "npm run build:track && npm run build:ridge",
+    "build:race": "node scripts/build-race-presentation.js",
+    "build:effects": "node scripts/build-vfx-audio.js",
+    "build:combat": "node scripts/build-combat-assets.js",
+    "build:social": "node scripts/build-social-assets.js",
+    "build:drivers": "node scripts/build-driver-assets.js",
+    "build:progression": "node scripts/build-progression-assets.js",
+    "prepare:godot": "node scripts/prepare-godot-assets.js",
+    "test:godot": "godot --headless --path godot --script res://tests/smoke_test.gd",
+    "preview": "vite preview --host 0.0.0.0",
+    "test": "node --test tests/*.test.js",
+    "validate:cars": "node scripts/validate-assets.js",
+    "validate:track": "node scripts/validate-track-assets.js",
+    "validate:race": "node scripts/validate-race-assets.js",
+    "validate:effects": "node scripts/validate-vfx-audio.js",
+    "validate:combat": "node scripts/validate-combat-assets.js",
+    "validate:social": "node scripts/validate-social-assets.js",
+    "validate:drivers": "node scripts/validate-driver-assets.js",
+    "validate:progression": "node scripts/validate-progression-assets.js",
+    "validate:assets": "npm run validate:cars && npm run validate:track && npm run validate:race && npm run validate:effects && npm run validate:combat && npm run validate:social && npm run validate:drivers && npm run validate:progression"
+  },
+  "dependencies": {
+    "@fontsource-variable/inter": "^5.2.8",
+    "@fontsource-variable/space-grotesk": "^5.2.9",
+    "three": "0.186.1"
+  },
+  "devDependencies": {
+    "@gltf-transform/core": "^4.5.1",
+    "@gltf-transform/extensions": "^4.5.1",
+    "@gltf-transform/functions": "^4.5.1",
+    "gltf-validator": "^2.0.0-dev.3.10",
+    "meshoptimizer": "^1.3.0",
+    "sharp": "^0.35.5",
+    "vite": "^8.3.5"
+  }
+}

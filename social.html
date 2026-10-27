@@ -1,0 +1,93 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#090e11" />
+    <meta name="description" content="Velocity Social Lobby — original reusable party/lobby emblems, interface icons, team palettes and fictional UI fixtures." />
+    <title>Social Lobby — Velocity Social UI</title>
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+  </head>
+  <body data-asset-ready="false" data-social-state="party" data-team="lime" data-player="p-v84">
+    <div id="social-app">
+      <header class="social-topbar">
+        <a class="social-brand" href="./" aria-label="Back to Velocity vehicle library">
+          <svg viewBox="0 0 40 28" aria-hidden="true"><path d="M2 4h9l7 20h-8L2 4Zm13 0h8l6 14 5-14h5L26 24h-7L13 4Z" fill="currentColor" /></svg>
+          <span>VELOCITY<small>Social division</small></span>
+        </a>
+        <div class="social-breadcrumb"><span>Library</span><i>/</i><strong>Social 06</strong></div>
+        <nav class="social-nav" aria-label="Social package resources">
+          <span class="social-local"><i></i> Original · CC0</span>
+          <a href="./">Vehicles</a><a href="./track.html">Azurline</a><a href="./race.html">Race</a><a href="./effects.html">FX</a><a href="./combat.html">Combat</a><a href="./drivers.html">Drivers</a>
+          <a href="./progression.html">Progression</a>
+          <a href="/assets/social/social.json" download="social.json">Manifest</a>
+        </nav>
+      </header>
+
+      <main class="social-workspace">
+        <aside class="social-control-panel">
+          <div class="social-heading"><p class="social-eyebrow">Multiplayer presentation / 01</p><h1>Social <span>Lobby</span></h1><p>Original emblems, interface icons and team palettes with isolated party and lobby fixtures. No live network services.</p></div>
+          <div class="social-tags"><span>8 emblems</span><span>24 icons</span><span>4 palettes</span><span>CC0</span></div>
+          <section class="social-states" aria-labelledby="social-states-title">
+            <div class="social-section-title"><span id="social-states-title">Preview fixture</span><small>Static only</small></div>
+            <div class="social-state-list" role="group" aria-label="Select social presentation fixture">
+              <button class="active" type="button" data-social-view="party" aria-pressed="true"><span>01</span><strong>Party</strong><small>4 + 2 slots</small></button>
+              <button type="button" data-social-view="lobby" aria-pressed="false"><span>02</span><strong>Team lobby</strong><small>8 players</small></button>
+              <button type="button" data-social-view="ready" aria-pressed="false"><span>03</span><strong>Ready check</strong><small>All ready</small></button>
+            </div>
+          </section>
+          <section class="social-roster" aria-labelledby="social-roster-title">
+            <div class="social-section-title"><span id="social-roster-title">Demo players</span><small>10 fictional records</small></div>
+            <div id="social-player-list" class="social-player-list" role="group" aria-label="Inspect fictional player"></div>
+          </section>
+          <p class="social-scope-note">Presentation assets and fictional fixtures only. No servers, matchmaking, invitations, chat, voice, presence or lobby rules.</p>
+        </aside>
+
+        <section class="social-stage" id="social-stage" aria-label="Social lobby presentation preview">
+          <div class="social-poster" id="social-poster" aria-hidden="true"><img src="/assets/previews/social-lobby.webp" width="1200" height="800" alt="" fetchpriority="high" decoding="async" /></div>
+          <div class="social-screen">
+            <div class="social-stage-topline"><span><i></i> Local presentation fixture</span><b id="stage-social-count">10 DEMO PLAYERS</b></div>
+            <section class="room-hero">
+              <img src="/assets/previews/azurline-circuit.webp" width="960" height="600" alt="Azurline Circuit map" decoding="async" />
+              <div class="room-hero-shade"></div>
+              <div class="room-hero-content"><span>AZURLINE / SOCIAL SESSION</span><h2 id="room-name">Azurline Atlantic Club</h2><p id="room-event">Atlantic Social Session</p></div>
+              <div class="room-meta"><span><small>Fixture code</small><strong id="room-code">DEMO-V84</strong></span><span><small>Region fixture</small><strong id="room-region">West Africa</strong></span><span><small>Room type</small><strong id="room-privacy">Private fixture</strong></span></div>
+            </section>
+            <section class="social-fixture" aria-live="polite">
+              <div class="social-fixture-heading"><div><span id="fixture-eyebrow">YOUR PARTY / 04</span><h2 id="fixture-title">Ready for the coast</h2><p id="fixture-description">Four local demo players and two empty presentation slots.</p></div><span class="fixture-badge">STATIC DEMO</span></div>
+              <div id="social-state-content" class="social-state-content"></div>
+            </section>
+            <div class="social-demo-note"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="/assets/social/icons.svg#lock"></use></svg><span>Fictional local data. Selecting a fixture or palette changes this preview only; no information leaves the browser.</span></div>
+          </div>
+          <div class="social-error" id="social-error" hidden><strong>Social assets could not be loaded</strong><p id="social-error-message">Please retry the local manifest.</p><button id="retry-social" type="button">Retry</button></div>
+        </section>
+
+        <aside class="social-kit-panel">
+          <div class="social-kit-heading"><div><p class="social-eyebrow">Reusable package</p><h2>Social UI kit</h2></div><span>LOCAL / CC0</span></div>
+          <section class="selected-player-card" aria-live="polite">
+            <div class="selected-player-main"><img id="selected-player-emblem" src="/assets/social/emblems/vector.svg" width="128" height="128" alt="Vector emblem" /><div><span id="selected-player-role">HOST / DESKTOP</span><strong id="selected-player-tag">V84</strong><small id="selected-player-name">Vector 84</small></div></div>
+            <div class="selected-player-status"><span id="selected-player-ready"><i></i> Ready</span><span id="selected-player-ping">24 ms</span></div>
+            <dl><div><dt>Team palette</dt><dd id="selected-player-team">Velocity Lime</dd></div><div><dt>Platform icon</dt><dd id="selected-player-platform">Desktop</dd></div><div><dt>Voice fixture</dt><dd id="selected-player-voice">Connected</dd></div><div><dt>Presence fixture</dt><dd id="selected-player-presence">In garage</dd></div></dl>
+          </section>
+          <section class="palette-section" aria-labelledby="palette-title">
+            <div class="social-section-title"><span id="palette-title">Team palettes</span><small>Preview accent</small></div>
+            <div id="team-palette-list" class="team-palette-list" role="group" aria-label="Preview team color palette"></div>
+          </section>
+          <section class="icon-section" aria-labelledby="icon-title">
+            <div class="social-section-title"><span id="icon-title">Interface icons</span><small>24 SVG symbols</small></div>
+            <div id="social-icon-grid" class="social-icon-grid"></div>
+          </section>
+          <div class="social-downloads">
+            <a class="social-primary-download" id="download-social-emblem" href="/assets/social/emblems/vector.svg" download="vector.svg">Download selected emblem <span>↓</span></a>
+            <a href="/assets/social/icons.svg" download="social-icons.svg">Complete icon sprite <span>SVG</span></a>
+            <a href="/assets/social/social.json" download="social.json">Fixtures + design tokens <span>JSON</span></a>
+            <a href="/assets/social/LICENSE.txt" download="social-LICENSE.txt">CC0 license record <span>TXT</span></a>
+          </div>
+          <div class="social-license"><strong>CC0 1.0</strong><p>Original abstract emblems and icons. No third-party avatars, platform logos or UI kits.</p></div>
+        </aside>
+      </main>
+      <footer class="social-footer"><span><i></i> Asset foundation / presentation only</span><span id="active-social-file">assets/social/social.json</span></footer>
+    </div>
+    <script type="module" src="/src/social.js"></script>
+  </body>
+</html>

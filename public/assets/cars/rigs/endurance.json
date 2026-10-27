@@ -1,0 +1,100 @@
+{
+  "id": "endurance",
+  "units": "metres",
+  "upAxis": "+Y",
+  "forwardAxis": "+Z",
+  "groundY": 0,
+  "normalized": true,
+  "dimensions": {
+    "length": 4.9,
+    "width": 1.966,
+    "height": 1.315
+  },
+  "wheels": [
+    {
+      "id": "FL",
+      "sourceNode": "Endurance_Wheel_FL_Tyre",
+      "position": [
+        0.8033,
+        0.3745,
+        1.5905
+      ],
+      "radius": 0.3745,
+      "width": 0.2994,
+      "axle": "front",
+      "side": "left",
+      "steering": true
+    },
+    {
+      "id": "FR",
+      "sourceNode": "Endurance_Wheel_FR_Tyre",
+      "position": [
+        -0.8033,
+        0.3745,
+        1.5905
+      ],
+      "radius": 0.3745,
+      "width": 0.2994,
+      "axle": "front",
+      "side": "right",
+      "steering": true
+    },
+    {
+      "id": "RL",
+      "sourceNode": "Endurance_Wheel_RL_Tyre",
+      "position": [
+        0.7833,
+        0.4029,
+        -1.6464
+      ],
+      "radius": 0.4029,
+      "width": 0.3592,
+      "axle": "rear",
+      "side": "left",
+      "steering": false
+    },
+    {
+      "id": "RR",
+      "sourceNode": "Endurance_Wheel_RR_Tyre",
+      "position": [
+        -0.7833,
+        0.4029,
+        -1.6464
+      ],
+      "radius": 0.4029,
+      "width": 0.3592,
+      "axle": "rear",
+      "side": "right",
+      "steering": false
+    }
+  ],
+  "collision": {
+    "path": "assets/cars/collisions/endurance-collision.glb",
+    "shape": "convex-hull",
+    "triangles": 302,
+    "bytes": 22976,
+    "note": "Basic single-hull collision asset for arcade physics. Wheel suspension and chassis tuning must be validated in the driving prototype."
+  },
+  "lods": {
+    "0": {
+      "path": "assets/cars/lods/endurance-lod0.glb",
+      "triangles": 238680,
+      "bytes": 874248
+    },
+    "1": {
+      "path": "assets/cars/lods/endurance-lod1.glb",
+      "triangles": 123096,
+      "bytes": 580952
+    },
+    "2": {
+      "path": "assets/cars/lods/endurance-lod2.glb",
+      "triangles": 57266,
+      "bytes": 326920
+    },
+    "3": {
+      "path": "assets/cars/lods/endurance-lod3.glb",
+      "triangles": 25280,
+      "bytes": 196460
+    }
+  }
+}

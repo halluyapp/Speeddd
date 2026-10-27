@@ -1,0 +1,113 @@
+name: Godot Android
+
+on:
+  workflow_dispatch:
+  push:
+    paths:
+      - 'godot/**'
+      - 'scripts/prepare-godot-assets.js'
+      - '.github/workflows/android.yml'
+      - 'package.json'
+      - 'package-lock.json'
+      - 'public/assets/**'
+
+jobs:
+  build-apk:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 30
+    env:
+      GODOT_VERSION: 4.7.2
+      GODOT_RELEASE: 4.7.2-stable
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '17'
+      - uses: android-actions/setup-android@v4.0.4
+      - name: Install dependencies and validate source packages
+        run: |
+          npm ci
+          npm test
+          npm run validate:assets
+      - name: Prepare local Godot resources
+        run: node scripts/prepare-godot-assets.js
+      - name: Install Godot editor and Android templates
+        run: |
+          mkdir -p "$HOME/.local/share/godot/export_templates/${GODOT_VERSION}.stable" "$HOME/.android"
+          curl -fL --retry 3 -o /tmp/godot.zip "https://github.com/godotengine/godot/releases/download/${GODOT_RELEASE}/Godot_v${GODOT_RELEASE}_linux.x86_64.zip"
+          unzip -q /tmp/godot.zip -d /tmp/godot-editor
+          curl -fL --retry 3 -o /tmp/templates.tpz "https://github.com/godotengine/godot/releases/download/${GODOT_RELEASE}/Godot_v${GODOT_RELEASE}_export_templates.tpz"
+          unzip -q /tmp/templates.tpz -d /tmp/godot-templates
+          cp -a /tmp/godot-templates/templates/. "$HOME/.local/share/godot/export_templates/${GODOT_VERSION}.stable/"
+          install -m 755 "/tmp/godot-editor/Godot_v${GODOT_RELEASE}_linux.x86_64" /usr/local/bin/godot
+          godot --headless --version
+      - name: Restore persistent debug signing key
+        uses: actions/cache@v4
+        with:
+          path: ~/.android/debug.keystore
+          key: apex-drive-android-debug-keystore-v1
+      - name: Generate standard Android debug signing key when absent
+        run: |
+          if [ ! -f "$HOME/.android/debug.keystore" ]; then
+            keytool -genkeypair -noprompt -keystore "$HOME/.android/debug.keystore" -storepass android -alias androiddebugkey -keypass android -dname "CN=Android Debug,O=Android,C=US" -keyalg RSA -keysize 2048 -validity 10000
+          fi
+          keytool -list -keystore "$HOME/.android/debug.keystore" -storepass android -alias androiddebugkey
+      - name: Import Godot resources
+        run: godot --headless --path godot --editor --import --quit
+      - name: Run native smoke tests
+        run: |
+          set +e
+          timeout 45s godot --headless --path godot --script res://tests/smoke_test.gd > /tmp/apex-drive-native-test.log 2>&1
+          status=$?
+          if grep -qE 'SCRIPT ERROR:|^ERROR:' /tmp/apex-drive-native-test.log; then status=1; fi
+          cat /tmp/apex-drive-native-test.log
+          if [ "$status" -ne 0 ]; then
+            report=$(printf 'Native smoke exit code %s\n' "$status"; tail -100 /tmp/apex-drive-native-test.log | sed -r 's/\x1B\[[0-9;]*[mK]//g')
+            report=${report//'%'/'%25'}
+            report=${report//$'\r'/'%0D'}
+            report=${report//$'\n'/'%0A'}
+            printf '::error::%s\n' "$report"
+            exit "$status"
+          fi
+      - name: Export installable Android APK
+        run: |
+          mkdir -p godot/build
+          ls -lh "$HOME/.local/share/godot/export_templates/${GODOT_VERSION}.stable/"android*
+          command -v apksigner || true
+          command -v zipalign || true
+          set +e
+          godot --verbose --headless --path godot --export-debug Android build/apex-drive-debug.apk > /tmp/apex-drive-android-export.log 2>&1
+          status=$?
+          cat /tmp/apex-drive-android-export.log
+          if [ "$status" -ne 0 ]; then
+            tail -140 /tmp/apex-drive-android-export.log | sed -r 's/\x1B\[[0-9;]*[mK]//g' | while IFS= read -r line; do printf '::error::%s\n' "$line"; done
+            exit "$status"
+          fi
+      - name: Verify APK integrity, signature and Android compatibility
+        run: |
+          APK=godot/build/apex-drive-debug.apk
+          SDK_ROOT=${ANDROID_HOME:-$ANDROID_SDK_ROOT}
+          APKSIGNER=$(find "$SDK_ROOT/build-tools" -type f -name apksigner | sort -V | tail -1)
+          AAPT=$(find "$SDK_ROOT/build-tools" -type f -name aapt | sort -V | tail -1)
+          test -x "$APKSIGNER"
+          test -x "$AAPT"
+          unzip -t "$APK" >/dev/null
+          "$APKSIGNER" verify --verbose --print-certs "$APK"
+          "$AAPT" dump badging "$APK" > /tmp/apex-drive-apk-badging.txt
+          grep -E '^package:|^sdkVersion|^targetSdkVersion|^native-code' /tmp/apex-drive-apk-badging.txt
+          grep -q "sdkVersion:'24'" /tmp/apex-drive-apk-badging.txt
+          grep '^native-code' /tmp/apex-drive-apk-badging.txt | grep -q 'armeabi-v7a'
+          grep '^native-code' /tmp/apex-drive-apk-badging.txt | grep -q 'arm64-v8a'
+          grep '^native-code' /tmp/apex-drive-apk-badging.txt | grep -q "'x86'"
+          grep '^native-code' /tmp/apex-drive-apk-badging.txt | grep -q 'x86_64'
+      - uses: actions/upload-artifact@v4
+        with:
+          name: apex-drive-android-debug
+          path: godot/build/apex-drive-debug.apk
+          if-no-files-found: error
+          retention-days: 14

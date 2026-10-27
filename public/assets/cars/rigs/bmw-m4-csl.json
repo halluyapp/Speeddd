@@ -1,0 +1,100 @@
+{
+  "id": "bmw-m4-csl",
+  "units": "metres",
+  "upAxis": "+Y",
+  "forwardAxis": "+Z",
+  "groundY": 0,
+  "normalized": true,
+  "dimensions": {
+    "length": 4.8,
+    "width": 2.083,
+    "height": 1.501
+  },
+  "wheels": [
+    {
+      "id": "FL",
+      "sourceNode": "M4xNME_wheels_enkeif",
+      "position": [
+        0.7792,
+        0.3675,
+        1.5282
+      ],
+      "radius": 0.2912,
+      "width": 0.3217,
+      "axle": "front",
+      "side": "left",
+      "steering": true
+    },
+    {
+      "id": "FR",
+      "sourceNode": "M4xNME_wheels_enkeif.002",
+      "position": [
+        -0.7776,
+        0.3675,
+        1.5282
+      ],
+      "radius": 0.2912,
+      "width": 0.3217,
+      "axle": "front",
+      "side": "right",
+      "steering": true
+    },
+    {
+      "id": "RL",
+      "sourceNode": "M4xNME_wheels_enkeif.001",
+      "position": [
+        0.7792,
+        0.3675,
+        -1.3236
+      ],
+      "radius": 0.2912,
+      "width": 0.3217,
+      "axle": "rear",
+      "side": "left",
+      "steering": false
+    },
+    {
+      "id": "RR",
+      "sourceNode": "M4xNME_wheels_enkeif.003",
+      "position": [
+        -0.7776,
+        0.3675,
+        -1.3236
+      ],
+      "radius": 0.2912,
+      "width": 0.3217,
+      "axle": "rear",
+      "side": "right",
+      "steering": false
+    }
+  ],
+  "collision": {
+    "path": "assets/cars/collisions/bmw-m4-csl-collision.glb",
+    "shape": "convex-hull",
+    "triangles": 262,
+    "bytes": 20132,
+    "note": "Basic single-hull collision asset for arcade physics. Wheel suspension and chassis tuning must be validated in the driving prototype."
+  },
+  "lods": {
+    "0": {
+      "path": "assets/cars/lods/bmw-m4-csl-lod0.glb",
+      "triangles": 286137,
+      "bytes": 2040556
+    },
+    "1": {
+      "path": "assets/cars/lods/bmw-m4-csl-lod1.glb",
+      "triangles": 174046,
+      "bytes": 1531544
+    },
+    "2": {
+      "path": "assets/cars/lods/bmw-m4-csl-lod2.glb",
+      "triangles": 109401,
+      "bytes": 1192692
+    },
+    "3": {
+      "path": "assets/cars/lods/bmw-m4-csl-lod3.glb",
+      "triangles": 78439,
+      "bytes": 1014940
+    }
+  }
+}
