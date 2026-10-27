@@ -105,6 +105,12 @@ func _run() -> void:
 	_check(game.course.centerline.size() == 361, "Azure Coast centerline drives AI and standings")
 	_check(game.course.checkpoints.size() == 12, "all twelve ordered checkpoints are installed")
 	_check(game.racers[1].driver_name == "M. KESTREL", "AI identity remains consistent throughout the event")
+	for _index in range(30):
+		await physics_frame
+	var grid_stable: bool = true
+	for racer in game.racers:
+		grid_stable = grid_stable and racer.speed_kph < 1.0
+	_check(grid_stable, "countdown braking holds the grid without engaging reverse")
 	game.cycle_camera()
 	_check(game.camera_mode == 1, "hood camera is available")
 	game.cycle_camera()

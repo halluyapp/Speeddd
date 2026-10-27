@@ -213,7 +213,7 @@ func _update_movement(delta: float) -> void:
 			forward_speed = move_toward(forward_speed, speed_limit, engine_force * throttle * delta)
 		if brake > 0.0:
 			var brake_force: float = 34.0 if assists else 30.0
-			if forward_speed > 1.0:
+			if forward_speed > 1.0 or not race_active:
 				forward_speed = move_toward(forward_speed, 0.0, brake_force * brake * delta)
 			else:
 				forward_speed = move_toward(forward_speed, -11.0, 9.0 * brake * delta)
