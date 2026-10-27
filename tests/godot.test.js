@@ -35,6 +35,8 @@ test('Android workflow builds and tests a native APK without remote runtime asse
   assert.match(workflow, /smoke_test\.gd/);
   assert.match(preset, /architectures\/armeabi-v7a=true/);
   assert.match(preset, /architectures\/arm64-v8a=true/);
+  assert.match(preset, /architectures\/x86=true/);
+  assert.match(preset, /architectures\/x86_64=true/);
   assert.match(preset, /texture_format\/etc2_astc=true/);
   assert.doesNotMatch(scripts, /https?:\/\//);
 });

@@ -18,7 +18,7 @@ npm run test:godot           # native smoke suite, after importing
 
 Keyboard controls: **WASD/arrows** drive, **Space** drifts, **Shift** engages nitro, **F** or the left mouse button fires, and **Escape** pauses. Android uses the landscape touch controls.
 
-`.github/workflows/android.yml` validates all source packages, runs the web and native tests, and exports an installable **32-bit ARM + 64-bit ARM debug APK** with Godot 4.7.2. The Compatibility renderer requires **Android 7.0 / API 24 or newer**. Download the `velocity-android-debug` artifact from a successful GitHub Actions run, extract the ZIP before installing, and uninstall any earlier Velocity debug build if Android reports a signature conflict. CI verifies the APK signature and packaged ABIs. The debug APK is for testing only; release signing and Play distribution are separate steps.
+`.github/workflows/android.yml` validates all source packages, runs the web and native tests, and exports one universal **ARM32, ARM64, x86 and x86_64 debug APK** with Godot 4.7.2. The Compatibility renderer requires **Android 7.0 / API 24 or newer with OpenGL ES 3 support**. Download the `velocity-android-debug` artifact from a successful GitHub Actions run, extract the ZIP before installing, and uninstall any earlier Velocity debug build if Android reports a signature conflict. CI verifies the APK signature and all four packaged ABIs. The debug APK is for testing only; release signing and Play distribution are separate steps.
 
 ## Run the inspectors
 

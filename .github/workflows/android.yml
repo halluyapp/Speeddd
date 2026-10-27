@@ -103,6 +103,8 @@ jobs:
           grep -q "sdkVersion:'24'" /tmp/velocity-apk-badging.txt
           grep '^native-code' /tmp/velocity-apk-badging.txt | grep -q 'armeabi-v7a'
           grep '^native-code' /tmp/velocity-apk-badging.txt | grep -q 'arm64-v8a'
+          grep '^native-code' /tmp/velocity-apk-badging.txt | grep -q "'x86'"
+          grep '^native-code' /tmp/velocity-apk-badging.txt | grep -q 'x86_64'
       - uses: actions/upload-artifact@v4
         with:
           name: velocity-android-debug
